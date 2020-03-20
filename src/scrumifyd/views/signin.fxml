@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scrumifyd.services.SigninController">
+   <children>
+      <Pane layoutX="-1.0" layoutY="-2.0" prefHeight="477.0" prefWidth="749.0" styleClass="linear-grad" stylesheets="@../util/fullpackstyling.css">
+         <children>
+            <ImageView fitHeight="261.0" fitWidth="313.0" layoutX="62.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/undraw_investing_7u74.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="74.0" fitWidth="64.0" layoutX="18.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/scrumify.png" />
+               </image>
+            </ImageView>
+            <Text fill="#626970" fontSmoothingType="LCD" layoutX="7.0" layoutY="140.0" lineSpacing="12.0" stroke="#2c8396" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-family: Calibir; -fx-font-size: 15;" styleClass="button3" text="Scrumify." textAlignment="CENTER" wrappingWidth="167.45313262939453" />
+            <Text fill="#626970" layoutX="467.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 12 px; -fx-font-weight: bold; -fx-font-family: Calibri;" text="New to scrumify ?" />
+            <JFXButton fx:id="open_signup" defaultButton="true" layoutX="615.0" layoutY="38.0" minHeight="20.0" onMouseClicked="#open_signup" prefHeight="32.0" prefWidth="64.0" style="-fx-text-weight: Bold;" styleClass="button2" stylesheets="@../util/fullpackstyling.css" text="Sign up" textAlignment="CENTER" />
+            <FontAwesomeIconView fx:id="exit" fill="WHITE" glyphName="CLOSE" layoutX="720.0" layoutY="27.0" size="20" wrappingWidth="26.761884689331055" />
+            <Label fx:id="Errors" layoutX="14.0" layoutY="447.0" prefHeight="17.0" prefWidth="235.0" textFill="#32aea6" />
+            <Pane fx:id="vbox" layoutX="419.0" layoutY="85.0" prefHeight="362.0" prefWidth="143.0" style="-fx-background-color: white;">
+               <children>
+                  <Text fill="#626970" layoutX="26.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 12 px; -fx-font-weight: bold; -fx-font-family: Calibri;" text="Sign in " />
+                  <Text fill="#626970" layoutX="26.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 11 px; -fx-font-family: Calibri;" text="Keep up with your projects" />
+                  <JFXButton fx:id="btnSignin" defaultButton="true" layoutX="26.0" layoutY="250.0" onMouseClicked="#signInButton" prefHeight="32.0" prefWidth="235.0" style="-fx-text-weight: Bold;" styleClass="button3" stylesheets="@../../../../../../../util/fullpackstyling.css" text="Sign in" textAlignment="CENTER" />
+                  <JFXCheckBox checkedColor="#16cabd" layoutX="26.0" layoutY="217.0" text="Remember me " textFill="#626970" />
+                  <Text fill="#626970" layoutX="69.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Forget password ?" />
+                  <JFXButton layoutX="160.0" layoutY="314.0" text="Reset now" textFill="#16cabd" underline="true" />
+                  <JFXTextField fx:id="Email" alignment="TOP_LEFT" focusColor="#36989a" labelFloat="true" layoutX="21.0" layoutY="122.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="21.0" prefWidth="235.0" promptText="Email" style="-fx-font-size: 9 px; -fx-text-fill: #626970;">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </JFXTextField>
+                  <JFXPasswordField fx:id="Password" alignment="TOP_LEFT" focusColor="#4ca6a7" labelFloat="true" layoutX="21.0" layoutY="160.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="21.0" prefWidth="235.0" promptText="Password" style="-fx-font-size: 9px; -fx-text-fill: #626970;">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </JFXPasswordField>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="300.0" top="13.0" />
+               </padding>
+            </Pane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
