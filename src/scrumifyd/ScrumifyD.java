@@ -5,8 +5,7 @@
  */
 package scrumifyd;
 
-import scrumifyd.services.UserService;
-import scrumifyd.models.User;
+
 
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -21,6 +20,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -38,10 +38,16 @@ public class ScrumifyD extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-           Parent root = FXMLLoader.load(getClass().getResource("/scrumifyd/views/Home.fxml"));
+         Parent root = FXMLLoader.load(getClass().getResource("/scrumifyd/GestionUsers/views/Home.fxml"));
          //we gonna remove the borderless thingie.  
-        stage.initStyle(StageStyle.DECORATED);
-        stage.setMaximized(false);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.getIcons().add(
+   new Image(
+      ScrumifyD.class.getResourceAsStream( "/scrumifyd/images/scrumify.png" ))); 
+        stage.setResizable(true);
+      
+       
+        //stage.setMaximized(false);
 
         //grab your root here
         root.setOnMousePressed((MouseEvent event) -> {
@@ -65,23 +71,7 @@ public class ScrumifyD extends Application {
      */
     public static void main(String[] args) {
         launch(args);
-         /* User p = new User("cyrine", "Jlassi");
-        UserService ps = new UserService();
-        try {
-            System.out.println(ps.getAllPersonnes());
-        } catch (SQLException ex) {
-            Logger.getLogger(ScrumifyD.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            ps.ajouterPersonne2(p);
-        } catch (SQLException ex) {
-            Logger.getLogger(ScrumifyD.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            System.out.println(ps.getAllPersonnes());
-        } catch (SQLException ex) {
-            Logger.getLogger(ScrumifyD.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+  
     }
   
 }

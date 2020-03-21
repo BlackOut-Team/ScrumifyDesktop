@@ -4,12 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/services/UserService.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/views/signin.fxml</file>
             <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/ScrumifyD.java</file>
             <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/services/HomeController.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/util/MyDbConnection.java</file>
+            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/services/ProjectsController.java</file>
             <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/util/fullpackstyling.css</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/services/LoginController.java</file>
+            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/services/UserSession.java</file>
+            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/services/ProjetService.java</file>
             <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/services/SigninController.java</file>
             <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/views/Projects.fxml</file>
         </group>

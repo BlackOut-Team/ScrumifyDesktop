@@ -168,3 +168,20 @@
 
     
 }
+.head-background
+{
+    -fx-background-color: linear-gradient(to top right , #22c1c3 , #ffffff );
+}
+
+.button6
+{
+-fx-background-color : transparent;
+}
+.button6:hover
+{
+-fx-background-color : #adf7f7 ;
+}
+.button6:pressed
+{
+-fx-background-color : #adf7f7; 
+}
