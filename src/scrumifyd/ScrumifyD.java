@@ -8,6 +8,8 @@ package scrumifyd;
 
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -24,7 +26,8 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
+import scrumifyd.GestionProjets.models.Project;
+import scrumifyd.GestionProjets.services.ProjectService;
 
 /**
  *
@@ -38,11 +41,13 @@ public class ScrumifyD extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-         Parent root = FXMLLoader.load(getClass().getResource("/scrumifyd/GestionUsers/views/Home.fxml"));
-         //we gonna remove the borderless thingie.  
+        // Parent root = FXMLLoader.load(getClass().getResource("/scrumifyd/GestionUsers/views/Home.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/scrumifyd/GestionProjets/views/Dashboard.fxml"));
+
+         //borderless .  
         stage.initStyle(StageStyle.UNDECORATED);
         stage.getIcons().add(
-   new Image(
+      new Image(
       ScrumifyD.class.getResourceAsStream( "/scrumifyd/images/scrumify.png" ))); 
         stage.setResizable(true);
       
@@ -63,6 +68,9 @@ public class ScrumifyD extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        
+      
+
     }
     
 

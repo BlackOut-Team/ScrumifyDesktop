@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<!--<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutX="-1.0" layoutY="-2.0" prefHeight="477.0" prefWidth="749.0" styleClass="linear-grad" stylesheets="@../util/fullpackstyling.css">
+         <children>
+            <ImageView fitHeight="398.0" fitWidth="628.0" layoutX="82.0" layoutY="59.0" opacity="0.19" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/undraw_investing_7u74.png" />
+               </image>
+            </ImageView>
+            <FontAwesomeIconView fx:id="exit" fill="WHITE" glyphName="CLOSE" layoutX="720.0" layoutY="27.0" size="20" wrappingWidth="26.761884689331055" />
+            <Label fx:id="Errors" layoutX="14.0" layoutY="447.0" prefHeight="17.0" prefWidth="235.0" textFill="#32aea6" />
+            <BorderPane prefHeight="477.0" prefWidth="200.0" style="-fx-background-color: white;">
+               <center>
+                  <ImageView fitHeight="37.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                     <image>
+                        <Image url="@../images/scrumify.png" />
+                     </image>
+                  </ImageView>
+               </center>
+            </BorderPane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>-->
+
+<StackPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scrumifyd.GestionProjets.controllers.EditPController">
+   <children>
+      <AnchorPane>
+         <children>
+            <Pane fx:id="contentPane" layoutX="11.0" layoutY="8.0" prefHeight="512.0" prefWidth="934.0">
+               <children>
+                  <FontAwesomeIconView fx:id="back" fill="#16cabd" glyphName="BACKWARD" layoutX="18.0" layoutY="40.0" onMouseClicked="#back" size="24" />
+                  <Text fill="#16cabd" layoutX="401.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD PROJECT">
+                     <font>
+                        <Font name="Calibri Light" size="24.0" />
+                     </font>
+                  </Text>
+                  <JFXTextField fx:id="Name" alignment="TOP_LEFT" focusColor="#36989a" labelFloat="true" layoutX="81.0" layoutY="130.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="24.0" prefWidth="310.0" promptText="Name" style="-fx-font-size: 9 px; -fx-text-fill: #626970;" styleClass="column-header" unFocusColor="#16cabd">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </JFXTextField>
+                  <JFXButton fx:id="Submit" defaultButton="true" layoutX="333.0" layoutY="365.0" onMouseClicked="#SubmitButton" prefHeight="40.0" prefWidth="235.0" style="-fx-text-weight: Bold;" styleClass="button3" stylesheets="@../util/fullpackstyling.css" text="Save" textAlignment="CENTER" textFill="WHITE" />
+                  <JFXTextArea fx:id="Description" focusColor="#36989a" labelFloat="true" layoutX="81.0" layoutY="190.0" prefHeight="134.0" prefWidth="317.0" promptText="Project Description" style="-fx-text-fill: #626970; -fx-font-size: 11 px;" styleClass="column-header" unFocusColor="#16cabd">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor></JFXTextArea>
+                  <JFXDatePicker fx:id="Deadline" defaultColor="#1ac3b5" layoutX="485.0" layoutY="190.0" overLay="true" prefHeight="40.0" prefWidth="382.0" promptText="Deadline" showWeekNumbers="true" style="-fx-font-size: 11 px; -fx-text-fill: #16cabd;" />
+                  <JFXComboBox fx:id="Team" focusColor="#16cabd" layoutX="485.0" layoutY="257.0" prefHeight="25.0" prefWidth="348.0" promptText="Team" style="-fx-font-size: 11px; -fx-text-fill: #626970;" unFocusColor="#16cabd" />
+                  <JFXComboBox fx:id="PO" layoutX="484.0" layoutY="315.0" prefHeight="25.0" prefWidth="348.0" promptText="Product Owner" style="-fx-font-size: 11 px; -fx-text-fill: #626970;" unFocusColor="#16c9bb" />
+                  <FontAwesomeIconView fill="#16cabd" glyphName="GROUP" layoutX="839.0" layoutY="278.0" size="18" />
+                  <FontAwesomeIconView fill="#16cabd" glyphName="GAVEL" layoutX="838.0" layoutY="337.0" size="18" />
+                  <Label fx:id="Errors" layoutX="81.0" layoutY="377.0" prefHeight="17.0" prefWidth="235.0" textFill="#32aea6" />
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

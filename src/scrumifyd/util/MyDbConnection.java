@@ -7,7 +7,9 @@ package scrumifyd.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -20,6 +22,7 @@ public class MyDbConnection {
     private String url = "JDBC:mysql://localhost/scrumifyd";
     private String user = "root";
     private String password = "";
+    private static Statement stmt = null;
 
     private MyDbConnection() {
         try {
@@ -40,4 +43,5 @@ public class MyDbConnection {
         return this.connexion;
     }
 
+    
 }

@@ -17,6 +17,10 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,7 +33,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -75,6 +81,12 @@ public class HomeController implements Initializable {
     Connection con = null;
     PreparedStatement preparedStatement = null;
     String resultSet = null;
+    @FXML
+    private AnchorPane anchorPane;
+    @FXML
+    private Pane vbox;
+    @FXML
+    private StackPane stackPane;
     
     
 
@@ -95,25 +107,49 @@ public class HomeController implements Initializable {
     @FXML
     public void open_signin(MouseEvent event) {
 
-       if (event.getSource() == open_signin) {
+       //if (event.getSource() == open_signin) {
           
-                try {
+           try {
+               /*try {
+               
+               //add you loading or delays - ;-)
+               Node node = (Node) event.getSource();
+               Stage stage = (Stage) node.getScene().getWindow();
+               //stage.setMaximized(true);
+               stage.close();
+               Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/scrumifyd/GestionUsers/views/signin.fxml")));
+               
+               stage.setScene(scene);
+               stage.show();
+               
+               } catch (IOException ex) {
+               System.err.println(ex.getMessage());
+               }*/
+               Parent root=FXMLLoader.load(getClass().getResource("/scrumifyd/GestionUsers/views/signin.fxml"));
+               Scene SignupScene = open_signin.getScene();
+               root.translateXProperty().set(SignupScene.getHeight()); 
+               stackPane.getChildren().add(root);
+               Timeline timeline = new Timeline();
+               KeyValue keyValue = new KeyValue(root.translateXProperty(),0,Interpolator.EASE_IN);
+               KeyFrame keyFrame = new KeyFrame(Duration.millis(200),keyValue);
+               timeline.getKeyFrames().add(keyFrame);
+               timeline.play();
+               timeline.setOnFinished((ActionEvent event2)->{
+               stackPane.getChildren().remove(anchorPane);
+                   
+               
+               });
+               
+           } catch (IOException ex) {
+               Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+           }
+           
 
-                    //add you loading or delays - ;-)
-                    Node node = (Node) event.getSource();
-                    Stage stage = (Stage) node.getScene().getWindow();
-                    //stage.setMaximized(true);
-                    stage.close();
-                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/scrumifyd/GestionUsers/views/signin.fxml")));
-                    stage.setScene(scene);
-                    stage.show();
-
-                } catch (IOException ex) {
-                    System.err.println(ex.getMessage());
-                }
-
-            }
+        //    }
+           
+          
        }
+    @FXML
     public void handleButtonAction(MouseEvent event) {
 
         if (event.getSource() == btnSignup) {
@@ -126,7 +162,7 @@ public class HomeController implements Initializable {
                     Stage stage = (Stage) node.getScene().getWindow();
                     //stage.setMaximized(true);
                     stage.close();
-                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/scrumifyd/GestionProjets/views/Projects.fxml")));
+                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/scrumifyd/GestionProjets/views/Dashboard.fxml")));
                     stage.setScene(scene);
                     stage.show();
 

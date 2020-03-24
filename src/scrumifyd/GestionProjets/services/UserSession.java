@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package scrumifyd.services;
+package scrumifyd.GestionProjets.services;
 
 import java.util.HashSet;
 import java.util.Set;

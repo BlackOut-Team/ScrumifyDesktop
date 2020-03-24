@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.geometry.Insets?>
-<?import javafx.geometry.Rectangle2D?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -40,181 +39,37 @@
    </children>
 </AnchorPane>-->
 
-<AnchorPane id="AnchorPane" fx:id="Dashboard" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scrumifyd.GestionProjets.services.ProjectsController">
+<StackPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scrumifyd.GestionProjets.controllers.AddPController">
    <children>
-      <Pane layoutX="-2.0" prefHeight="145.0" prefWidth="1150.0" styleClass="head-background" stylesheets="@../util/fullpackstyling.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane>
          <children>
-            <Label layoutX="224.0" layoutY="47.0" text="Scrumify" textFill="WHITE">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </Label>
-            <Label layoutX="227.0" layoutY="100.0" text="Best project management tool" textFill="WHITE">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Label>
-            <JFXButton layoutX="832.0" layoutY="84.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="30.0" prefWidth="163.0" ripplerFill="WHITE" style="-fx-background-color: #16bacd;" text="EDIT PROFILE" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </JFXButton>
-            <ImageView fitHeight="82.0" fitWidth="78.0" layoutX="573.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/scrumify.png" />
-               </image>
-            </ImageView>
-            <Circle fx:id="ExitButton" fill="#ff391f" layoutX="1112.0" layoutY="29.0" onMouseClicked="#ExitButton" opacity="0.6" radius="8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-            <Circle fx:id="resizeButton" fill="#71d02e" layoutX="1088.0" layoutY="29.0" onMouseClicked="#resizeButton" opacity="0.6" radius="8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-            <Circle fx:id="MinimizeButton" fill="#d7ff1f" layoutX="1062.0" layoutY="29.0" opacity="0.6" radius="8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <Pane fx:id="contentPane" layoutX="11.0" layoutY="8.0" prefHeight="512.0" prefWidth="934.0">
+               <children>
+                  <FontAwesomeIconView fx:id="back" fill="#16cabd" glyphName="BACKWARD" layoutX="18.0" layoutY="40.0" onMouseClicked="#back" size="24" />
+                  <Text fill="#16cabd" layoutX="401.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD PROJECT">
+                     <font>
+                        <Font name="Calibri Light" size="24.0" />
+                     </font>
+                  </Text>
+                  <JFXTextField fx:id="Name" alignment="TOP_LEFT" focusColor="#36989a" labelFloat="true" layoutX="81.0" layoutY="130.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="24.0" prefWidth="310.0" promptText="Name" style="-fx-font-size: 9 px; -fx-text-fill: #626970;" styleClass="column-header" unFocusColor="#16cabd">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </JFXTextField>
+                  <JFXButton fx:id="Submit" defaultButton="true" layoutX="333.0" layoutY="365.0" onMouseClicked="#SubmitButton" prefHeight="40.0" prefWidth="235.0" style="-fx-text-weight: Bold;" styleClass="button3" stylesheets="@../util/fullpackstyling.css" text="Continue" textAlignment="CENTER" textFill="WHITE" />
+                  <JFXTextArea fx:id="Description" focusColor="#36989a" labelFloat="true" layoutX="81.0" layoutY="190.0" prefHeight="134.0" prefWidth="317.0" promptText="Project Description" style="-fx-text-fill: #626970; -fx-font-size: 11 px;" styleClass="column-header" unFocusColor="#16cabd">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor></JFXTextArea>
+                  <JFXDatePicker fx:id="Deadline" defaultColor="#1ac3b5" layoutX="485.0" layoutY="190.0" overLay="true" prefHeight="40.0" prefWidth="382.0" promptText="Deadline" showWeekNumbers="true" style="-fx-font-size: 11 px; -fx-text-fill: #16cabd;" />
+                  <JFXComboBox fx:id="Team" focusColor="#16cabd" layoutX="485.0" layoutY="257.0" prefHeight="25.0" prefWidth="348.0" promptText="Team" style="-fx-font-size: 11px; -fx-text-fill: #626970;" unFocusColor="#16cabd" />
+                  <JFXComboBox fx:id="PO" layoutX="484.0" layoutY="315.0" prefHeight="25.0" prefWidth="348.0" promptText="Product Owner" style="-fx-font-size: 11 px; -fx-text-fill: #626970;" unFocusColor="#16c9bb" />
+                  <FontAwesomeIconView fill="#16cabd" glyphName="GROUP" layoutX="839.0" layoutY="278.0" size="18" />
+                  <FontAwesomeIconView fill="#16cabd" glyphName="GAVEL" layoutX="838.0" layoutY="337.0" size="18" />
+                  <Label fx:id="Errors" layoutX="81.0" layoutY="377.0" prefHeight="17.0" prefWidth="235.0" textFill="#32aea6" />
+               </children>
+            </Pane>
          </children>
-      </Pane>
-      <VBox layoutX="-1.0" layoutY="145.0" prefHeight="438.0" prefWidth="200.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="146.0">
-         <children>
-            <Label prefHeight="30.0" prefWidth="252.0" text="PROJECTS" textFill="#171717">
-               <font>
-                  <Font size="13.0" />
-               </font>
-               <padding>
-                  <Insets left="40.0" />
-               </padding>
-               <VBox.margin>
-                  <Insets top="60.0" />
-               </VBox.margin>
-            </Label>
-            <JFXButton alignment="BASELINE_LEFT" graphicTextGap="10.0" prefHeight="43.0" prefWidth="252.0" ripplerFill="#adf7f7" styleClass="column-header" stylesheets="@../util/fullpackstyling.css" text="Projects lists" textFill="#5b5858">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <font>
-                  <Font size="13.0" />
-               </font>
-               <graphic>
-                  <ImageView accessibleText="Project List" fitHeight="16.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/projects.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="50.0" />
-               </padding>
-            </JFXButton>
-            <JFXButton alignment="BASELINE_LEFT" graphicTextGap="10.0" prefHeight="43.0" prefWidth="252.0" ripplerFill="#adf7f7" text="Deadlines &amp; charts" textFill="#5b5858">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <font>
-                  <Font size="13.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/reliabilty.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="50.0" />
-               </padding>
-            </JFXButton>
-            <JFXButton alignment="BASELINE_LEFT" graphicTextGap="10.0" prefHeight="43.0" prefWidth="252.0" ripplerFill="#adf7f7" text="Files" textFill="#5b5858">
-               <font>
-                  <Font size="13.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="16.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/logo.png" />
-                     </image>
-                     <viewport>
-                        <Rectangle2D />
-                     </viewport>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="50.0" />
-               </padding>
-            </JFXButton>
-            <JFXButton alignment="BASELINE_LEFT" graphicTextGap="10.0" prefHeight="43.0" prefWidth="252.0" ripplerFill="#adf7f7" text="Teams" textFill="#5b5858">
-               <font>
-                  <Font size="13.0" />
-               </font>
-               <graphic>
-                  <ImageView accessibleText="Project List" fitHeight="16.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/agencies.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="50.0" />
-               </padding>
-            </JFXButton>
-            <Label prefHeight="30.0" prefWidth="252.0" text="ENTERPRISE" textFill="#171717">
-               <font>
-                  <Font size="13.0" />
-               </font>
-               <padding>
-                  <Insets left="40.0" />
-               </padding>
-            </Label>
-            <JFXButton alignment="BASELINE_LEFT" graphicTextGap="10.0" prefHeight="43.0" prefWidth="252.0" ripplerFill="#adf7f7" text="Settings" textFill="#5b5858">
-               <font>
-                  <Font size="13.0" />
-               </font>
-               <graphic>
-                  <ImageView accessibleText="Project List" fitHeight="16.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/projections.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="50.0" />
-               </padding>
-            </JFXButton>
-            <JFXButton alignment="BASELINE_LEFT" graphicTextGap="10.0" prefHeight="43.0" prefWidth="252.0" ripplerFill="#adf7f7" text="About" textFill="#5b5858">
-               <font>
-                  <Font size="13.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/icons8_Share_64px.png" />
-                     </image>
-                     <viewport>
-                        <Rectangle2D />
-                     </viewport>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="50.0" />
-               </padding>
-            </JFXButton>
-         </children>
-      </VBox>
-      <Pane layoutX="71.0" layoutY="44.0" prefHeight="131.0" prefWidth="142.0" style="-fx-background-color: #fff;">
-         <children>
-            <ImageView fitHeight="120.0" fitWidth="139.0" layoutX="4.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/Image14.png" />
-               </image>
-            </ImageView>
-         </children>
-         <effect>
-            <DropShadow blurType="GAUSSIAN" height="10.0" radius="4.5" width="10.0" />
-         </effect>
-      </Pane>
-      <VBox layoutX="258.0" layoutY="205.0" prefHeight="337.0" prefWidth="719.0">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add new project " wrappingWidth="194.13671875" />
-            <JFXTextField alignment="BOTTOM_CENTER" prefHeight="21.0" prefWidth="612.0" translateX="22.0" translateY="34.0">
-               <font>
-                  <Font name="Calibri Light" size="10.0" />
-               </font>
-            </JFXTextField>
-         </children>
-      </VBox>
+      </AnchorPane>
    </children>
-</AnchorPane>
+</StackPane>
