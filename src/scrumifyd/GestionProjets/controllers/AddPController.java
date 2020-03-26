@@ -15,11 +15,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -34,6 +38,7 @@ import scrumifyd.util.MyDbConnection;
 import scrumifyd.GestionProjets.services.ProjectService;
 import scrumifyd.GestionProjets.models.Project;
 import scrumifyd.GestionProjets.services.InterfaceProjet;
+import scrumifyd.GestionProjets.models.Team;
 
 /**
  * FXML Controller class
@@ -43,7 +48,7 @@ import scrumifyd.GestionProjets.services.InterfaceProjet;
 public class AddPController implements Initializable {
 
     Connection con = null;
-    PreparedStatement preparedStatement = null;
+    PreparedStatement pst = null;
     String resultSet = null;
 
     @FXML
@@ -63,7 +68,10 @@ public class AddPController implements Initializable {
     @FXML
     private JFXComboBox<String> Team;
     @FXML
-    private JFXComboBox<String> PO;
+    private JFXComboBox PO;
+    
+    private ObservableList<String> teams = FXCollections.observableArrayList();
+    private ObservableList<String> owners = FXCollections.observableArrayList();
 
     int etat = 1;
     LocalDate today = LocalDate.now();
@@ -74,6 +82,7 @@ public class AddPController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+
         if (con == null) {
             Errors.setTextFill(Color.TOMATO);
             Errors.setText("Server Error : Check");
@@ -81,13 +90,41 @@ public class AddPController implements Initializable {
             Errors.setTextFill(Color.GREEN);
             Errors.setText("Server is up : Good to go");
         }
+
+
+       // fillComboBoxT(teams);
+       
+
+
+        
+
     }
 
-    public AddPController() {
-        con = MyDbConnection.getInstance().getConnexion();
+    public AddPController() {    
+        
+                    con = MyDbConnection.getInstance().getConnexion();
+    }
+    public   void  fillComboBoxT(ObservableList<String> teams){
+       
+            String query = "select `name` from `team` ";
+             try {
+      
+            Statement stm = con.createStatement();
+            ResultSet rs = pst.executeQuery(query);
+            System.out.println("test");
+            while(rs.next()) {
+                System.out.println("test1");
+                teams.add(rs.getString("name"));
+                System.out.println(teams);
+
+            }
+             Team.setItems(teams);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(AddPController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
-
     @FXML
     public void SubmitButton(MouseEvent event) {
 

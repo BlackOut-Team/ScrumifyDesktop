@@ -19,11 +19,11 @@ public interface InterfaceProjet {
 
 
     public    boolean  addProject(Project p) throws SQLException ;
-             public  List<Project> getAllProjects() throws SQLException;
-               public boolean archiveProject(Project project) ;
-                   public boolean updateProject(Project project) ;
-                       public ObservableList<PieChart.Data> getProjectGraphStatistics() ;
-                       public boolean unarchiveProject(Project project) ;
+    public  List<Project> getAllProjects() throws SQLException;
+    public boolean archiveProject(Project project) ;
+    public boolean updateProject(Project project) ;
+    public ObservableList<PieChart.Data> getProjectGraphStatistics() ;
+    public boolean unarchiveProject(Project project) ;
 
 
 
