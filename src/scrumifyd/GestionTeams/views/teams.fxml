@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<!--<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutX="-1.0" layoutY="-2.0" prefHeight="477.0" prefWidth="749.0" styleClass="linear-grad" stylesheets="@../util/fullpackstyling.css">
+         <children>
+            <ImageView fitHeight="398.0" fitWidth="628.0" layoutX="82.0" layoutY="59.0" opacity="0.19" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/undraw_investing_7u74.png" />
+               </image>
+            </ImageView>
+            <FontAwesomeIconView fx:id="exit" fill="WHITE" glyphName="CLOSE" layoutX="720.0" layoutY="27.0" size="20" wrappingWidth="26.761884689331055" />
+            <Label fx:id="Errors" layoutX="14.0" layoutY="447.0" prefHeight="17.0" prefWidth="235.0" textFill="#32aea6" />
+            <BorderPane prefHeight="477.0" prefWidth="200.0" style="-fx-background-color: white;">
+               <center>
+                  <ImageView fitHeight="37.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                     <image>
+                        <Image url="@../images/scrumify.png" />
+                     </image>
+                  </ImageView>
+               </center>
+            </BorderPane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>-->
+
+<StackPane prefHeight="411.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scrumifyd.GestionTeams.controllers.TeamsController">
+   <children>
+      <AnchorPane prefHeight="411.0" prefWidth="600.0">
+         <children>
+            <Pane fx:id="contentPane" layoutX="77.0" layoutY="8.0" prefHeight="403.0" prefWidth="764.0">
+               <children>
+                  <TreeTableView layoutX="100.0" layoutY="70.0" prefHeight="294.0" prefWidth="639.0" styleClass="table-view" stylesheets="@../../util/fullpackstyling.css">
+                    <columns>
+                      <TreeTableColumn prefWidth="102.33331298828125" text="Team id" />
+                      <TreeTableColumn prefWidth="113.33334350585938" text="Team Name" />
+                        <TreeTableColumn prefWidth="115.3333740234375" text="Created" />
+                        <TreeTableColumn prefWidth="152.33331298828125" text="Updated" />
+                        <TreeTableColumn minWidth="3.0" prefWidth="69.66668701171875" text="status" />
+                        <TreeTableColumn prefWidth="83.3333740234375" text="index" />
+                    </columns>
+                  </TreeTableView>
+                  <Label fx:id="Errors" layoutX="47.0" layoutY="458.0" prefHeight="17.0" prefWidth="235.0" textFill="#32aea6" />
+                  <Text fill="#16cabd" layoutX="418.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="hea" text="Teams">
+                     <font>
+                        <Font name="Calibri Light" size="37.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

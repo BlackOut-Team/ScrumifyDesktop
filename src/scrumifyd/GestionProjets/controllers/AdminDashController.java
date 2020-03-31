@@ -1,0 +1,186 @@
+
+
+package scrumifyd.GestionProjets.controllers;
+
+import com.jfoenix.controls.JFXButton;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
+
+/**
+ *
+ * @author Amira Doghri
+ */
+public class AdminDashController implements Initializable {
+       
+    @FXML 
+    private Circle ExitButton;
+    @FXML 
+    private Circle MinimizeButton;
+    @FXML
+    private Circle resizeButton;
+    
+  
+    @FXML
+    private StackPane contentPane;
+   
+    
+    
+    
+    @FXML
+    private JFXButton Projects;
+    @FXML
+    private JFXButton settings;
+    @FXML
+    private AnchorPane Dashboard;
+    @FXML
+    private JFXButton teams;
+   
+    
+    @FXML
+    Label user_id;
+    
+    int user_idd;
+    @FXML
+    private JFXButton Users;
+    
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        
+        // TODO     
+          contentPane.getChildren().clear();
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/scrumifyd/GestionProjets/views/ProjectsAdmin.fxml"));
+
+        } catch (IOException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        contentPane.getChildren().add(root);
+       
+    }    
+
+    public void setContentPane(StackPane contentPane) {
+        this.contentPane = contentPane;
+    }
+
+    public StackPane getContentPane() {
+        return contentPane;
+    }
+    
+  public void setUserId(int user_id){
+      this.user_idd=user_id;
+      this.user_id.setText(""+user_id);
+  }
+    
+    @FXML
+     public void ExitButton(MouseEvent event) {
+          if (event.getSource() == ExitButton){
+    // get a handle to the stage
+              Node node = (Node) event.getSource();
+                    Stage stage = (Stage) node.getScene().getWindow();
+    // do what you have to do
+    stage.close();
+    }
+    }
+     @FXML
+     public void MinimizeButton(MouseEvent event) {
+          if (event.getSource() == MinimizeButton){
+    // get a handle to the stage
+              Node node = (Node) event.getSource();
+                    Stage stage = (Stage) node.getScene().getWindow();
+    // do what you have to do
+    stage.setIconified(true);
+    }
+    }
+    @FXML
+    public void resizeButton(MouseEvent event) {
+         if (event.getSource() == resizeButton){
+    // get a handle to the stage
+              Node node = (Node) event.getSource();
+              Stage stage = (Stage) node.getScene().getWindow();
+    // do what you have to do
+    if (stage.isMaximized())
+    {
+        stage.setMaximized(false);
+    }
+    else
+    {
+         stage.setMaxWidth(1366);
+    stage.setMaxHeight(720);
+        stage.setMaximized(true);
+    }
+   
+    }
+    }
+    
+    
+
+  public void loadUI(String module , String ui){
+             contentPane.getChildren().clear();
+
+         Parent root=null;
+       try{
+           root = FXMLLoader.load(getClass().getResource("/scrumifyd/"+module+"/views/"+ui+".fxml"));
+           
+       } catch (IOException ex) {
+                Logger.getLogger(AdminDashController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        contentPane.getChildren().add(root);
+   }
+
+
+ 
+
+    @FXML
+    private void Projects(MouseEvent event) {
+        contentPane.getChildren().clear();
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/scrumifyd/GestionProjets/views/ProjectsAdmin.fxml"));
+
+        } catch (IOException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        contentPane.getChildren().add(root);
+    }
+
+    private void settings(MouseEvent event) {
+        loadUI("GestionProjets","settings");
+    }
+
+    private void settings(ActionEvent event) {
+        loadUI("GestionProjets","settings");
+
+    }
+
+   
+
+
+    @FXML
+    private void openTeams(MouseEvent event) {
+        loadUI("GestionTeams","teams");
+    }
+
+    @FXML
+    private void Users(MouseEvent event) {
+        loadUI("GestionUsers","UsersAdmin");
+    }
+    
+}

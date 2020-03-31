@@ -12,9 +12,16 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,14 +37,24 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import scrumifyd.GestionProjets.controllers.DashboardController;
+import scrumifyd.GestionProjets.controllers.ProjectsController;
+import scrumifyd.GestionProjets.controllers.SprintSController;
+import scrumifyd.GestionProjets.controllers.emptyController;
+import scrumifyd.GestionProjets.models.Project;
+import scrumifyd.GestionProjets.services.ProjectService;
+import scrumifyd.ScrumifyD;
 import scrumifyd.util.MyDbConnection;
 
 /**
@@ -59,27 +76,29 @@ public class SigninController implements Initializable {
     private JFXTextField Email;
     @FXML
     private JFXPasswordField Password;
-     @FXML 
+    @FXML
     private Circle ExitButton;
-    @FXML 
+    @FXML
     private Circle MinimizeButton;
     @FXML
     private Circle resizeButton;
-    
-     Connection con = null;
+
+    Connection con = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
     @FXML
     private StackPane stackPane;
     @FXML
     private AnchorPane anchorPane;
+    @FXML
+    private JFXButton adminButton;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-           // TODO
+        // TODO
         if (con == null) {
             Errors.setTextFill(Color.TOMATO);
             Errors.setText("Server Error : Check");
@@ -87,51 +106,78 @@ public class SigninController implements Initializable {
             Errors.setTextFill(Color.GREEN);
             Errors.setText("Server is up : Good to go");
         }
-    }    
+    }
 
     @FXML
     private void open_signup(MouseEvent event) {
-              
 
-         try {
-              
-             // Animation
-               Parent root=FXMLLoader.load(getClass().getResource("/scrumifyd/GestionUsers/views/Home.fxml"));
-               Scene SigninScene = open_signup.getScene();
-               root.translateYProperty().set(SigninScene.getHeight()); 
-               stackPane.getChildren().add(root);
-               Timeline timeline = new Timeline();
-               KeyValue keyValue = new KeyValue(root.translateYProperty(),0,Interpolator.EASE_OUT);
-               KeyFrame keyFrame = new KeyFrame(Duration.millis(200),keyValue);
-               timeline.getKeyFrames().add(keyFrame);
-               timeline.play();
-               timeline.setOnFinished((ActionEvent event2)->{
-               stackPane.getChildren().remove(anchorPane);
-                   
-               
-               });
-               
-           } catch (IOException ex) {
-               Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-           }
-           
+        try {
+
+            // Animation
+            Parent root = FXMLLoader.load(getClass().getResource("/scrumifyd/GestionUsers/views/Home.fxml"));
+            Scene SigninScene = open_signup.getScene();
+            root.translateYProperty().set(SigninScene.getHeight());
+            stackPane.getChildren().add(root);
+            Timeline timeline = new Timeline();
+            KeyValue keyValue = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_OUT);
+            KeyFrame keyFrame = new KeyFrame(Duration.millis(200), keyValue);
+            timeline.getKeyFrames().add(keyFrame);
+            timeline.play();
+            timeline.setOnFinished((ActionEvent event2) -> {
+                stackPane.getChildren().remove(anchorPane);
+
+            });
+
+        } catch (IOException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     @FXML
     private void signInButton(MouseEvent event) {
-         if (event.getSource() == btnSignin) {
+        if (event.getSource() == btnSignin) {
             //login here
-            if (logIn().equals("Success")) {
-                try {
 
+            if (logIn() != 0) {
+                try {
+                    int res = logIn();
                     //add you loading or delays - ;-)
                     Node node = (Node) event.getSource();
                     Stage stage = (Stage) node.getScene().getWindow();
                     //stage.setMaximized(true);
                     stage.close();
                     Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/scrumifyd/GestionProjets/views/Dashboard.fxml")));
-                    stage.setScene(scene);
+                    stage.setScene(scene);                
                     stage.show();
+
+//                    if (getUserProjects(res) != 0) {
+//                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/scrumifyd/GestionProjets/views/Dashboard.fxml"));
+//                        Stage stage1 = new Stage(StageStyle.UNDECORATED);
+//                        stage1.getIcons().add(
+//                new Image(
+//                        ScrumifyD.class.getResourceAsStream("/scrumifyd/images/scrumify.png")));
+//                        stage.setResizable(true);
+//
+//                        stage1.setScene(new Scene((AnchorPane) loader.load()));
+//                        
+// 
+//                        DashboardController sp = loader.getController();
+//                        loader.setController(sp);
+//
+//                        sp.setUserId(res);
+//                        System.out.println("Sign in  projects: " + res);
+//                        stage1.show();
+//                    } else if (getUserProjects(res) == 0) {
+//                        FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/scrumifyd/GestionProjets/views/empty.fxml"));
+//                        Stage stage2 = new Stage(StageStyle.UNDECORATED);
+//                        stage2.setScene(new Scene((StackPane) loader1.load()));
+//
+//                        emptyController sp1 = loader1.getController();
+//                        sp1.setUserId(res);
+//                        System.out.println("Sign in empty : " + res);
+//                        stage2.show();
+//                    }
 
                 } catch (IOException ex) {
                     System.err.println(ex.getMessage());
@@ -142,15 +188,17 @@ public class SigninController implements Initializable {
     }
 
     public SigninController() {
-                con = MyDbConnection.getInstance().getConnexion();
+        con = MyDbConnection.getInstance().getConnexion();
 
     }
+
     //we gonna use string to check for status
-    private String logIn() {
+    private int logIn() {
+        int user_id = 0;
         String status = "Success";
         String email = Email.getText();
         String password = Password.getText();
-        if(email.isEmpty() || password.isEmpty()) {
+        if (email.isEmpty() || password.isEmpty()) {
             setLblError(Color.TOMATO, "Empty credentials");
             status = "Error";
         } else {
@@ -163,56 +211,100 @@ public class SigninController implements Initializable {
                 resultSet = preparedStatement.executeQuery();
                 if (!resultSet.next()) {
                     setLblError(Color.TOMATO, "Enter Correct Email/Password");
+
                     status = "Error";
                 } else {
                     setLblError(Color.GREEN, "Login Successful..Redirecting..");
+                    user_id = resultSet.getInt(1);
                 }
             } catch (SQLException ex) {
                 System.err.println(ex.getMessage());
                 status = "Exception";
             }
         }
-        
-        return status;
+
+        return user_id;
     }
-    
+
     private void setLblError(Color color, String text) {
         Errors.setTextFill(color);
         Errors.setText(text);
         System.out.println(text);
     }
-    
+
     @FXML
     private void ExitButton(MouseEvent event) {
-          if (event.getSource() == ExitButton){
-    // get a handle to the stage
-              Node node = (Node) event.getSource();
-                    Stage stage = (Stage) node.getScene().getWindow();
-    // do what you have to do
-    stage.close();
+        if (event.getSource() == ExitButton) {
+            // get a handle to the stage
+            Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+            // do what you have to do
+            stage.close();
+        }
     }
-    }
-        @FXML
+
+    @FXML
     private void MinimizeButton(MouseEvent event) {
-          if (event.getSource() == MinimizeButton){
-    // get a handle to the stage
-              Node node = (Node) event.getSource();
-                    Stage stage = (Stage) node.getScene().getWindow();
-    // do what you have to do
-    stage.setIconified(true);
+        if (event.getSource() == MinimizeButton) {
+            // get a handle to the stage
+            Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+            // do what you have to do
+            stage.setIconified(true);
+        }
     }
-    }
- @FXML
+
+    @FXML
     void resizeButton(MouseEvent event) {
-         if (event.getSource() == resizeButton){
-    // get a handle to the stage
-              Node node = (Node) event.getSource();
-              Stage stage = (Stage) node.getScene().getWindow();
-    // do what you have to do
-    stage.setMaxWidth(1920);
-    stage.setMaxHeight(1080);
+        if (event.getSource() == resizeButton) {
+            // get a handle to the stage
+            Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+            // do what you have to do
+            stage.setMaxWidth(1920);
+            stage.setMaxHeight(1080);
+        }
     }
+
+    public int getUserProjects(int id) {
+
+        List<Project> Projects = new ArrayList<>();
+        try {
+
+            String req = "SELECT * FROM `projet` WHERE `owner_id`=" + id + " or `master_id`=" + id + " and etat=1" ;
+            Statement stm = con.createStatement();
+            ResultSet result = stm.executeQuery(req);
+
+            while (result.next()) {
+                Date createdd = result.getDate("created");
+                Date duedate = result.getDate("duedate");
+                LocalDate datec = Instant.ofEpochMilli(createdd.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate dated = Instant.ofEpochMilli(duedate.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                Project p = new Project(result.getInt(1), result.getString("name"), result.getString("description"), datec, dated, result.getInt("etat"));
+                Projects.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return Projects.size();
+    }
+
+    @FXML
+    private void adminButton(MouseEvent event) {
+            if (event.getSource() == adminButton) {
+              
+                try {
+              
+                    Node node = (Node) event.getSource();
+                    Stage stage = (Stage) node.getScene().getWindow();
+                    stage.close();
+                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/scrumifyd/GestionProjets/views/AdminDash.fxml")));
+                    stage.setScene(scene);                
+                    stage.show();
+                } catch (IOException ex) {
+                    Logger.getLogger(SigninController.class.getName()).log(Level.SEVERE, null, ex);
+                }
     }
 }
-
-
+}

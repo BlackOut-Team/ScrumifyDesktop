@@ -42,6 +42,10 @@
             <Circle fx:id="ExitButton" fill="#ff391f" layoutX="1112.0" layoutY="29.0" onMouseClicked="#ExitButton" opacity="0.6" radius="8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
             <Circle fx:id="resizeButton" fill="#71d02e" layoutX="1088.0" layoutY="29.0" onMouseClicked="#resizeButton" opacity="0.6" radius="8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
             <Circle fx:id="MinimizeButton" fill="#d7ff1f" layoutX="1062.0" layoutY="29.0" onMouseClicked="#MinimizeButton" opacity="0.6" radius="8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <Label fx:id="user_id" layoutX="965.0" layoutY="56.0" text="Id" textFill="#625454" />
+            <Text fill="#918d8d" layoutX="842.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello," />
+            <Label layoutX="886.0" layoutY="56.0" text="Amira" textFill="#918d8d" />
+            <Text fill="#625454" layoutX="927.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/ Id :" />
          </children>
       </Pane>
       <VBox layoutX="-1.0" layoutY="145.0" prefHeight="438.0" prefWidth="200.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="146.0">
@@ -111,7 +115,7 @@
                   <Insets left="50.0" />
                </padding>
             </JFXButton>
-            <JFXButton alignment="BASELINE_LEFT" graphicTextGap="10.0" prefHeight="43.0" prefWidth="252.0" ripplerFill="#adf7f7" text="Teams" textFill="#5b5858">
+            <JFXButton fx:id="teams" alignment="BASELINE_LEFT" graphicTextGap="10.0" onMouseClicked="#openTeams" prefHeight="43.0" prefWidth="252.0" ripplerFill="#adf7f7" text="Teams" textFill="#5b5858">
                <font>
                   <Font size="13.0" />
                </font>
@@ -181,23 +185,6 @@
             <DropShadow blurType="GAUSSIAN" height="10.0" radius="4.5" width="10.0" />
          </effect>
       </Pane>
-      <StackPane fx:id="contentPane" layoutX="217.0" layoutY="203.0" prefHeight="380.0" prefWidth="935.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="203.0">
-         <children>
-            <AnchorPane prefHeight="350.0" prefWidth="935.0">
-               <children>
-                  <Text fill="#4a5150" layoutX="233.0" layoutY="120.0" opacity="0.63" strokeType="OUTSIDE" strokeWidth="0.0" text="No project yet ? Start your journey now ." wrappingWidth="308.80340576171875">
-                     <font>
-                        <Font name="Calibri Light Italic" size="18.0" />
-                     </font>
-                  </Text>
-                  <ImageView fitHeight="131.0" fitWidth="92.0" layoutX="322.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/empty-state.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-         </children>
-      </StackPane>
+      <StackPane fx:id="contentPane" layoutX="217.0" layoutY="153.0" prefHeight="438.0" prefWidth="935.0" AnchorPane.bottomAnchor="-7.0" AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="153.0" />
    </children>
 </AnchorPane>

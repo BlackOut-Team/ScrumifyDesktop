@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package scrumifyd.GestionProjets.controllers;
 
 import com.jfoenix.controls.JFXButton;
@@ -14,11 +9,12 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,7 +34,8 @@ import scrumifyd.util.MyDbConnection;
 import scrumifyd.GestionProjets.services.ProjectService;
 import scrumifyd.GestionProjets.models.Project;
 import scrumifyd.GestionProjets.services.InterfaceProjet;
-import scrumifyd.GestionProjets.models.Team;
+import scrumifyd.GestionProjets.services.SprintInterface;
+import scrumifyd.GestionProjets.services.SprintService;
 
 /**
  * FXML Controller class
@@ -48,9 +45,7 @@ import scrumifyd.GestionProjets.models.Team;
 public class AddPController implements Initializable {
 
     Connection con = null;
-    PreparedStatement pst = null;
-    String resultSet = null;
-
+   
     @FXML
     private Pane contentPane;
     @FXML
@@ -66,65 +61,100 @@ public class AddPController implements Initializable {
     @FXML
     private Label Errors;
     @FXML
-    private JFXComboBox<String> Team;
+    private JFXComboBox Team;
     @FXML
     private JFXComboBox PO;
-    
-    private ObservableList<String> teams = FXCollections.observableArrayList();
-    private ObservableList<String> owners = FXCollections.observableArrayList();
-
+    int user_id;
     int etat = 1;
     LocalDate today = LocalDate.now();
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-
+        //Database
         if (con == null) {
             Errors.setTextFill(Color.TOMATO);
             Errors.setText("Server Error : Check");
         } else {
             Errors.setTextFill(Color.GREEN);
             Errors.setText("Server is up : Good to go");
+        //Comboboxes  
+        //Teams    
+            Team.getSelectionModel().clearSelection();
+            ObservableList teams = FXCollections.observableArrayList(fillComboBoxT());
+            Team.setItems(teams);
+        //Owners
+            PO.getSelectionModel().clearSelection();
+            ObservableList owners = FXCollections.observableArrayList(fillComboBoxO());
+            PO.setItems(owners);
         }
 
 
-       // fillComboBoxT(teams);
-       
-
-
-        
+ 
+ 
+ 
+ 
+ 
+ 
+  
+   
 
     }
+ public void setUserId(int user_id){
+      this.user_id=user_id;
+  }
+    
+    public AddPController() {
 
-    public AddPController() {    
-        
-                    con = MyDbConnection.getInstance().getConnexion();
+        con = MyDbConnection.getInstance().getConnexion();
     }
-    public   void  fillComboBoxT(ObservableList<String> teams){
-       
-            String query = "select `name` from `team` ";
-             try {
-      
+
+    public List<String> fillComboBoxT() {
+
+        List<String> list = new ArrayList<>();
+        try {
+            String query = "SELECT `name` FROM `team` ";
+
             Statement stm = con.createStatement();
-            ResultSet rs = pst.executeQuery(query);
-            System.out.println("test");
-            while(rs.next()) {
-                System.out.println("test1");
-                teams.add(rs.getString("name"));
-                System.out.println(teams);
+            ResultSet rs = stm.executeQuery(query);
+
+            while (rs.next()) {
+                list.add(rs.getString("name"));
 
             }
-             Team.setItems(teams);
         } catch (SQLException ex) {
-            ex.printStackTrace();
             Logger.getLogger(AddPController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        return list;
     }
+    public List<String> fillComboBoxO() {
+
+        List<String> list = new ArrayList<>();
+   
+        try {
+            String query = "SELECT `name` FROM `person` ";
+
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery(query);
+
+            while (rs.next()) {
+                list.add(rs.getString("name"));
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AddPController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return list;
+    }
+
     @FXML
     public void SubmitButton(MouseEvent event) {
 
@@ -139,7 +169,6 @@ public class AddPController implements Initializable {
                 alert.setContentText("Added successfully!");
 
                 alert.showAndWait();
-                loadUI("ProjectsCurrent");
 
             } else {
                 Alert alert = new Alert(AlertType.ERROR);
@@ -157,32 +186,59 @@ public class AddPController implements Initializable {
 
     public boolean AddP() {
 
-        boolean res = false;
+        int res = 0;
+        boolean s = false ;
         String name = Name.getText();
-        String description = Description.getText();
-        // int team_id=0;
-        // int owner_id=0;
-        // int master_id=0;
-
+        String description = Description.getText();   
         LocalDate deadline = Deadline.getValue();
-        //String team = Team.getValue();
-        //String productowner = PO.getValue();
-        if (name.isEmpty() || description.isEmpty() || deadline.isBefore(LocalDate.now())) {
-            setLblError(Color.TOMATO, "Empty credentials");
+        String team = (String) Team.getValue();     
+        String productowner = (String) PO.getValue();
+        int team_id=0;
+        int owner_id=0;
+        
+        if (name.isEmpty() || description.isEmpty() || deadline.isBefore(LocalDate.now()) || Team.getValue()==""|| PO.getValue()=="") {
+            setLblError(Color.TOMATO, "Empty/wrong credentials");
 
         } else {
-            //query
             try {
-                Project project = new Project(name, description, today, deadline, etat);
+                System.out.println("Add : "  + user_id);
+                Project project = new Project(name, description, today,deadline, etat );
 
                 InterfaceProjet Projects = new ProjectService();
                 res = Projects.addProject(project);
-
-                if (res) {
+                Project  pp = Projects.getProject(res);
+                if (res!=0) {
+                    s=true;
                     setLblError(Color.GREEN, "Project Added Successfully.Redirecting..");
+                     SprintInterface sprint = new SprintService(); 
+
+                     int s1=    sprint.sprintSuggest1(project);
+                     int s2=    sprint.sprintSuggest2(project);
+                  
+      
+                    try {
+                                contentPane.getChildren().clear();
+
+                        FXMLLoader  loader = new FXMLLoader(getClass().getResource("/scrumifyd/GestionProjets/views/SprintsSuggest.fxml"));
+                        Parent root = (Parent) loader.load();
+                        SprintSController sp= loader.getController();
+                        sp.setLabels(s1, s2);
+                        sp.setProject(pp);
+                        sp.setProjectId(pp.getId());
+                        
+                        contentPane.getChildren().add(root);
+
+
+
+                    } catch (IOException ex) {
+                        Logger.getLogger(AddPController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                 
 
                 } else {
-                    setLblError(Color.GREEN, "Project Added Successfully.Redirecting..");
+                    s=false ; 
+                    setLblError(Color.RED, "Project error...");
                 }
 
             } catch (SQLException ex) {
@@ -190,7 +246,7 @@ public class AddPController implements Initializable {
             }
 
         }
-        return res;
+        return s;
 
     }
 
@@ -217,5 +273,7 @@ public class AddPController implements Initializable {
         Errors.setText(text);
         System.out.println(text);
     }
+
+   
 
 }

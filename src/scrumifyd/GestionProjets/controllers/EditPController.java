@@ -15,23 +15,28 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 import scrumifyd.GestionProjets.models.Project;
 import scrumifyd.GestionProjets.services.InterfaceProjet;
 import scrumifyd.GestionProjets.services.ProjectService;
@@ -57,21 +62,24 @@ public class EditPController implements Initializable {
     @FXML
     private JFXDatePicker Deadline;
     @FXML
-    private JFXComboBox<?> Team;
+    private JFXComboBox Team;
     @FXML
-    private JFXComboBox<?> PO;
+    private JFXComboBox PO;
     @FXML
     private Label Errors;
 
     Connection con = null;
     PreparedStatement preparedStatement = null;
     String resultSet = null;
-
+Project p ; 
+int pid ; 
     int etat = 1;
     LocalDate today = LocalDate.now();
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -83,20 +91,71 @@ public class EditPController implements Initializable {
             Errors.setTextFill(Color.GREEN);
             Errors.setText("Server is up : Good to go");
         }
+        
+            //Comboboxes  
+        //Teams    
+            Team.getSelectionModel().clearSelection();
+            ObservableList teams = FXCollections.observableArrayList(fillComboBoxT());
+            Team.setItems(teams);
+        //Owners
+            PO.getSelectionModel().clearSelection();
+            ObservableList owners = FXCollections.observableArrayList(fillComboBoxO());
+            PO.setItems(owners);
     }
 
     public EditPController() {
         con = MyDbConnection.getInstance().getConnexion();
 
     }
-
-    private void setFields(Project p) {
-
-        Name.setText(p.getName());
-        Description.setText(p.getDescription());
-        // Deadline.set
-        //Team.set
+    
+    public void setProject(Project p){
+        this.p=p;
     }
+    
+    public void setProjectId(int pid){
+        this.pid=pid;
+    }
+ public List<String> fillComboBoxT() {
+
+        List<String> list = new ArrayList<>();
+        try {
+            String query = "SELECT `name` FROM `team` ";
+
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery(query);
+
+            while (rs.next()) {
+                list.add(rs.getString("name"));
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AddPController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return list;
+    }
+    public List<String> fillComboBoxO() {
+
+        List<String> list = new ArrayList<>();
+        System.out.println("test");
+        try {
+            String query = "SELECT `name` FROM `person` ";
+
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery(query);
+
+            while (rs.next()) {
+                list.add(rs.getString("name"));
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AddPController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return list;
+    }
+
+
 
     @FXML
     public void SubmitButton(MouseEvent event) {
@@ -130,33 +189,49 @@ public class EditPController implements Initializable {
 
     public boolean EditP() {
 
-        boolean res = false;
+        int res = 0;
+        boolean s=false;
         String name = Name.getText();
         String description = Description.getText();
+        LocalDate deadline = Deadline.getValue();
+        String team = (String) Team.getValue();     
+        String productowner = (String) PO.getValue();
         // int team_id=0;
         // int owner_id=0;
         // int master_id=0;
 
-        LocalDate deadline = Deadline.getValue();
-        //String team = Team.getValue();
-        //String productowner = PO.getValue();
-        if (name.isEmpty() || description.isEmpty() || deadline.isBefore(LocalDate.now())) {
-            setLblError(Color.TOMATO, "Empty credentials");
+
+        if (name.isEmpty() || description.isEmpty() || deadline.isBefore(LocalDate.now()) || Team.getValue()==""|| PO.getValue()=="") {
+            setLblError(Color.TOMATO, "Empty/wrong credentials");
 
         } else {
-            //query
-            Project project = new Project(name, description, today, deadline, etat);
-            InterfaceProjet Projects = new ProjectService();
-            res = Projects.updateProject(project);
-            if (res) {
-                setLblError(Color.GREEN, "Project Edited Successfully.Redirecting..");
-
-            } else {
-                setLblError(Color.GREEN, "Project edited Successfully.Redirecting..");
+            try {
+                Project project = new Project(name, description, deadline );
+                InterfaceProjet Projects = new ProjectService();
+                 
+            
+                res = Projects.updateProject(pid,project );
+               
+                
+                if (res!=0) {
+                    s=true;
+                    setLblError(Color.GREEN, "Project Edited Successfully.Redirecting..");
+                    
+                    loadUI("ProjectsCurrent");
+                    
+                    
+                    
+                    
+                } else {
+                    s=false;
+                    setLblError(Color.RED, "ERROR");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(EditPController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
-        return res;
+        return s;
 
     }
 
@@ -183,5 +258,27 @@ public class EditPController implements Initializable {
         Errors.setText(text);
         System.out.println(text);
     }
+        public void setName(String Name) {
+        this.Name.setText(Name);
+    }
+
+   public void setDeadline(LocalDate deadline){
+       this.Deadline.setValue(deadline);
+   }
+
+
+    public void setDescription(String Description) {
+        this.Description.setText(Description);
+        
+    }
+
+   
+    
+
+
+
+  
+
+ 
 
 }

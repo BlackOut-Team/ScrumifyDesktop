@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="244.0" prefWidth="441.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scrumifyd.GestionProjets.controllers.ItemSController">
+   <children>
+      <AnchorPane layoutX="33.0" layoutY="22.0" prefHeight="200.0" prefWidth="375.0" style="-fx-background-color: #c9c0c0;" stylesheets="@../../util/fullpackstyling.css">
+         <children>
+            <Label fx:id="Name" layoutX="24.0" layoutY="14.0" text="Sprint in progess" textFill="#20beb6">
+               <font>
+                  <Font name="Calibri Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="id" layoutX="59.0" layoutY="35.0" text="20178" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="207.0" layoutY="131.0" text="Start Date" textFill="#20beb6">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label layoutX="280.0" layoutY="131.0" text="Finish date" textFill="#20beb6">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="created_day" layoutX="204.0" layoutY="101.0" text="16" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="deadline_day" layoutX="279.0" layoutY="101.0" text="25" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="created_month" layoutX="237.0" layoutY="104.0" text="APR" textFill="#20beb6">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="created_year" layoutX="236.0" layoutY="117.0" text="2018" textFill="#646262">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="deadline_month" layoutX="315.0" layoutY="104.0" text="APR" textFill="#20beb6">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="deadline_year" layoutX="314.0" layoutY="117.0" text="2018" textFill="#646262">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Text fill="#aeacac" layoutX="36.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="id : " />
+            <Label fx:id="Description" layoutX="29.0" layoutY="63.0" prefHeight="19.0" prefWidth="99.0" text="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" textFill="#20beb6">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <FontAwesomeIconView fx:id="EditButton" fill="WHITE" glyphName="EDIT" layoutX="340.0" layoutY="31.0" size="18" />
+            <FontAwesomeIconView fx:id="ArchiveButton" fill="WHITE" glyphName="ARCHIVE" layoutX="317.0" layoutY="30.0" size="16" />
+            <FontAwesomeIconView fx:id="LinkButton" fill="WHITE" glyphName="LINK" layoutX="299.0" layoutY="30.0" size="14" />
+            <Separator layoutX="266.0" layoutY="97.0" orientation="VERTICAL" prefHeight="49.0" prefWidth="5.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -3,34 +3,24 @@
 package scrumifyd.GestionProjets.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import scrumifyd.GestionUsers.services.HomeController;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.animation.FadeTransition;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.NodeOrientation;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
-import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 /**
  *
@@ -56,20 +46,49 @@ public class DashboardController implements Initializable {
     private JFXButton Projects;
     @FXML
     private JFXButton settings;
+    @FXML
+    private AnchorPane Dashboard;
+    @FXML
+    private JFXButton teams;
    
-
+ @FXML
+    private JFXButton addP;
+    @FXML
+    private JFXButton addT;
     
+    @FXML
+    Label user_id;
     
-
+    int user_idd;
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         // TODO      
-     
+         contentPane.getChildren().clear();
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/scrumifyd/GestionProjets/views/ProjectsCurrent.fxml"));
+
+        } catch (IOException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        contentPane.getChildren().add(root);
     }    
+
+    public void setContentPane(StackPane contentPane) {
+        this.contentPane = contentPane;
+    }
+
+    public StackPane getContentPane() {
+        return contentPane;
+    }
     
-  
+  public void setUserId(int user_id){
+      this.user_idd=user_id;
+      this.user_id.setText(""+user_id);
+  }
     
     @FXML
      public void ExitButton(MouseEvent event) {
@@ -113,38 +132,64 @@ public class DashboardController implements Initializable {
     }
     
     
- 
-
- 
-
-    @FXML
-    private void Projects(MouseEvent event) {
-        loadUI("ProjectsCurrent");
+ @FXML
+    private void addP(MouseEvent event) {
+        loadUI("GestionProjets","AddP");
     }
-
-    @FXML
-    private void settings(MouseEvent event) {
-        loadUI("settings");
-    }
-
-    @FXML
-    private void settings(ActionEvent event) {
-        loadUI("settings");
-
-    }
-
-   
-   public void loadUI(String ui){
+  public void loadUI(String module , String ui){
              contentPane.getChildren().clear();
 
          Parent root=null;
        try{
-           root = FXMLLoader.load(getClass().getResource("/scrumifyd/GestionProjets/views/"+ui+".fxml"));
+           root = FXMLLoader.load(getClass().getResource("/scrumifyd/"+module+"/views/"+ui+".fxml"));
            
        } catch (IOException ex) {
                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
         contentPane.getChildren().add(root);
    }
+
+    @FXML
+    private void addT(MouseEvent event) {
+                loadUI("GestionTeams","teams");
+
+    }
+
+ 
+
+    @FXML
+    private void Projects(MouseEvent event) {
+        try {
+            contentPane.getChildren().clear();
+            
+            FXMLLoader  loader = new FXMLLoader(getClass().getResource("/scrumifyd/GestionProjets/views/Dashboard.fxml"));
+            Parent root = (Parent) loader.load();
+            DashboardController sp= loader.getController();
+            sp.setUserId(user_idd);
+            
+            
+            contentPane.getChildren().add(root);
+            loadUI("GestionProjets","ProjectsCurrent");
+        } catch (IOException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void settings(MouseEvent event) {
+        loadUI("GestionProjets","settings");
+    }
+
+    private void settings(ActionEvent event) {
+        loadUI("GestionProjets","settings");
+
+    }
+
+   
+
+
+    @FXML
+    private void openTeams(MouseEvent event) {
+        loadUI("GestionTeams","teams");
+    }
     
 }

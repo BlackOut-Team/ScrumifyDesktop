@@ -5,12 +5,7 @@
  */
 package scrumifyd.GestionProjets.models;
 
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXTextField;
 import java.time.LocalDate;
-import java.util.Date;
-import javax.print.attribute.standard.DateTimeAtCreation;
 
 /**
  *
@@ -55,11 +50,44 @@ public class Project {
         this.duedate = duedate;
     }
 
+    public Project(int etat) {
+        this.etat = etat;
+    }
+
   
 
     public Project(String Name, String Description) {
         this.Name = Name;
         this.Description = Description;
+    }
+
+    public Project(String Name, String Description, LocalDate created, LocalDate duedate, int etat, int team_id, int owner_id, int master_id) {
+        this.Name = Name;
+        this.Description = Description;
+        this.created = created;
+        this.duedate = duedate;
+        this.etat = etat;
+        this.team_id = team_id;
+        this.owner_id = owner_id;
+        this.master_id = master_id;
+    }
+
+    public Project(String Name, String Description, LocalDate created, LocalDate duedate, int etat, int master_id) {
+        this.Name = Name;
+        this.Description = Description;
+        this.created = created;
+        this.duedate = duedate;
+        this.etat = etat;
+        this.master_id = master_id;
+    }
+
+    public Project(String Name, String Description, LocalDate duedate, int team_id, int owner_id, int master_id) {
+        this.Name = Name;
+        this.Description = Description;
+        this.duedate = duedate;
+        this.team_id = team_id;
+        this.owner_id = owner_id;
+        this.master_id = master_id;
     }
 
  

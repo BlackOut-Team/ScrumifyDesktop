@@ -6,7 +6,7 @@
 
 .button1
 {
--fx-background-color : #393355;
+-fx-background-color : #075750;
 -fx-background-radius :  30 0 0 30;
 }
 .button1:hover
@@ -99,7 +99,8 @@
 .table-view .column-header,
 .table-view .column-header-background .filler {
     -fx-cell-size : 20;
-    -fx-background-color:   #2D75E8;
+    -fx-background-color:   #16cabd;
+    -fx-alignment: CENTER_LEFT;
 }
 .table-view .column-header .label{
 
