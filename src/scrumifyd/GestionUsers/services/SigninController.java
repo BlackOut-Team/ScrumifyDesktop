@@ -8,7 +8,6 @@ package scrumifyd.GestionUsers.services;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -37,24 +36,17 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import scrumifyd.GestionProjets.controllers.DashboardController;
-import scrumifyd.GestionProjets.controllers.ProjectsController;
-import scrumifyd.GestionProjets.controllers.SprintSController;
-import scrumifyd.GestionProjets.controllers.emptyController;
 import scrumifyd.GestionProjets.models.Project;
 import scrumifyd.GestionProjets.services.ProjectService;
-import scrumifyd.ScrumifyD;
 import scrumifyd.util.MyDbConnection;
 
 /**
@@ -62,6 +54,8 @@ import scrumifyd.util.MyDbConnection;
  *
  * @author Amira Doghri
  */
+
+
 public class SigninController implements Initializable {
 
     @FXML
@@ -92,6 +86,7 @@ public class SigninController implements Initializable {
     private AnchorPane anchorPane;
     @FXML
     private JFXButton adminButton;
+    int user_id ; 
 
     /**
      * Initializes the controller class.
@@ -147,37 +142,23 @@ public class SigninController implements Initializable {
                     Stage stage = (Stage) node.getScene().getWindow();
                     //stage.setMaximized(true);
                     stage.close();
-                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/scrumifyd/GestionProjets/views/Dashboard.fxml")));
-                    stage.setScene(scene);                
-                    stage.show();
+//                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/scrumifyd/GestionProjets/views/Dashboard.fxml")));
+//                    stage.setScene(scene);                
+//                    stage.show();
 
-//                    if (getUserProjects(res) != 0) {
-//                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/scrumifyd/GestionProjets/views/Dashboard.fxml"));
-//                        Stage stage1 = new Stage(StageStyle.UNDECORATED);
-//                        stage1.getIcons().add(
-//                new Image(
-//                        ScrumifyD.class.getResourceAsStream("/scrumifyd/images/scrumify.png")));
-//                        stage.setResizable(true);
-//
-//                        stage1.setScene(new Scene((AnchorPane) loader.load()));
-//                        
-// 
-//                        DashboardController sp = loader.getController();
-//                        loader.setController(sp);
-//
-//                        sp.setUserId(res);
-//                        System.out.println("Sign in  projects: " + res);
-//                        stage1.show();
-//                    } else if (getUserProjects(res) == 0) {
-//                        FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/scrumifyd/GestionProjets/views/empty.fxml"));
-//                        Stage stage2 = new Stage(StageStyle.UNDECORATED);
-//                        stage2.setScene(new Scene((StackPane) loader1.load()));
-//
-//                        emptyController sp1 = loader1.getController();
-//                        sp1.setUserId(res);
-//                        System.out.println("Sign in empty : " + res);
-//                        stage2.show();
-//                    }
+
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/scrumifyd/GestionProjets/views/Dashboard.fxml"));
+
+                        stage.setScene(new Scene(loader.load()));
+                        
+ 
+                        DashboardController sp = loader.getController();
+                        loader.setController(sp);
+                        user_id=res;
+                        sp.setUserId(res);
+                        System.out.println("Sign in  projects: " + res);
+                        stage.show();
+
 
                 } catch (IOException ex) {
                     System.err.println(ex.getMessage());

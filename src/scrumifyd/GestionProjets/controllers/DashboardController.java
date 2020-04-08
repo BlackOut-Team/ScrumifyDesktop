@@ -14,13 +14,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import scrumifyd.GestionUsers.services.SigninController;
 
 /**
  *
@@ -51,30 +52,32 @@ public class DashboardController implements Initializable {
     @FXML
     private JFXButton teams;
    
- @FXML
-    private JFXButton addP;
-    @FXML
-    private JFXButton addT;
     
     @FXML
     Label user_id;
     
     int user_idd;
+    @FXML
+    private JFXButton deconnexion;
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        // TODO      
-         contentPane.getChildren().clear();
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("/scrumifyd/GestionProjets/views/ProjectsCurrent.fxml"));
-
-        } catch (IOException ex) {
-            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        contentPane.getChildren().add(root);
+//        try {
+//            // TODO
+//            contentPane.getChildren().clear();
+//            
+//            FXMLLoader  loader = new FXMLLoader(getClass().getResource("/scrumifyd/GestionProjets/views/Projects.fxml"));
+//            Parent root = (Parent) loader.load();
+//            ProjectsController sp= loader.getController();
+//            sp.setUserId(user_idd);
+//            
+//            
+//            contentPane.getChildren().add(root);
+//        } catch (IOException ex) {
+//            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }    
 
     public void setContentPane(StackPane contentPane) {
@@ -132,7 +135,6 @@ public class DashboardController implements Initializable {
     }
     
     
- @FXML
     private void addP(MouseEvent event) {
         loadUI("GestionProjets","AddP");
     }
@@ -149,7 +151,6 @@ public class DashboardController implements Initializable {
         contentPane.getChildren().add(root);
    }
 
-    @FXML
     private void addT(MouseEvent event) {
                 loadUI("GestionTeams","teams");
 
@@ -162,14 +163,14 @@ public class DashboardController implements Initializable {
         try {
             contentPane.getChildren().clear();
             
-            FXMLLoader  loader = new FXMLLoader(getClass().getResource("/scrumifyd/GestionProjets/views/Dashboard.fxml"));
+            FXMLLoader  loader = new FXMLLoader(getClass().getResource("/scrumifyd/GestionProjets/views/Projects.fxml"));
             Parent root = (Parent) loader.load();
-            DashboardController sp= loader.getController();
+            ProjectsController sp= loader.getController();
             sp.setUserId(user_idd);
             
             
             contentPane.getChildren().add(root);
-            loadUI("GestionProjets","ProjectsCurrent");
+//loadUI("GestionProjets","Projects");
         } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -190,6 +191,24 @@ public class DashboardController implements Initializable {
     @FXML
     private void openTeams(MouseEvent event) {
         loadUI("GestionTeams","teams");
+    }
+
+    @FXML
+    private void deconnexion(MouseEvent event) {
+              if (event.getSource() == deconnexion) {
+              
+                try {
+              
+                    Node node = (Node) event.getSource();
+                    Stage stage = (Stage) node.getScene().getWindow();
+                    stage.close();
+                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/scrumifyd/GestionUsers/views/signin.fxml")));
+                    stage.setScene(scene);                
+                    stage.show();
+                } catch (IOException ex) {
+                    Logger.getLogger(SigninController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+    }
     }
     
 }

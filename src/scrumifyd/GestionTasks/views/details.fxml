@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane id="AnchorPane" prefHeight="580.0" prefWidth="788.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hidaya.DetailsController">
+   <children>
+      <TableView fx:id="table_details" layoutX="130.0" layoutY="187.0" prefHeight="139.0" prefWidth="523.0">
+        <columns>
+          <TableColumn fx:id="title" prefWidth="75.0" text="title" />
+          <TableColumn fx:id="description" prefWidth="75.0" text="description" />
+            <TableColumn fx:id="created" prefWidth="75.0" text="created" />
+            <TableColumn fx:id="updated" prefWidth="75.0" text="updated" />
+            <TableColumn fx:id="finished" prefWidth="75.0" text="due date" />
+            <TableColumn fx:id="priority" prefWidth="75.0" text="priority" />
+            <TableColumn fx:id="status" prefWidth="75.0" text="status" />
+        </columns>
+      </TableView>
+      <ListView fx:id="l_files" layoutX="128.0" layoutY="358.0" prefHeight="187.0" prefWidth="200.0" />
+      <Label layoutX="128.0" layoutY="335.0" text="List of files" />
+      <ListView fx:id="l_members" layoutX="453.0" layoutY="358.0" prefHeight="187.0" prefWidth="200.0" />
+      <Label layoutX="453.0" layoutY="335.0" text="List of members" />
+      <Pane fx:id="search" layoutX="-5.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="125.0" prefWidth="793.0" style="-fx-background-color: #00BFFF;">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="160.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icon%20utilisateur.PNG" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="115.0" fitWidth="168.0" layoutX="332.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../files/logo.PNG" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

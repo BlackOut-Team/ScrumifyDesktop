@@ -171,7 +171,7 @@ int pid ;
                 alert.setContentText("Edited successfully!");
 
                 alert.showAndWait();
-                loadUI("ProjectsCurrent");
+                loadUI("Projects");
 
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);

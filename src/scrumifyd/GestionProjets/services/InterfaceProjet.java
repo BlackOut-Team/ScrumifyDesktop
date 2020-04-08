@@ -17,17 +17,27 @@ import scrumifyd.GestionProjets.models.Project;
  */
 public interface InterfaceProjet {
 
+    public int addProject(Project p) throws SQLException;
 
-    public    int  addProject(Project p) throws SQLException ;
-     public Project getProject(int id) throws SQLException ;
-    public  List<Project> getAllProjects() throws SQLException;
-    public boolean archiveProject(int id) ;
-    public int updateProject(int id , Project project)throws SQLException ;
-    public ObservableList<PieChart.Data> getProjectGraphStatistics() ;
-    public boolean unarchiveProject(int id) ;
+    public Project getProject(int id) throws SQLException;
 
+    public List<Project> getAllProjects() throws SQLException;
 
+    public List<Project> getAllActiveProjects() throws SQLException;
 
+    public List<Project> getCurrentProjects() throws SQLException;
+
+    public List<Project> getPendingProjects() throws SQLException;
+
+    public List<Project> getCompletedProjects() throws SQLException;
+
+    public boolean archiveProject(int id);
+
+    public int updateProject(int id, Project project) throws SQLException;
+    public List<Project> searchProjects(String key) throws SQLException ;
+
+    public ObservableList<PieChart.Data> getProjectGraphStatistics();
+
+    public boolean unarchiveProject(int id);
 
 }
-

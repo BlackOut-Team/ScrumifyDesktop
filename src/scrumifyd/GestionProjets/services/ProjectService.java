@@ -13,9 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -34,7 +32,6 @@ public class ProjectService implements InterfaceProjet {
 
     static Connection connexion;
 
-
     public ProjectService() {
         connexion = MyDbConnection.getInstance().getConnexion();
 
@@ -43,49 +40,46 @@ public class ProjectService implements InterfaceProjet {
     @Override
     public int addProject(Project p) throws SQLException {
         try {
-            PreparedStatement statement =connexion.prepareStatement(
-       
-                    "INSERT INTO PROJET (name ,description,created,duedate,etat ) values (?,?,?,?,?)" ,Statement.RETURN_GENERATED_KEYS);
-         
+            PreparedStatement statement = connexion.prepareStatement(
+                    "INSERT INTO PROJET (name ,description,created,duedate,etat,team_id,owner_id,master_id ) values (?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+
             statement.setString(1, p.getName());
             statement.setString(2, p.getDescription());
             statement.setDate(3, java.sql.Date.valueOf(p.getCreated()));
             statement.setDate(4, java.sql.Date.valueOf(p.getDuedate()));
             statement.setInt(5, p.getEtat());
-            //statement.setInt(6, p.getMaster_id());
+            statement.setInt(6, p.getTeam_id());
+            statement.setInt(7, p.getOwner_id());
+            statement.setInt(8, p.getMaster_id());
             statement.executeUpdate();
-              ResultSet tableKeys = statement.getGeneratedKeys();
-             if (tableKeys.next() ){
-             
-               int s= tableKeys.getInt(1);
-               p.setId(s);
-               return s ;
+            ResultSet tableKeys = statement.getGeneratedKeys();
+            if (tableKeys.next()) {
 
-             }
-             
-             else 
-             {
-                 return 0 ;
-             }
-         
-         
+                int s = tableKeys.getInt(1);
+                p.setId(s);
+                return s;
+
+            } else {
+                return 0;
+            }
 
             //statement.setInt(6, p.getTeam_id());
             //statement.setInt(6, p.getOwner_id());
-           // statement.setInt(7, p.getMaster_id());
+            // statement.setInt(7, p.getMaster_id());
         } catch (SQLException ex) {
             Logger.getLogger(ProjectService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return 0 ;
-        
+        return 0;
+
     }
-  @Override
+
+    @Override
 
     public Project getProject(int id) throws SQLException {
-        Project  p = new Project();
+        Project p = new Project();
         try {
 
-            String req = "SELECT * FROM PROJET WHERE ID="+id+" ";
+            String req = "SELECT * FROM PROJET WHERE ID=" + id + " ";
             Statement stm = connexion.createStatement();
             ResultSet result = stm.executeQuery(req);
 
@@ -95,7 +89,7 @@ public class ProjectService implements InterfaceProjet {
                 LocalDate datec = Instant.ofEpochMilli(createdd.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
                 LocalDate dated = Instant.ofEpochMilli(duedate.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
                 p = new Project(result.getInt(1), result.getString("name"), result.getString("description"), datec, dated, result.getInt("etat"));
-                        return p;
+                return p;
 
             }
         } catch (SQLException ex) {
@@ -105,8 +99,7 @@ public class ProjectService implements InterfaceProjet {
         return p;
 
     }
-    
-    
+
     @Override
 
     public List<Project> getAllProjects() throws SQLException {
@@ -115,6 +108,36 @@ public class ProjectService implements InterfaceProjet {
         try {
 
             String req = "SELECT * FROM `projet` ";
+            Statement stm = connexion.createStatement();
+            ResultSet result = stm.executeQuery(req);
+
+            while (result.next()) {
+                Date createdd = result.getDate("created");
+                Date duedate = result.getDate("duedate");
+                LocalDate datec = Instant.ofEpochMilli(createdd.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate dated = Instant.ofEpochMilli(duedate.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                Project p = new Project(result.getInt(1), result.getString("name"), result.getString("description"), datec, dated, result.getInt("etat"));
+              
+                //System.out.println(p.getCellButton());
+                
+                Projects.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return Projects;
+
+    }
+
+    @Override
+
+    public List<Project> getAllActiveProjects() throws SQLException {
+
+        List<Project> Projects = new ArrayList<>();
+        try {
+
+            String req = "SELECT * FROM `projet` WHERE `etat`=1 ";
             Statement stm = connexion.createStatement();
             ResultSet result = stm.executeQuery(req);
 
@@ -136,11 +159,10 @@ public class ProjectService implements InterfaceProjet {
 
     @Override
 
-    public boolean archiveProject(int id ) {
+    public boolean archiveProject(int id) {
         try {
-            String update = "UPDATE PROJET SET ETAT=0 WHERE ID="+id+"";
+            String update = "UPDATE PROJET SET ETAT=0 WHERE ID=" + id + "";
             PreparedStatement stm = connexion.prepareStatement(update);
-
 
             int res = stm.executeUpdate();
             return (res > 0);
@@ -150,28 +172,29 @@ public class ProjectService implements InterfaceProjet {
         }
         return false;
     }
-      @Override
 
-    public boolean unarchiveProject(int id ) {
-        try {
-            String update = "UPDATE PROJET SET ETAT=1 WHERE ID="+id+"";
-            PreparedStatement stm = connexion.prepareStatement(update);
-
-
-            int res = stm.executeUpdate();
-            return (res > 0);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ProjectService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
     @Override
 
-    public int updateProject(int id ,Project project) throws SQLException {
+    public boolean unarchiveProject(int id) {
         try {
-            String update = "UPDATE PROJET SET NAME=?, DESCRIPTION=? , DUEDATE= ?  WHERE ID="+id+"";
-            PreparedStatement stm = connexion.prepareStatement(update,Statement.RETURN_GENERATED_KEYS);
+            String update = "UPDATE PROJET SET ETAT=1 WHERE ID=" + id + "";
+            PreparedStatement stm = connexion.prepareStatement(update);
+
+            int res = stm.executeUpdate();
+            return (res > 0);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    @Override
+
+    public int updateProject(int id, Project project) throws SQLException {
+        try {
+            String update = "UPDATE PROJET SET NAME=?, DESCRIPTION=? , DUEDATE= ?  WHERE ID=" + id + "";
+            PreparedStatement stm = connexion.prepareStatement(update, Statement.RETURN_GENERATED_KEYS);
             stm.setString(1, project.getName());
             stm.setString(2, project.getDescription());
             stm.setDate(3, java.sql.Date.valueOf(project.getDuedate()));
@@ -179,20 +202,14 @@ public class ProjectService implements InterfaceProjet {
             //stm.setInt(5, project.getOwner_id());
             //stm.setInt(6, project.getMaster_id());
 
-            if (stm.executeUpdate()>0){
-              
-                
-               int s=id;
-               return s ;
+            if (stm.executeUpdate() > 0) {
 
-             }
-             
-             else 
-             {
-                 return 0 ;
-             }
-         
-         
+                int s = id;
+                return s;
+
+            } else {
+                return 0;
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(ProjectService.class.getName()).log(Level.SEVERE, null, ex);
@@ -229,7 +246,7 @@ public class ProjectService implements InterfaceProjet {
         }
         return data;
     }
-  
+
     public ResultSet execQuery(String query) {
         ResultSet result;
         try {
@@ -242,5 +259,114 @@ public class ProjectService implements InterfaceProjet {
         }
         return result;
     }
+ @Override
 
+    public List<Project> searchProjects(String key) throws SQLException {
+
+        List<Project> Projects = new ArrayList<>();
+        try {
+
+            String req = "SELECT * FROM `projet` WHERE `etat`=1 and (`name` like ? or `description` like ?) ";
+            PreparedStatement stm = connexion.prepareStatement(req);
+            stm.setString(1, "%" + key + "%");
+            stm.setString(2, "%" + key + "%");
+
+
+            ResultSet result = stm.executeQuery();
+
+            while (result.next()) {
+                Date createdd = result.getDate("created");
+                Date duedate = result.getDate("duedate");
+                LocalDate datec = Instant.ofEpochMilli(createdd.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate dated = Instant.ofEpochMilli(duedate.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                Project p = new Project(result.getInt(1), result.getString("name"), result.getString("description"), datec, dated, result.getInt("etat"));
+                Projects.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return Projects;
+
+    }
+    @Override
+
+    public List<Project> getCurrentProjects() throws SQLException {
+
+        List<Project> Projects = new ArrayList<>();
+        try {
+
+            String req = "SELECT * FROM `projet` WHERE `etat`=1 and `duedate` > CURRENT_DATE() ";
+            Statement stm = connexion.createStatement();
+            ResultSet result = stm.executeQuery(req);
+
+            while (result.next()) {
+                Date createdd = result.getDate("created");
+                Date duedate = result.getDate("duedate");
+                LocalDate datec = Instant.ofEpochMilli(createdd.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate dated = Instant.ofEpochMilli(duedate.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                Project p = new Project(result.getInt(1), result.getString("name"), result.getString("description"), datec, dated, result.getInt("etat"));
+                Projects.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return Projects;
+
+    }
+
+    @Override
+
+    public List<Project> getPendingProjects() throws SQLException {
+
+        List<Project> Projects = new ArrayList<>();
+        try {
+
+            String req = "SELECT * FROM `projet` WHERE `etat`=1 ";
+            Statement stm = connexion.createStatement();
+            ResultSet result = stm.executeQuery(req);
+
+            while (result.next()) {
+                Date createdd = result.getDate("created");
+                Date duedate = result.getDate("duedate");
+                LocalDate datec = Instant.ofEpochMilli(createdd.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate dated = Instant.ofEpochMilli(duedate.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                Project p = new Project(result.getInt(1), result.getString("name"), result.getString("description"), datec, dated, result.getInt("etat"));
+                Projects.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return Projects;
+
+    }
+
+    @Override
+
+    public List<Project> getCompletedProjects() throws SQLException {
+
+        List<Project> Projects = new ArrayList<>();
+        try {
+
+            String req = "SELECT * FROM `projet` WHERE `etat`=1 and `duedate` < CURRENT_DATE() ";
+            Statement stm = connexion.createStatement();
+            ResultSet result = stm.executeQuery(req);
+
+            while (result.next()) {
+                Date createdd = result.getDate("created");
+                Date duedate = result.getDate("duedate");
+                LocalDate datec = Instant.ofEpochMilli(createdd.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate dated = Instant.ofEpochMilli(duedate.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                Project p = new Project(result.getInt(1), result.getString("name"), result.getString("description"), datec, dated, result.getInt("etat"));
+                Projects.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return Projects;
+
+    }
 }

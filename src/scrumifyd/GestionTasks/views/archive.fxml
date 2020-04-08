@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane id="AnchorPane" prefHeight="532.0" prefWidth="782.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hidaya.ArchiveController">
+   <children>
+      <TableView fx:id="table_archive" layoutX="202.0" layoutY="153.0" prefHeight="356.0" prefWidth="562.0">
+         <columns>
+            <TableColumn fx:id="title" prefWidth="75.0" text="title" />
+            <TableColumn fx:id="description" prefWidth="87.0" text="description" />
+            <TableColumn fx:id="created" prefWidth="77.0" text="created" />
+            <TableColumn fx:id="updated" prefWidth="76.0" text="updated" />
+            <TableColumn fx:id="finished" prefWidth="93.0" text="due date" />
+            <TableColumn fx:id="priority" prefWidth="67.0" text="priority" />
+            <TableColumn fx:id="status" prefWidth="86.0" text="status" />
+         </columns>
+      </TableView>
+      <Pane fx:id="search" layoutX="-7.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="125.0" prefWidth="793.0" style="-fx-background-color: #00BFFF;">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="160.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icon%20utilisateur.PNG" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="115.0" fitWidth="168.0" layoutX="332.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../files/logo.PNG" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

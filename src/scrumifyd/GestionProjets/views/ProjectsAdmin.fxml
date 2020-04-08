@@ -9,9 +9,9 @@
 
 <StackPane fx:id="contentPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scrumifyd.GestionProjets.controllers.ProjectsAdminController">
    <children>
-      <AnchorPane prefHeight="522.0" prefWidth="718.0">
+      <AnchorPane prefHeight="522.0" prefWidth="1001.0">
          <children>
-            <TableView fx:id="ProjectTable" layoutX="105.0" layoutY="122.0" prefHeight="304.0" prefWidth="776.0" stylesheets="@../../util/fullpackstyling.css">
+            <TableView fx:id="ProjectTable" layoutX="42.0" layoutY="129.0" prefHeight="304.0" prefWidth="879.0" stylesheets="@../../util/fullpackstyling.css">
               <columns>
                 <TableColumn fx:id="clm_id" prefWidth="40.666656494140625" text="ID" />
                 <TableColumn fx:id="clm_name" prefWidth="82.33334350585938" text="NAME" />

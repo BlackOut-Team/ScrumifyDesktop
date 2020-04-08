@@ -36,6 +36,8 @@ import scrumifyd.GestionProjets.models.Project;
 import scrumifyd.GestionProjets.services.InterfaceProjet;
 import scrumifyd.GestionProjets.services.SprintInterface;
 import scrumifyd.GestionProjets.services.SprintService;
+import scrumifyd.GestionTeams.models.Team;
+import scrumifyd.GestionUsers.models.User;
 
 /**
  * FXML Controller class
@@ -87,11 +89,19 @@ public class AddPController implements Initializable {
         //Comboboxes  
         //Teams    
             Team.getSelectionModel().clearSelection();
-            ObservableList teams = FXCollections.observableArrayList(fillComboBoxT());
+            List<Team> Tlist = fillComboBoxT();
+            ObservableList teams = FXCollections.observableArrayList();
+            Tlist.forEach((t) -> {
+                teams.add(t.getName());
+            });
             Team.setItems(teams);
         //Owners
             PO.getSelectionModel().clearSelection();
-            ObservableList owners = FXCollections.observableArrayList(fillComboBoxO());
+             List<User> Olist = fillComboBoxO();
+            ObservableList owners = FXCollections.observableArrayList();
+            Olist.forEach((o) -> {
+                owners.add(o.getName());
+            });
             PO.setItems(owners);
         }
 
@@ -115,17 +125,20 @@ public class AddPController implements Initializable {
         con = MyDbConnection.getInstance().getConnexion();
     }
 
-    public List<String> fillComboBoxT() {
+    public List<Team> fillComboBoxT() {
 
-        List<String> list = new ArrayList<>();
+        List<Team> list = new ArrayList<>();
         try {
-            String query = "SELECT `name` FROM `team` ";
+            String query = "SELECT `name`, `id` FROM `team` ";
 
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery(query);
 
             while (rs.next()) {
-                list.add(rs.getString("name"));
+               
+               
+               Team t = new Team(rs.getInt("id"), rs.getString("name"));
+               list.add(t);
 
             }
         } catch (SQLException ex) {
@@ -134,18 +147,19 @@ public class AddPController implements Initializable {
 
         return list;
     }
-    public List<String> fillComboBoxO() {
+    public List<User> fillComboBoxO() {
 
-        List<String> list = new ArrayList<>();
+        List<User> list = new ArrayList<>();
    
         try {
-            String query = "SELECT `name` FROM `person` ";
+            String query = "SELECT `name` , `id` FROM `person` ";
 
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery(query);
 
             while (rs.next()) {
-                list.add(rs.getString("name"));
+                User o = new User(rs.getInt("id"), rs.getString("name"));
+               list.add(o);
 
             }
         } catch (SQLException ex) {
@@ -186,15 +200,14 @@ public class AddPController implements Initializable {
 
     public boolean AddP() {
 
-        int res = 0;
+        int res ;
         boolean s = false ;
         String name = Name.getText();
         String description = Description.getText();   
         LocalDate deadline = Deadline.getValue();
-        String team = (String) Team.getValue();     
-        String productowner = (String) PO.getValue();
-        int team_id=0;
-        int owner_id=0;
+        Team t = fillComboBoxT().get(Team.getSelectionModel().getSelectedIndex());
+        User o = fillComboBoxO().get(PO.getSelectionModel().getSelectedIndex());
+      
         
         if (name.isEmpty() || description.isEmpty() || deadline.isBefore(LocalDate.now()) || Team.getValue()==""|| PO.getValue()=="") {
             setLblError(Color.TOMATO, "Empty/wrong credentials");
@@ -202,7 +215,7 @@ public class AddPController implements Initializable {
         } else {
             try {
                 System.out.println("Add : "  + user_id);
-                Project project = new Project(name, description, today,deadline, etat );
+                Project project = new Project(name, description, today,deadline, etat ,t.getId(),o.getId() , user_id );
 
                 InterfaceProjet Projects = new ProjectService();
                 res = Projects.addProject(project);
@@ -252,7 +265,7 @@ public class AddPController implements Initializable {
 
     @FXML
     private void back(MouseEvent event) {
-        loadUI("ProjectsCurrent");
+        loadUI("Projects");
 
     }
 

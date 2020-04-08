@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -21,6 +22,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import scrumifyd.GestionUsers.services.SigninController;
 
 /**
  *
@@ -58,6 +60,10 @@ public class AdminDashController implements Initializable {
     int user_idd;
     @FXML
     private JFXButton Users;
+    @FXML
+    private JFXButton deconnexion;
+    @FXML
+    private JFXButton statistics;
     
     
     @Override
@@ -181,6 +187,28 @@ public class AdminDashController implements Initializable {
     @FXML
     private void Users(MouseEvent event) {
         loadUI("GestionUsers","UsersAdmin");
+    }
+
+    @FXML
+    private void deconnexion(MouseEvent event) {
+           if (event.getSource() == deconnexion) {
+              
+                try {
+              
+                    Node node = (Node) event.getSource();
+                    Stage stage = (Stage) node.getScene().getWindow();
+                    stage.close();
+                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/scrumifyd/GestionUsers/views/signin.fxml")));
+                    stage.setScene(scene);                
+                    stage.show();
+                } catch (IOException ex) {
+                    Logger.getLogger(SigninController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+    }
+    }
+
+    @FXML
+    private void OpenStatistics(MouseEvent event) {
     }
     
 }

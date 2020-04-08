@@ -6,22 +6,24 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="contentPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scrumifyd.GestionProjets.controllers.ProjectsController">
+<StackPane fx:id="contentPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scrumifyd.GestionProjets.controllers.CompletedProjectsController">
    <children>
       <AnchorPane>
          <children>
-            <ScrollPane layoutY="33.0" prefHeight="462.0" prefWidth="898.0" style="-fx-background-color: #fff;">
+
+            <ScrollPane layoutY="42.0" prefHeight="453.0" prefWidth="898.0" style="-fx-background-color: #fff;">
                <content>
-                  <VBox fx:id="pnl_scroll" prefHeight="506.0" prefWidth="897.0" spacing="20.0" style="-fx-background-color: #fff;" />
+                  <VBox fx:id="pnl_scroll" prefHeight="491.0" prefWidth="897.0" spacing="20.0" style="-fx-background-color: #fff;" />
                </content>
             </ScrollPane>
-            <HBox layoutX="12.0" layoutY="3.0" prefHeight="66.0" prefWidth="888.0">
+            <HBox layoutX="12.0" layoutY="3.0" prefHeight="35.0" prefWidth="884.0" style="-fx-background-color: white;">
                <children>
-                  <Label fx:id="lbl_currentprojects" onMouseClicked="#currentProjects" prefHeight="30.0" prefWidth="207.0" styleClass="button6" stylesheets="@../util/fullpackstyling.css" text="Current Projects" textFill="#171717">
+                  <Label fx:id="lbl_allProjects" onMouseClicked="#allProjects" prefHeight="30.0" prefWidth="207.0" styleClass="button6" stylesheets="@../util/fullpackstyling.css" text="All Projects" textFill="#171717">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -29,7 +31,7 @@
                         <Insets left="40.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="lbl_pending" onMouseClicked="#pendingProjects" prefHeight="30.0" prefWidth="207.0" styleClass="button6" stylesheets="@../util/fullpackstyling.css" text="Pending Projects" textFill="#171717">
+                  <Label fx:id="lbl_currentprojects" onMouseClicked="#currentProjects" prefHeight="30.0" prefWidth="207.0" styleClass="button6" stylesheets="@../util/fullpackstyling.css" text="Current Projects">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -37,7 +39,7 @@
                         <Insets left="40.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="lbl_completed" onMouseClicked="#completedProjects" prefHeight="30.0" prefWidth="207.0" styleClass="button6" stylesheets="@../util/fullpackstyling.css" text="Completed Projects" textFill="#13c5ad">
+                  <Label fx:id="lbl_completed" onMouseClicked="#completedProjects" prefHeight="30.0" prefWidth="207.0" styleClass="button6" stylesheets="@../util/fullpackstyling.css" text="Completed Projects" textFill="#16cabd">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -45,7 +47,11 @@
                         <Insets left="40.0" />
                      </padding>
                   </Label>
-                  <FontAwesomeIconView fx:id="AddProject" fill="#16cabd" glyphName="PLUS" onMouseClicked="#AddProject" size="30" strokeType="INSIDE" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="230.09525871276855" />
+                  <Pane fx:id="AddProject" onMouseClicked="#AddProject" prefHeight="35.0" prefWidth="258.0" styleClass="button4" stylesheets="@../../util/fullpackstyling.css">
+                     <children>
+                        <FontAwesomeIconView fx:id="AddProject1" fill="WHITE" glyphName="PLUS" layoutX="9.0" layoutY="17.0" onMouseClicked="#AddProject" size="30" strokeType="INSIDE" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="230.09525871276855" />
+                     </children>
+                  </Pane>
                </children>
             </HBox>
          </children>

@@ -11,15 +11,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
+import javafx.scene.text.Text;
 
 /**
  * FXML Controller class
@@ -34,7 +33,16 @@ public class emptyController implements Initializable {
     private JFXButton addP;
     @FXML
     private JFXButton addT;
-int user_id ; 
+    int user_id ; 
+    @FXML
+    private Text label_empty;
+    @FXML
+    public Label lbl_allProjects;
+    @FXML
+    public Label lbl_currentprojects;
+ 
+    @FXML
+    public Label lbl_completed;
     /**
      * Initializes the controller class.
      */
@@ -55,10 +63,22 @@ int user_id ;
             
             
             contentPane.getChildren().add(root);
+//loadUI("GestionProjets", "AddP");
         } catch (IOException ex) {
             Logger.getLogger(emptyController.class.getName()).log(Level.SEVERE, null, ex);
         }
        
+    }
+    
+    public void setLabel(String label){
+        this.label_empty.setStyle("-fx-translate-y: 5px;");
+        this.label_empty.setText(label);
+    }
+    public void setLabelColor(Label label){
+        label.setStyle("-fx-text-fill: #16cabd;"+"-fx-font-weight: bold;");
+    }
+    public void setLabelColor1(Label label){
+        label.setStyle("-fx-text-fill: #000000;" + "-fx-font-weight:regular;");
     }
   public void loadUI(String module , String ui){
              contentPane.getChildren().clear();
@@ -80,12 +100,25 @@ public void setUserId(int user_id){
                 loadUI("GestionTeams","teams");
 
     }
-    
-    
-    
-    
+
+  
+    @FXML
+    private void currentProjects(MouseEvent event) {
+        loadUI("GestionProjets","ProjectsCurrent");
+    }
+
  
 
+    @FXML
+    private void completedProjects(MouseEvent event) {
+        loadUI("GestionProjets","ProjectsCompleted");
+
+    }
+
+    @FXML
+    private void allProjects(MouseEvent event) {
+        loadUI("GestionProjets","Projects");
+    }
  
 
 }

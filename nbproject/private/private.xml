@@ -5,7 +5,7 @@
             <url>src/scrumifyd/GestionProjets/controllers/AddPController.java</url>
             <bookmark id="2">
                 <name/>
-                <line>226</line>
+                <line>239</line>
                 <key/>
             </bookmark>
         </file>
@@ -13,24 +13,15 @@
             <url>src/scrumifyd/GestionProjets/services/ProjectService.java</url>
             <bookmark id="1">
                 <name/>
-                <line>45</line>
+                <line>42</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionProjets/controllers/AdminDashController.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionProjets/views/ProjectsCurrent.fxml</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionProjets/services/ProjectService.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionProjets/controllers/EditPController.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionProjets/controllers/AddSprintController.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionProjets/controllers/ProjectsController.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionProjets/models/Project.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionUsers/services/SigninController.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionProjets/services/InterfaceProjet.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionProjets/controllers/DashboardController.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionProjets/controllers/ProjectsAdminController.java</file>
+            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionProjets/controllers/ItemSController.java</file>
+            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionProjets/controllers/SprintSController.java</file>
         </group>
     </open-files>
 </project-private>

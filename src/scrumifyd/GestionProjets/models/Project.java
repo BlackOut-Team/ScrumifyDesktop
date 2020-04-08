@@ -22,6 +22,9 @@ public class Project {
     private int owner_id ; 
     private int master_id;
 
+   
+  
+   
     public Project() {
     }
 
@@ -33,6 +36,9 @@ public class Project {
         this.etat = etat;
     }
 
+   
+
+    
  
 
     public Project(int id, String Name, String Description, LocalDate created, LocalDate duedate, int etat) {

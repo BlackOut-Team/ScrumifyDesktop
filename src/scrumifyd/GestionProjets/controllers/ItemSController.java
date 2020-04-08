@@ -12,7 +12,6 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 
 /**
  * FXML Controller class
@@ -44,10 +43,12 @@ public class ItemSController implements Initializable {
     @FXML
     public FontAwesomeIconView ArchiveButton;
     @FXML
-    private FontAwesomeIconView LinkButton;
+    public FontAwesomeIconView LinkButton;
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

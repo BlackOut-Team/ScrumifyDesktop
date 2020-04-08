@@ -72,7 +72,7 @@ public class AddSprintController implements Initializable {
 
     @FXML
     private void back(MouseEvent event) {
-        loadUI("ProjectsCurrent");
+        loadUI("Projects");
     }
 
     public void setProject(Project p) {

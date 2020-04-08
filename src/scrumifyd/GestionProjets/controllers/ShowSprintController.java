@@ -224,7 +224,7 @@ public String getProjectId(){
 }
     @FXML
     private void back(MouseEvent event) {
-        loadUI("ProjectsCurrent");
+        loadUI("Projects");
 
     }
 
