@@ -12,12 +12,24 @@ package scrumifyd.models;
 public class User {
     private int identifiant;
     private String nom,prenom;
+    private String email;
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
     public User(String nom, String prenom) {
         this.nom = nom;
         this.prenom = prenom;
     }
-
+ public User(String nom, String prenom , String email) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+    }
     public User(int identifiant, String nom, String prenom) {
         this.identifiant = identifiant;
         this.nom = nom;

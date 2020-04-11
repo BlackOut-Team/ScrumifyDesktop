@@ -9,17 +9,17 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="399.0" prefWidth="880.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" fx:id="item" prefHeight="399.0" prefWidth="880.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scrumifyd.GestionProjets.controllers.ItemController">
    <children>
       <Pane layoutX="29.0" layoutY="22.0" prefHeight="338.0" prefWidth="820.0" style="-fx-background-color: #fff;">
          <children>
-            <ImageView fitHeight="70.0" fitWidth="76.0" layoutX="41.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="avatar" fitHeight="70.0" fitWidth="76.0" layoutX="41.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/Image2.png" />
                </image>
             </ImageView>
             <Separator layoutX="41.0" layoutY="94.0" prefHeight="0.0" prefWidth="763.0" />
-            <Label layoutX="123.0" layoutY="18.0" text="Project in progress" textFill="#16cabd">
+            <Label fx:id="Name" layoutX="123.0" layoutY="18.0" text="Project in progress" textFill="#16cabd">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -39,27 +39,17 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="279.0" layoutY="186.0" text="PRICE" textFill="#aeacac">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="58.0" layoutY="139.0" text="Amira Doghri" textFill="#4d4c4c">
+            <Label fx:id="master" layoutX="58.0" layoutY="139.0" text="Amira Doghri" textFill="#4d4c4c">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
-            <Label layoutX="287.0" layoutY="139.0" text="Brad Pitt" textFill="#4d4c4c">
+            <Label fx:id="client" layoutX="287.0" layoutY="139.0" text="Brad Pitt" textFill="#4d4c4c">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
-            <Label layoutX="287.0" layoutY="211.0" text="Between $190 and $270" textFill="#4d4c4c">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Label>
-            <Label layoutX="58.0" layoutY="211.0" text="ACTIVE" textFill="#4d4c4c">
+            <Label fx:id="etat" layoutX="58.0" layoutY="211.0" text="ACTIVE" textFill="#4d4c4c">
                <font>
                   <Font size="13.0" />
                </font>
@@ -69,7 +59,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="576.0" layoutY="139.0" prefHeight="19.0" prefWidth="44.0" style="-fx-background-color: #aeacac;" text="Toggle" textFill="#fffefe">
+            <Label fx:id="team_member" layoutX="576.0" layoutY="139.0" prefHeight="19.0" prefWidth="44.0" style="-fx-background-color: #aeacac;" text="Toggle" textFill="#fffefe">
                <font>
                   <Font size="13.0" />
                </font>
@@ -86,7 +76,7 @@
             </Label>
             <Pane layoutY="269.0" prefHeight="70.0" prefWidth="820.0" style="-fx-background-color: #F0F0F0;">
                <children>
-                  <Label layoutX="62.0" layoutY="26.0" prefHeight="19.0" prefWidth="645.0" text="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" textFill="#16cabd">
+                  <Label fx:id="Description" layoutX="62.0" layoutY="26.0" prefHeight="19.0" prefWidth="645.0" text="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" textFill="#16cabd">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -98,27 +88,27 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="614.0" layoutY="34.0" text="16" textFill="#aeacac">
+            <Label fx:id="created_day" layoutX="614.0" layoutY="34.0" text="16" textFill="#aeacac">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <Label layoutX="663.0" layoutY="42.0" text="APR" textFill="#16cabd" />
-            <Label layoutX="663.0" layoutY="60.0" text="2018" textFill="#aeacac" />
+            <Label fx:id="created_month" layoutX="663.0" layoutY="42.0" text="APR" textFill="#16cabd" />
+            <Label fx:id="created_year" layoutX="663.0" layoutY="60.0" text="2018" textFill="#aeacac" />
             <Separator layoutX="708.0" layoutY="19.0" orientation="VERTICAL" prefHeight="64.0" prefWidth="0.0" />
-            <Label layoutX="725.0" layoutY="13.0" text="Desired Start" textFill="#16cabd">
+            <Label layoutX="725.0" layoutY="13.0" text="Deadline date" textFill="#16cabd">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="725.0" layoutY="33.0" text="25" textFill="#aeacac">
+            <Label fx:id="deadline_day" layoutX="725.0" layoutY="33.0" text="25" textFill="#aeacac">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <Label layoutX="774.0" layoutY="41.0" text="AUG" textFill="#16cabd" />
-            <Label layoutX="774.0" layoutY="59.0" text="2018" textFill="#aeacac" />
-            <Label layoutX="123.0" layoutY="51.0" text="Id: 20178" textFill="#b2b0b0">
+            <Label fx:id="deadline_month" layoutX="774.0" layoutY="41.0" text="AUG" textFill="#16cabd" />
+            <Label fx:id="deadline_year" layoutX="774.0" layoutY="59.0" text="2018" textFill="#aeacac" />
+            <Label fx:id="id" layoutX="123.0" layoutY="51.0" text="Id: 20178" textFill="#b2b0b0">
                <font>
                   <Font size="14.0" />
                </font>

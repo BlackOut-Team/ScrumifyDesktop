@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="contentPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scrumifyd.GestionProjets.controllers.ProjectsController">
+   <children>
+      <AnchorPane>
+         <children>
+
+            <ScrollPane layoutY="33.0" prefHeight="462.0" prefWidth="898.0" style="-fx-background-color: #fff;">
+               <content>
+                  <VBox fx:id="pnl_scroll" prefHeight="506.0" prefWidth="897.0" spacing="20.0" style="-fx-background-color: #fff;" />
+               </content>
+            </ScrollPane>
+            <HBox layoutX="12.0" layoutY="3.0" prefHeight="66.0" prefWidth="885.0">
+               <children>
+                  <Label fx:id="lbl_currentprojects" onMouseClicked="#currentProjects" prefHeight="30.0" prefWidth="207.0" styleClass="button6" stylesheets="@../util/fullpackstyling.css" text="Current Projects" textFill="#13c5ad">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <padding>
+                        <Insets left="40.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="lbl_pending" onMouseClicked="#pendingProjects" prefHeight="30.0" prefWidth="207.0" styleClass="button6" stylesheets="@../util/fullpackstyling.css" text="Pending Projects" textFill="#171717">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <padding>
+                        <Insets left="40.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="lbl_completed" onMouseClicked="#completedProjects" prefHeight="30.0" prefWidth="207.0" styleClass="button6" stylesheets="@../util/fullpackstyling.css" text="Completed Projects" textFill="#171717">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <padding>
+                        <Insets left="40.0" />
+                     </padding>
+                  </Label>
+                  <FontAwesomeIconView fx:id="AddProject" fill="#16cabd" glyphName="PLUS" onMouseClicked="#AddProject" size="30" strokeType="INSIDE" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="230.09525871276855" />
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
