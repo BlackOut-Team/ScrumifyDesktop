@@ -81,8 +81,6 @@ public class teamsController implements Initializable {
     private JFXButton ArchButton;
     @FXML
     private CustomTextField lal;
-    @FXML
-    private JFXButton refButton;
     
     
     public void populate() {
@@ -133,6 +131,17 @@ public class teamsController implements Initializable {
        
     }
         
+    public void refreshTableData() {
+        List<Team> tList = new ArrayList<>();
+       TeamService orderService = TeamService.getInstance();
+    tList = TeamService.getAllTeams();
+                   
+
+        oblist.clear();
+        oblist.addAll(tList);
+       TeamTable.setItems(oblist);
+      
+    }
     
     @FXML
     private void openAdd(MouseEvent event) {
@@ -141,10 +150,7 @@ public class teamsController implements Initializable {
     }
     
      
-    private void openAff(MouseEvent event) {
-        loadUI("GestionTeams", "Addteam");
-
-    }
+   
     
       public void loadUI (String module ,String ui){
          contentPane.getChildren().clear();
@@ -161,17 +167,31 @@ public class teamsController implements Initializable {
  //********************* U **************************//
     @FXML
     public void selectOneTeamAction(KeyEvent keyEvent) {
+        
         Team t = (Team) TeamTable.getSelectionModel().getSelectedItem();
         if(t != null)
         {
+          
             fillUpdateForm(t);
         }
     }
     @FXML
     public void clickOneTeamAction() {
+         TeamService teamService = TeamService.getInstance();
         Team t = (Team)TeamTable.getSelectionModel().getSelectedItem();
+        
         if(t != null)
         {
+            if (!teamService.isScrumMatser(t.getId())) {
+                this.AffButton.disableProperty().setValue(true);
+                this.updateOrderButton.disableProperty().setValue(true);
+                this.ArchButton.disableProperty().setValue(true);
+            } else {
+                 this.AffButton.disableProperty().setValue(false);
+                this.updateOrderButton.disableProperty().setValue(false);
+                 this.ArchButton.disableProperty().setValue(false);
+                
+            }
             fillUpdateForm(t);
         }
     }
@@ -258,18 +278,7 @@ public class teamsController implements Initializable {
         refreshTableData();
     }
 
-    @FXML
-    public void refreshTableData() {
-        List<Team> tList = new ArrayList<>();
-       TeamService orderService = TeamService.getInstance();
-    tList = TeamService.getAllTeams();
-                   
-
-        oblist.clear();
-        oblist.addAll(tList);
-       TeamTable.setItems(oblist);
-      
-    }
+    
 
     @FXML
     private void selectTeamAndOpenAddModal(MouseEvent event) {

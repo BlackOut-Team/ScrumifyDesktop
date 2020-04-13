@@ -31,6 +31,7 @@ import javax.mail.*;
 import javax.mail.internet.*;  
 import javax.activation.*;
 import javax.swing.JOptionPane;
+import scrumifyd.GestionTeams.models.Affiche;
 import scrumifyd.util.MyDbConnection;
 
 /**
@@ -74,7 +75,7 @@ public  class TeamService {
         } catch (SQLException ex) {
             Logger.getLogger(TeamService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(Teams);
+     
         return Teams;
         
 
@@ -82,20 +83,27 @@ public  class TeamService {
     }
     
 
+ 
 
     public boolean addTeam(Team t ) throws SQLException {
 try {
+            boolean isInserted = false;
             PreparedStatement statement = connexion.prepareStatement(
-                    "INSERT INTO TEAM (name ,created ,updated ,etat,ind) values (?,?,?,?,?)");
+                    "INSERT INTO TEAM (name ,created ,updated ,etat,ind) values (?,?,?,?,?)" ,Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, t.getName());
             statement.setDate(2, java.sql.Date.valueOf(LocalDate.now()));
             statement.setDate(3, java.sql.Date.valueOf(LocalDate.now()));
             statement.setInt(4, 1);
             statement.setInt(5, 0);
-         
-
-       
-            return statement.executeUpdate() > 0;
+           isInserted =  statement.executeUpdate() > 0;
+            ResultSet tableKeys = statement.getGeneratedKeys();
+            if (tableKeys.next()) {
+                 int teamId = tableKeys.getInt(1);
+                if (addScrumMaster(teamId)) {
+                    return true;
+                }
+            }
+            return false;
         } catch (SQLException ex) {
             Logger.getLogger(TeamService.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -153,7 +161,7 @@ try {
     }
   
     private int isUserExist(String userEmail) {
-        int userId;
+        int userId  = -1;
         try {
            
             String req = "SELECT * FROM user where email = ?";
@@ -168,6 +176,34 @@ try {
         } catch (SQLException e) {
             System.out.println(e);
         }
+        return userId;
+    }
+    
+    public int isUserExistInTeam( String usemarEmail) {
+        int userId = isUserExist(usemarEmail);
+        
+        if (userId == -1) {
+            
+            return 0;
+        
+        }
+        try {
+           
+            String req = "SELECT * FROM team_user where user_id = ? and team_id = ?";
+            PreparedStatement prpStm = connexion.prepareStatement(req);
+             prpStm.setInt(1, userId);
+              prpStm.setInt(2,this.getSelectedTeam().getId());
+
+            ResultSet result = prpStm.executeQuery();
+            if (result.next()) {
+                userId = result.getInt("id");
+                return userId;
+        }
+            return -1;
+           
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
         return -1;
     }
     
@@ -176,8 +212,24 @@ try {
         Pattern pattern = Pattern.compile(regex); 
         return pattern.matcher(emailID).matches(); }
     
+    private boolean addScrumMaster(int teamId) {
+        // inject User Service
+        // user = getCurrentUser()
+        try {
+            PreparedStatement statement = connexion.prepareStatement(
+                    "INSERT INTO `team_user`(`team_id`, `user_id`, `role`) VALUES (?,? , ?)");
+            statement.setInt(1, teamId);
+            statement.setInt(2, 3);
+            statement.setInt(3, 1);
+             return statement.executeUpdate() > 0;
+        }  catch (SQLException ex) {
+            Logger.getLogger(TeamService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+        
+    }
     
-    public void addMember(String email) {
+    public void addMember(String email , int roleId) {
             TeamService teamService = TeamService.getInstance();
                         Team team = new Team();
                         
@@ -192,7 +244,15 @@ try {
         if (this.isUserExist(email)!= -1) {
             try {
             
-                
+                     PreparedStatement statement = connexion.prepareStatement(
+                    "INSERT INTO `team_user`(`team_id`, `user_id` ,`role` ) VALUES (?,?,?)");
+            statement.setInt(1, team.getId());
+            statement.setInt(2, this.isUserExist(email));
+            statement.setInt(3, roleId);
+             statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(TeamService.class.getName()).log(Level.SEVERE, null, ex);
+        }
                 
                 //******************/
                 
@@ -254,14 +314,7 @@ try {
             System.out.println(e.getMessage());
         }//******************/
                 
-            PreparedStatement statement = connexion.prepareStatement(
-                    "INSERT INTO `team_user`(`team_id`, `user_id`) VALUES (?,?)");
-            statement.setInt(1, team.getId());
-            statement.setInt(2, this.isUserExist(email));
-             statement.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(TeamService.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
         }
         else
         {
@@ -336,8 +389,6 @@ try {
     }
     
     
-    //esmaaa b edele  les attributs selon el entite  ena aandi ken champ name akhaw naamel aalih recherche maantha supp
-    
     
     
 public ArrayList<Team> rechercherNomEt(String rech) throws SQLException {
@@ -374,7 +425,76 @@ public ArrayList<Team> rechercherNomEt(String rech) throws SQLException {
         return off;
     }     
     
-    
+public boolean isScrumMatser(int teamId) {
+    try {
+
+            String req = "SELECT * FROM `team_user` WHERE `team_id` = ? and `role` = 1 and `user_id` = 3";
+            PreparedStatement stm = connexion.prepareStatement(req);
+            stm.setInt(1, teamId);
+            ResultSet result = stm.executeQuery();
+            if (result.next()) {
+            
+              return true;
+            }
+          
+            return false;
+        } catch (SQLException ex) {
+            Logger.getLogger(TeamService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return false;
 }
 
+ public boolean isProductOwnerExist(int team_id) {
+       
+       try {
+           String req = "SELECT * FROM team_user where team_id = ? and role = 3";
+           PreparedStatement prpStm = connexion.prepareStatement(req);
+           prpStm.setInt(1, team_id);
+           ResultSet result =  prpStm.executeQuery();
+          
+          
+           return result.next();
+     } catch (Exception e) {
+           System.out.println("scrumifyd.GestionTeams.services.TeamService.isProductOwnerExist()" + e);
+           return false;
+     }  
+  
+ }
+ 
+ public static ArrayList<Affiche> geeamUsers (int teamId){
+            ArrayList<Affiche> aff = new ArrayList<Affiche>();
+             try {
+           String req = "SELECT user.username , user.email , role FROM `team_user` INNER join `user` ON team_user.user_id = user.id WHERE `team_user`.`team_id` = ?";
+           PreparedStatement prpStm = connexion.prepareStatement(req);
+           prpStm.setInt(1, teamId);
+           ResultSet result =  prpStm.executeQuery();
+                 while (result.next()) {
+                    
+                     
+                     Affiche f = new Affiche(result.getString("email"), result.getString("username"), getRoleNamme(result.getInt("role")));
+                aff.add(f);
+                 }
+                 return aff;
+             } catch (Exception e) {
+           System.out.println("scrumifyd.GestionTeams.services.TeamService.isProductOwnerExist()" + e);
+           return null;
+     }  
+             
+         }
+ 
+ public static String getRoleNamme(int code) {
+     if(code == 1) {
+         return "Scrum Master";
+     }
+     if (code == 2) {
+         return "Developer";
+     }
+     if(code == 3) {
+         return "Product Owner";
+     }
+     return "";
+ }
+         
+ }
+ 
 
