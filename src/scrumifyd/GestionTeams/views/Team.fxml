@@ -21,7 +21,7 @@
             <Font size="49.0" />
          </font>
       </Text>
-      <TableView fx:id="TeamTable" layoutX="55.0" layoutY="158.0" onKeyPressed="#selectOneTeamAction" onMouseClicked="#clickOneTeamAction" prefHeight="200.0" prefWidth="491.0">
+      <TableView fx:id="TeamTable" layoutX="55.0" layoutY="158.0" onMouseClicked="#clickOneTeamAction" prefHeight="200.0" prefWidth="491.0">
         <columns>
           <TableColumn fx:id="teamName" prefWidth="154.0" text="Team Name" />
             <TableColumn fx:id="created" prefWidth="144.0" text="Created date" />

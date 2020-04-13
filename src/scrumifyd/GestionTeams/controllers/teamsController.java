@@ -165,16 +165,7 @@ public class teamsController implements Initializable {
 
     
  //********************* U **************************//
-    @FXML
-    public void selectOneTeamAction(KeyEvent keyEvent) {
-        
-        Team t = (Team) TeamTable.getSelectionModel().getSelectedItem();
-        if(t != null)
-        {
-          
-            fillUpdateForm(t);
-        }
-    }
+   
     @FXML
     public void clickOneTeamAction() {
          TeamService teamService = TeamService.getInstance();

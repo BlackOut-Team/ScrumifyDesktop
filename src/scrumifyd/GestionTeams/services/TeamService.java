@@ -212,6 +212,7 @@ try {
         Pattern pattern = Pattern.compile(regex); 
         return pattern.matcher(emailID).matches(); }
     
+    
     private boolean addScrumMaster(int teamId) {
         // inject User Service
         // user = getCurrentUser()
@@ -239,11 +240,8 @@ try {
         }
           if (this.validateEmailAddress(email)==true)    
           {
-              
-          
         if (this.isUserExist(email)!= -1) {
             try {
-            
                      PreparedStatement statement = connexion.prepareStatement(
                     "INSERT INTO `team_user`(`team_id`, `user_id` ,`role` ) VALUES (?,?,?)");
             statement.setInt(1, team.getId());
@@ -252,130 +250,12 @@ try {
              statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(TeamService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                
-                //******************/
-                
-                 try{
-        
-        String to=email;//change accordingly  destinateur
-  final String user="scrumify.application@gmail.com";//change accordingly  eky yebath
-  final String password="Blackout2020";//change accordingly  
-  //1) get the session object     
- 
-  Properties properties = System.getProperties();  
-        properties.setProperty("mail.transport.protocol", "smtp");
-        properties.setProperty("mail.host", "smtp.gmail.com");
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.port", "587");
-
-        properties.put("mail.smtp.starttls.enable","true");
-        properties.put("mail.smtp.socketFactory.port", "465");
-        properties.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
-        properties.put("mail.smtp.socketFactory.fallback", "false"); 
-  
-  Session session = Session.getDefaultInstance(properties,  
-   new javax.mail.Authenticator() {  
-   protected PasswordAuthentication getPasswordAuthentication() {  
-   return new PasswordAuthentication(user,password);  
-   }  
-  });  
-     
-  //2) compose message     
-  try{  
-    MimeMessage message = new MimeMessage(session);  
-    message.setFrom(new InternetAddress(user));  
-    message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));  
-    message.setSubject("Affectation au team");  
-      
-    //3) create MimeBodyPart object and set your message text     
-    BodyPart messageBodyPart1 = new MimeBodyPart();  
-    messageBodyPart1.setText("Bonjour, vous êtes affecter au team kadhaaa");  
-  
-
-    //5) create Multipart object and add MimeBodyPart objects to this object      
-    Multipart multipart = new MimeMultipart();  
-    multipart.addBodyPart(messageBodyPart1);  
-  
-  
-    //6) set the multiplart object to the message object  
-    message.setContent(multipart );  
-     
-    //7) send message  
-    Transport.send(message);  
-   
-  JOptionPane.showMessageDialog(
-                    null, " mail envoyé avec succés ");
-   }catch (MessagingException ex) {ex.printStackTrace();}  
-               }catch (Exception e) {
-
-          
-            System.out.println(e.getStackTrace());
-            System.out.println(e.getMessage());
-        }//******************/
-                
-       
+        }   
+               sendEmailSucc(email);
         }
         else
         {
-      //******************/
-                
-                 try{
-        
-        String to=email;//change accordingly  destinateur
-  final String user="scrumify.application@gmail.com";//change accordingly  eky yebath
-  final String password="Blackout2020";//change accordingly  
-  //1) get the session object     
- 
-  Properties properties = System.getProperties();  
-        properties.setProperty("mail.transport.protocol", "smtp");
-        properties.setProperty("mail.host", "smtp.gmail.com");
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.port", "587");
-
-        properties.put("mail.smtp.starttls.enable","true");
-        properties.put("mail.smtp.socketFactory.port", "465");
-        properties.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
-        properties.put("mail.smtp.socketFactory.fallback", "false"); 
-  
-  Session session = Session.getDefaultInstance(properties,  
-   new javax.mail.Authenticator() {  
-   protected PasswordAuthentication getPasswordAuthentication() {  
-   return new PasswordAuthentication(user,password);  
-   }  
-  });  
-     
-  //2) compose message     
-  try{  
-    MimeMessage message = new MimeMessage(session);  
-    message.setFrom(new InternetAddress(user));  
-    message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));  
-    message.setSubject("Affectation au team");  
-      
-    //3) create MimeBodyPart object and set your message text     
-    BodyPart messageBodyPart1 = new MimeBodyPart();  
-    messageBodyPart1.setText("Bonjour, \n Vous êtes affacter au team ....... \n mais malheureusement vous êtes pas inscrit dans notre application \n Pour plu de detailles voulez vous contacter notre adminstarteur via email suivant : iheb.rekik@esprit.tn \n cordilement ");
-  
-
-    //5) create Multipart object and add MimeBodyPart objects to this object      
-    Multipart multipart = new MimeMultipart();  
-    multipart.addBodyPart(messageBodyPart1);  
-  
-  
-    //6) set the multiplart object to the message object  
-    message.setContent(multipart );  
-     
-    //7) send message  
-    Transport.send(message);  
-   
- 
-   }catch (MessagingException ex) {ex.printStackTrace();}  
-               }catch (Exception e) {
-
-          
-            System.out.println(e.getStackTrace());
-            System.out.println(e.getMessage());
-        }//******************/
+     sendEmailFaild(email);
             JOptionPane.showMessageDialog(
                     null, " Utilisateur n'existe pas ");
           }
@@ -494,6 +374,133 @@ public boolean isScrumMatser(int teamId) {
      }
      return "";
  }
+ 
+
+    private void sendEmailFaild(String email) {
+        
+        
+       
+        //******************/
+                
+                 try{
+        
+        String to=email;//change accordingly  destinateur
+  final String user="scrumify.application@gmail.com";//change accordingly  eky yebath
+  final String password="Blackout2020";//change accordingly  
+  //1) get the session object     
+ 
+  Properties properties = System.getProperties();  
+        properties.setProperty("mail.transport.protocol", "smtp");
+        properties.setProperty("mail.host", "smtp.gmail.com");
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.port", "587");
+
+        properties.put("mail.smtp.starttls.enable","true");
+        properties.put("mail.smtp.socketFactory.port", "465");
+        properties.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
+        properties.put("mail.smtp.socketFactory.fallback", "false"); 
+  
+  Session session = Session.getDefaultInstance(properties,  
+   new javax.mail.Authenticator() {  
+   protected PasswordAuthentication getPasswordAuthentication() {  
+   return new PasswordAuthentication(user,password);  
+   }  
+  });  
+     
+  //2) compose message     
+  try{  
+    MimeMessage message = new MimeMessage(session);  
+    message.setFrom(new InternetAddress(user));  
+    message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));  
+    message.setSubject("Affectation au team");  
+      
+    //3) create MimeBodyPart object and set your message text     
+    BodyPart messageBodyPart1 = new MimeBodyPart();  
+    messageBodyPart1.setText("Bonjour, \n Vous êtes affacter au team ....... \n mais malheureusement vous êtes pas inscrit dans notre application \n Pour plu de detailles voulez vous contacter notre adminstarteur via email suivant : iheb.rekik@esprit.tn \n cordilement ");
+  
+
+    //5) create Multipart object and add MimeBodyPart objects to this object      
+    Multipart multipart = new MimeMultipart();  
+    multipart.addBodyPart(messageBodyPart1);  
+  
+  
+    //6) set the multiplart object to the message object  
+    message.setContent(multipart );  
+     
+    //7) send message  
+    Transport.send(message);  
+   
+ 
+   }catch (MessagingException ex) {ex.printStackTrace();}  
+               }catch (Exception e) {
+
+          
+            System.out.println(e.getStackTrace());
+            System.out.println(e.getMessage());
+        }//******************/
+    }
+
+    private void sendEmailSucc(String email) {
+       //******************/
+                
+                 try{
+        
+        String to=email;//change accordingly  destinateur
+  final String user="scrumify.application@gmail.com";//change accordingly  eky yebath
+  final String password="Blackout2020";//change accordingly  
+  //1) get the session object     
+ 
+  Properties properties = System.getProperties();  
+        properties.setProperty("mail.transport.protocol", "smtp");
+        properties.setProperty("mail.host", "smtp.gmail.com");
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.port", "587");
+
+        properties.put("mail.smtp.starttls.enable","true");
+        properties.put("mail.smtp.socketFactory.port", "465");
+        properties.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
+        properties.put("mail.smtp.socketFactory.fallback", "false"); 
+  
+  Session session = Session.getDefaultInstance(properties,  
+   new javax.mail.Authenticator() {  
+   protected PasswordAuthentication getPasswordAuthentication() {  
+   return new PasswordAuthentication(user,password);  
+   }  
+  });  
+     
+  //2) compose message     
+  try{  
+    MimeMessage message = new MimeMessage(session);  
+    message.setFrom(new InternetAddress(user));  
+    message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));  
+    message.setSubject("Affectation au team");  
+      
+    //3) create MimeBodyPart object and set your message text     
+    BodyPart messageBodyPart1 = new MimeBodyPart();  
+    messageBodyPart1.setText("Bonjour, vous êtes affecter au team ..... ");  
+  
+
+    //5) create Multipart object and add MimeBodyPart objects to this object      
+    Multipart multipart = new MimeMultipart();  
+    multipart.addBodyPart(messageBodyPart1);  
+  
+  
+    //6) set the multiplart object to the message object  
+    message.setContent(multipart );  
+     
+    //7) send message  
+    Transport.send(message);  
+   
+  JOptionPane.showMessageDialog(
+                    null, " mail envoyé avec succés ");
+   }catch (MessagingException ex) {ex.printStackTrace();}  
+               }catch (Exception e) {
+
+          
+            System.out.println(e.getStackTrace());
+            System.out.println(e.getMessage());
+        }//******************/
+    }
          
  }
  

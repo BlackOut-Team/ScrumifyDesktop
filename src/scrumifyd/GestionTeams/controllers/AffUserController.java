@@ -56,6 +56,7 @@ public class AffUserController implements Initializable {
     private TableColumn<Object, Number> Role;
     @FXML
     private TableView<Affiche> Tab;
+    
  ObservableList<Affiche> oblist = FXCollections.observableArrayList();
     @FXML
     private JFXButton refresh;
@@ -104,6 +105,7 @@ public class AffUserController implements Initializable {
     
     @FXML
     private void AddButton(MouseEvent event) {
+        
         TeamService teamService = TeamService.getInstance();
         if (this.Name.getText().isEmpty() || this.getRole() == -1) {
             JOptionPane.showMessageDialog(
@@ -130,7 +132,8 @@ public class AffUserController implements Initializable {
             
         
         
-        
+        Name.clear();
+          choicBoxRole.getSelectionModel().clearSelection();
          refreshTableData();
     }
     
@@ -181,6 +184,8 @@ public class AffUserController implements Initializable {
             }
             }
         });
+        
+ 
     }
     
     
