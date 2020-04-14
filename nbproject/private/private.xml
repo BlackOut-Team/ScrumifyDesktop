@@ -5,7 +5,7 @@
             <url>src/scrumifyd/GestionTeams/controllers/AffUserController.java</url>
             <bookmark id="1">
                 <name/>
-                <line>92</line>
+                <line>93</line>
                 <key/>
             </bookmark>
         </file>
@@ -14,7 +14,6 @@
         <group>
             <file>file:/D:/ScrumifyDesktop/src/scrumifyd/GestionTeams/controllers/AffUserController.java</file>
             <file>file:/D:/ScrumifyDesktop/src/scrumifyd/GestionTeams/services/TeamService.java</file>
-            <file>file:/D:/ScrumifyDesktop/src/scrumifyd/GestionTeams/controllers/teamsController.java</file>
         </group>
     </open-files>
 </project-private>
