@@ -115,7 +115,7 @@ public class MeetingsController implements Initializable {
                         int i = ListM.indexOf(meeting);
                         i++;
                         if (true) {
-                            FXMLLoader loader = new FXMLLoader(MeetingsController.this.getClass().getResource("/scrumifyd/GestionProjets/views/MeetingBox.fxml"));
+                            FXMLLoader loader = new FXMLLoader(MeetingsController.this.getClass().getResource("/scrumifyd/GestionMeetings/views/MeetingBox.fxml"));
                             //separate date into separate day month year for both dates
                             int dayy = meeting.getMeetingDate().getDayOfMonth();
                             Month monthh = meeting.getMeetingDate().getMonth();
@@ -151,7 +151,7 @@ public class MeetingsController implements Initializable {
                              if (e.getSource() == box.EditButton) {
                                     try {
                                         System.out.print("here");
-                                          FXMLLoader loader2 = new FXMLLoader(MeetingsController.this.getClass().getResource("/scrumifyd/GestionProjets/views/EditM.fxml"));
+                                          FXMLLoader loader2 = new FXMLLoader(MeetingsController.this.getClass().getResource("/scrumifyd/GestionMeetings/views/EditM.fxml"));
 
                                         contentPane.getChildren().clear();
                                         Parent root = (Parent) loader2.load();
