@@ -21,7 +21,7 @@
       <Label layoutX="552.0" layoutY="178.0" text="User E-mail :" textFill="#16cabd" />
       <JFXButton fx:id="AffButton" layoutX="458.0" layoutY="320.0" onMouseClicked="#AddButton" prefHeight="31.0" prefWidth="270.0" styleClass="button2" stylesheets="@../../util/fullpackstyling.css" text="Affecter" textFill="WHITE" />
       <Label fx:id="Errors" layoutX="32.0" layoutY="351.0" textFill="#d72727" />
-      <TableView fx:id="Tab" layoutX="36.0" layoutY="184.0" prefHeight="204.0" prefWidth="383.0">
+      <TableView fx:id="Tab" layoutX="36.0" layoutY="184.0" prefHeight="204.0" prefWidth="383.0" stylesheets="@../../util/fullpackstyling.css">
         <columns>
           <TableColumn fx:id="UserName" prefWidth="108.0" text="User Name" />
           <TableColumn fx:id="Email" prefWidth="139.0" text="Email" />

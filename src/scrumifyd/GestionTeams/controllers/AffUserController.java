@@ -58,8 +58,6 @@ public class AffUserController implements Initializable {
     private TableView<Affiche> Tab;
     
  ObservableList<Affiche> oblist = FXCollections.observableArrayList();
-    @FXML
-    private JFXButton refresh;
   
 
     /** 
@@ -90,7 +88,6 @@ public class AffUserController implements Initializable {
     }    
 
     
-    @FXML
     public void refreshTableData() {
          TeamService teamService = TeamService.getInstance();
              List<Affiche> teamList = new ArrayList<>();
