@@ -102,7 +102,7 @@ public class ShowSprintController implements Initializable {
                         int yearrd = s.getDuedate().getYear();
                         nodes[i] = loader.load();
                         ItemSController item = loader.getController();
-                        item.setId(s.getId());
+                        //item.setId(s.getId());
                         item.setName(s.getName());
                         item.setDescription(s.getDescription());
                         //item.setEtat(s.getEtat());
@@ -249,7 +249,20 @@ public String getProjectId(){
     }
 
     @FXML
-    private void AddProject(MouseEvent event) {
+    private void AddSprint(MouseEvent event) {
+        contentPane.getChildren().clear();
+        try {
+            FXMLLoader loader = new FXMLLoader(ShowSprintController.this.getClass().getResource("/scrumifyd/GestionProjets/views/AddSprint.fxml"));          
+            Parent root = (Parent) loader.load();
+            AddSprintController sprints = loader.getController();
+            sprints.pid = this.pp;
+            contentPane.getChildren().add(root);
+
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ShowSprintController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
 }

@@ -10,7 +10,11 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import doryan.windowsnotificationapi.fr.Notification;
+import java.awt.AWTException;
+import java.awt.TrayIcon;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,16 +30,21 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import scrumifyd.GestionProjets.models.Project;
 import scrumifyd.GestionProjets.models.Sprint;
 import scrumifyd.GestionProjets.services.InterfaceProjet;
 import scrumifyd.GestionProjets.services.ProjectService;
 import scrumifyd.GestionProjets.services.SprintInterface;
 import scrumifyd.GestionProjets.services.SprintService;
+import scrumifyd.ScrumifyD;
 import scrumifyd.util.MyDbConnection;
+import tray.animations.AnimationType;
+import tray.notification.TrayNotification;
 
 /**
  * FXML Controller class
@@ -90,17 +99,25 @@ int pid ;
     
 
     @FXML
-    private void SubmitButton(MouseEvent event) {
+    private void SubmitButton(MouseEvent event) throws AWTException {
          if (event.getSource() == Submit) {
             // here
 
             if (EditS()) {
-
+                TrayNotification tray = new TrayNotification();
+                AnimationType type= AnimationType.POPUP;
+                tray.setAnimationType(type);
+                tray.setRectangleFill(Color.valueOf("#16cabd"));
+                tray.setTitle("Scrumify App");
+                tray.setMessage("Sprint edited successfully  !");
+                Image img = new Image (ScrumifyD.class.getResourceAsStream("/scrumifyd/images/scrumify.png"));
+                tray.setImage(img);
+                //tray.setNotificationType(NotificationType.SUCCESS);
+                tray.showAndDismiss(Duration.millis(3000));
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Edit sprint");
                 alert.setHeaderText("Results:");
                 alert.setContentText("Edited successfully!");
-
                 alert.showAndWait();
 
             } else {

@@ -1,3 +1,5 @@
+.default-color0.chart-pie { -fx-pie-color: #16cabd; }
+.default-color1.chart-pie { -fx-pie-color: #16cabd; }
 .text-input
 {
     -fx-text-fill : #ffffff;
@@ -6,8 +8,8 @@
 
 .button1
 {
--fx-background-color : #075750;
--fx-background-radius :  30 0 0 30;
+-fx-background-color : #16cabd;
+-fx-background-radius :  30 30 30 30;
 }
 .button1:hover
 {
@@ -64,6 +66,7 @@
 {
     -fx-background-color :linear-gradient(to top left, #16cabd, #ffffff);
     -fx-background-radius :  30 30 30 30;
+    -fx-text-alignment: center;
 }
 .button4:hover
 {
@@ -160,7 +163,8 @@
 }
 
 .chart-pie {
-    -fx-border-color: derive(-fx-pie-color, 1%);
+    -fx-pie-color: #16cabd;
+    -fx-border-color: derive(#16cabd, 1%);
     -fx-border-width: 0px;
 }
 .linear-grad
@@ -185,4 +189,59 @@
 .button6:pressed
 {
 -fx-background-color : #adf7f7; 
+}
+.titled-pane 
+{
+-fx-text-fill: -fx-text-base-color;
+}
+.titled-pane:focused 
+{
+-fx-text-fill: white;
+}
+.titled-pane > .title 
+{
+-fx-background-color: -fx-box-border, -fx-inner-border, -fx-body-color;
+-fx-background-insets: 0, 1, 2;
+-fx-background-radius: 5 5 0 0, 4 4 0 0, 3 3 0 0;
+-fx-padding: 0.166667em 0.833333em 0.25em 0.833333em; /* 2 10 3 10 */
+}
+
+.titled-pane:focused > .title 
+{
+-fx-color: -fx-focus-color;
+}
+
+.titled-pane > .title > .arrow-button 
+{
+-fx-background-color: null;
+-fx-background-insets: 0;
+-fx-background-radius: 0;
+-fx-padding: 0.0em 0.25em 0.0em 0.0em; /* 0 3 0 0 */
+}
+
+.titled-pane > .title > .arrow-button .arrow 
+{
+-fx-background-color: -fx-mark-highlight-color, -fx-mark-color;
+-fx-background-insets: 1 0 -1 0, 0;
+-fx-padding: 0.25em 0.3125em 0.25em 0.3125em; /* 3 3.75 3 3.75 */
+-fx-shape: "M 0 0 h 7 l -3.5 4 z";
+}
+
+.titled-pane:collapsed > .title > .arrow-button .arrow 
+{
+-fx-rotate: -90;
+}
+
+.titled-pane > *.content 
+{
+-fx-background-color:
+-fx-box-border,
+linear-gradient(to bottom, derive(-fx-color,-02%), derive(-fx-color,65%) 12%,      derive(-fx-color,23%) 88%, derive(-fx-color,50%) 99%, -fx-box-border);
+-fx-background-insets: 0, 0 1 1 1;
+-fx-padding: 0.167em;
+ }
+
+.titled-pane:focused > .title > .arrow-button .arrow 
+{
+-fx-background-color: #16cabd;
 }

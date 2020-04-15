@@ -27,7 +27,7 @@ public class media_services {
             public void ajout_media(String name,String path) {
                
         try {
-            String req = "INSERT INTO media (name,path) VALUES ('"+name+"','"+path+"')";
+            String req = "INSERT INTO media (name,path,type) VALUES ('"+name+"','"+path+"','pdf' )";
             
             PreparedStatement st = conn.prepareStatement(req);
             //st.setString(1, e.getNom());

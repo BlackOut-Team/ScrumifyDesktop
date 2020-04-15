@@ -19,15 +19,19 @@ public class task {
     private String title,status;
     private String description;
     private LocalDateTime upd;
-    private Date created,updated;
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+    private LocalDate created,updated,finished;
+    //SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
     Date date = new Date();  
-    String finished,members;
+     String members;
 
     public task() {
     }
 
-    public task(int priority, int etat, String title, String status, String description, Date created) {
+    public task(int etat) {
+        this.etat = etat;
+    }
+
+    public task(int priority, int etat, String title, String status, String description, LocalDate created) {
         this.priority = priority;
         this.etat = etat;
         this.title = title;
@@ -36,7 +40,7 @@ public class task {
         this.created = created;
     }
                             
-    public task(String title, String description, Date created, Date updated, String finished,int priority,String status) {
+    public task(String title, String description, LocalDate created, LocalDate updated, LocalDate finished,int priority,String status) {
         
         this.title = title;
         this.description = description;
@@ -46,7 +50,7 @@ public class task {
         this.priority = priority;
         this.status=status;
     }
-public task(String title,int id, String description, Date created, Date updated, String finished,int priority,String status) {
+public task(String title,int id, String description, LocalDate created, LocalDate updated, LocalDate finished,int priority,int etat ,String status) {
         
         this.title = title;
         this.id=id;
@@ -55,6 +59,7 @@ public task(String title,int id, String description, Date created, Date updated,
         this.updated = updated;
         this.finished = finished;
         this.priority = priority;
+        this.etat = etat;
         this.status=status;
     }
     public task(String title,int id) {
@@ -69,7 +74,7 @@ public task(String title,int id, String description, Date created, Date updated,
         this.description = description;
     }
 
-    public task(int priority, String title, String description, String finished,String members) {
+    public task(int priority, String title, String description, LocalDate finished,String members) {
         
         this.priority = priority;
         this.title = title;
@@ -114,15 +119,15 @@ public task(String title,int id, String description, Date created, Date updated,
         return description;
     }
 
-    public Date getCreated() {
+    public LocalDate getCreated() {
         return created;
     }
 
-    public Date getUpdated() {
+    public LocalDate getUpdated() {
         return updated;
     }
 
-    public String getFinished() {
+    public LocalDate getFinished() {
         return finished;
     }
 
@@ -150,16 +155,23 @@ public task(String title,int id, String description, Date created, Date updated,
         this.description = description;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(LocalDate created) {
         this.created = created;
     }
 
-    public void setUpdated(Date updated) {
+    public void setUpdated(LocalDate updated) {
         this.updated = updated;
     }
 
-    public void setFinished(String finished) {
+    public void setFinished(LocalDate finished) {
         this.finished = finished;
     }
+
+    @Override
+    public String toString() {
+        return "task{" + "id=" + id + ", priority=" + priority + ", etat=" + etat + ", title=" + title + ", status=" + status + ", description=" + description + ", upd=" + upd + ", created=" + created + ", updated=" + updated + ", finished=" + finished + ", date=" + date + ", members=" + members + '}';
+    }
+
+ 
     
 }

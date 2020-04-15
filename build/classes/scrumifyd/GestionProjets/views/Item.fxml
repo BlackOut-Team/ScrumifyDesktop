@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" fx:id="item" prefHeight="399.0" prefWidth="880.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scrumifyd.GestionProjets.controllers.ItemController">
    <children>
@@ -110,12 +109,6 @@
             </Label>
             <Label fx:id="deadline_month" layoutX="774.0" layoutY="41.0" text="AUG" textFill="#16cabd" />
             <Label fx:id="deadline_year" layoutX="774.0" layoutY="59.0" text="2018" textFill="#aeacac" />
-            <Label fx:id="id" layoutX="158.0" layoutY="51.0" text=" 20178" textFill="#b2b0b0">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Text fill="#b2b0b0" layoutX="132.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="id : " />
             <FontAwesomeIconView fx:id="EditButton" fill="#16cabd" glyphName="EDIT" layoutX="762.0" layoutY="256.0" size="28" />
             <FontAwesomeIconView fx:id="ArchiveButton" fill="#16cabd" glyphName="ARCHIVE" layoutX="723.0" layoutY="254.0" size="24" />
             <FontAwesomeIconView fx:id="showSprintsButton" fill="#16cabd" glyphName="LINK" layoutX="687.0" layoutY="255.0" size="24" />
@@ -129,6 +122,7 @@
                   <Font size="13.0" />
                </font>
             </Label>
+            <Label fx:id="lbl_role" layoutX="400.0" layoutY="26.0" prefHeight="17.0" prefWidth="86.0" style="-fx-background-color: #c91616; -fx-text-alignment: center;" styleClass="button4" stylesheets="@../../util/fullpackstyling.css" text="       Master" textAlignment="CENTER" textFill="WHITE" />
          </children>
          <effect>
             <DropShadow color="#d7d2d2" height="50.0" radius="24.5" width="50.0" />

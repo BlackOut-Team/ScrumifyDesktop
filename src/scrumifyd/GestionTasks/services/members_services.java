@@ -41,9 +41,7 @@ public class members_services {
             Connection conn = MyDbConnection.getInstance().getConnexion();
             String req = "Update tasks set members='"+id+"'";
             PreparedStatement st = conn.prepareStatement(req);
-            //st.setString(1, e.getNom());
-            //st.setObject(2, e.getDate());
-            //st.setObject(3, e.getDuree());
+            
             st.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(members_services.class.getName()).log(Level.SEVERE, null, ex);
@@ -54,11 +52,11 @@ public class members_services {
         List<member> members=new ArrayList<>();
         try {
                 Connection conn = MyDbConnection.getInstance().getConnexion();
-                PreparedStatement pt = conn.prepareStatement("select * from members");
+                PreparedStatement pt = conn.prepareStatement("select * from  person");
                 ResultSet rs = pt.executeQuery();
                 while (rs.next()) {
                     members.add(new member(
-                            rs.getInt("id_member"),rs.getString("nom_member")));
+                            rs.getInt("id"),rs.getString("name")));
                 }
                 
         } catch (SQLException ex) {
@@ -85,10 +83,10 @@ public class members_services {
         String name="";
         try {
                 Connection conn = MyDbConnection.getInstance().getConnexion();
-                PreparedStatement pt = conn.prepareStatement("select nom_member from members where id_member='"+id+"'");
+                PreparedStatement pt = conn.prepareStatement("select name from person where id='"+id+"'");
                 ResultSet rs = pt.executeQuery();
                 while (rs.next()) {
-                    name=rs.getString("nom_member");}
+                    name=rs.getString("name");}
                 
         } catch (SQLException ex) {
                 Logger.getLogger(members_services.class.getName()).log(Level.SEVERE, null, ex);

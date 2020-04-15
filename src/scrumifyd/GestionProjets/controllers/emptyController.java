@@ -30,9 +30,9 @@ public class emptyController implements Initializable {
     @FXML
     private StackPane contentPane;
     @FXML
-    private JFXButton addP;
+    public JFXButton addP;
     @FXML
-    private JFXButton addT;
+    public JFXButton addT;
     int user_id ; 
     @FXML
     private Text label_empty;
@@ -45,6 +45,8 @@ public class emptyController implements Initializable {
     public Label lbl_completed;
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

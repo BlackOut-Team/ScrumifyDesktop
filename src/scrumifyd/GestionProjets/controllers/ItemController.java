@@ -14,6 +14,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.Month;
+import static java.util.Collections.list;
 import java.util.Optional;
 
 import java.util.ResourceBundle;
@@ -22,6 +23,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -49,8 +51,8 @@ public class ItemController implements Initializable {
     private Label client;
     @FXML
     private Label etat;
-    @FXML
-    private Label team_member;
+//    @FXML
+//    private Label team_member;
     @FXML
     private Label Description;
     @FXML
@@ -65,7 +67,6 @@ public class ItemController implements Initializable {
     private Label deadline_month;
     @FXML
     private Label deadline_year;
-    @FXML
     private Label id;
     Connection con = null;
     PreparedStatement preparedStatement = null;
@@ -84,6 +85,10 @@ public class ItemController implements Initializable {
     int pid;
     @FXML
     public FontAwesomeIconView showSprintsButton;
+    @FXML
+    public Label lbl_role;
+    @FXML
+    private Label team_memebrs;
 
     /**
      * Initializes the controller class.
@@ -151,16 +156,21 @@ public class ItemController implements Initializable {
         this.deadline_year.setText("" + deadline_year);
     }
 
-    public void setId(int id) {
-        this.id.setText("" + id);
-    }
+
 
     public void setAvatar(ImageView avatar) {
         this.avatar = avatar;
     }
+public void setRole(String role){
+    this.lbl_role.setText(role);
+    
+}
 
 
-
-   
+   public void setTeam(String team){
+//           Node list[] = new Node[10];
+//
+//       Label team_member = new Label(team,list);
+   }
 
 }

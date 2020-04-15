@@ -36,6 +36,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -47,7 +48,12 @@ import javafx.util.Duration;
 import scrumifyd.GestionProjets.controllers.DashboardController;
 import scrumifyd.GestionProjets.models.Project;
 import scrumifyd.GestionProjets.services.ProjectService;
+import scrumifyd.GestionProjets.services.UserSession;
+import scrumifyd.ScrumifyD;
 import scrumifyd.util.MyDbConnection;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
 
 /**
  * FXML Controller class
@@ -87,6 +93,7 @@ public class SigninController implements Initializable {
     @FXML
     private JFXButton adminButton;
     int user_id ; 
+    public static UserSession user;
 
     /**
      * Initializes the controller class.
@@ -142,21 +149,21 @@ public class SigninController implements Initializable {
                     Stage stage = (Stage) node.getScene().getWindow();
                     //stage.setMaximized(true);
                     stage.close();
-//                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/scrumifyd/GestionProjets/views/Dashboard.fxml")));
-//                    stage.setScene(scene);                
-//                    stage.show();
-
-
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/scrumifyd/GestionProjets/views/Dashboard.fxml"));
-
-                        stage.setScene(new Scene(loader.load()));
-                        
- 
-                        DashboardController sp = loader.getController();
-                        loader.setController(sp);
-                        user_id=res;
-                        sp.setUserId(res);
-                        System.out.println("Sign in  projects: " + res);
+                   
+                user =  UserSession.getInstace(res);
+                TrayNotification tray = new TrayNotification();
+                AnimationType type= AnimationType.SLIDE;
+             
+                tray.setAnimationType(type);
+                tray.setRectangleFill(Color.valueOf("#16cabd"));
+                tray.setTitle("Scrumify App");
+                tray.setMessage("You are logged in  !");
+                Image img = new Image (ScrumifyD.class.getResourceAsStream("/scrumifyd/images/scrumify.png"));
+                tray.setImage(img);
+                //tray.setNotificationType(NotificationType.SUCCESS);
+                tray.showAndDismiss(Duration.millis(3000));
+                        stage.setScene( new Scene (FXMLLoader.load(getClass().getResource("/scrumifyd/GestionProjets/views/Dashboard.fxml"))));
+//                        sp.setUserId(res);
                         stage.show();
 
 

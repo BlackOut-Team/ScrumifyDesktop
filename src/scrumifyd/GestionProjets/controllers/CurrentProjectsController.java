@@ -40,6 +40,7 @@ import scrumifyd.GestionProjets.services.InterfaceProjet;
 import scrumifyd.GestionProjets.services.ProjectService;
 import scrumifyd.GestionProjets.services.SprintInterface;
 import scrumifyd.GestionProjets.services.SprintService;
+import scrumifyd.GestionUsers.services.SigninController;
 
 /**
  * FXML Controller class
@@ -71,7 +72,7 @@ public class CurrentProjectsController implements Initializable {
     private Label lbl_allProjects;
     @FXML
     private JFXTextField searchBar;
-
+ List<Project> ListPa;
     /**
      * Initializes the controller class.
      *
@@ -100,8 +101,11 @@ public class CurrentProjectsController implements Initializable {
             pnl_scroll.getChildren().clear();
 
             ListP = Projects.getAllProjects();
-            List<Project> ListPa = Projects.getCurrentProjects();
-
+            SigninController s = new SigninController();
+            user_id = s.user.getUserId();
+            System.out.println(user_id);
+            ListPa = Projects.getCurrentProjects(user_id);
+            System.out.println(ListPa);
             if (!ListPa.isEmpty()) {
 
                 Node nodes[] = new Node[ListPa.size() + 1];
@@ -121,8 +125,21 @@ public class CurrentProjectsController implements Initializable {
                             int yearrd = project.getDuedate().getYear();
                             nodes[i] = loader.load();
                             ItemController item = loader.getController();
-                            item.setId(project.getId());
+//                            item.setId(project.getId());
                             item.setName(project.getName());
+                           if (project.getMaster_id() == user_id) {
+                            item.setRole("Scrum Master");
+                        } else if (project.getOwner_id() == user_id) {
+                            item.lbl_role.setStyle("-fx-background-color:green");
+                            item.setRole("Project Owner");
+                            item.EditButton.setVisible(false);
+                            item.ArchiveButton.setVisible(false);
+
+                        }
+                        else {
+                            item.lbl_role.setStyle("-fx-background-color:#16cabd");
+                            item.setRole("Developer");
+                       }
                             item.setDescription(project.getDescription());
                             item.setEtat(project.getEtat());
                             item.setCreated_day(dayy);
@@ -213,7 +230,7 @@ public class CurrentProjectsController implements Initializable {
                                                             int yearrd = s.getDuedate().getYear();
                                                             nodes[i] = loader.load();
                                                             ItemSController item = loader.getController();
-                                                            item.setId(s.getId());
+                                                           // item.setId(s.getId());
                                                             item.setName(s.getName());
                                                             item.setDescription(s.getDescription());
                                                             //item.setEtat(s.getEtat());

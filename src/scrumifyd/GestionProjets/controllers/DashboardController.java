@@ -16,12 +16,18 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import scrumifyd.GestionUsers.services.SigninController;
+import scrumifyd.ScrumifyD;
+import tray.animations.AnimationType;
+import tray.notification.TrayNotification;
 
 /**
  *
@@ -53,31 +59,43 @@ public class DashboardController implements Initializable {
     private JFXButton teams;
    
     
-    @FXML
-    Label user_id;
+  
     
     int user_idd;
     @FXML
     private JFXButton deconnexion;
+    @FXML
+    private JFXButton CalendarButton;
+    @FXML
+    private Label username;
+    @FXML
+    private JFXButton tasksOpen;
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-//        try {
-//            // TODO
-//            contentPane.getChildren().clear();
-//            
-//            FXMLLoader  loader = new FXMLLoader(getClass().getResource("/scrumifyd/GestionProjets/views/Projects.fxml"));
-//            Parent root = (Parent) loader.load();
-//            ProjectsController sp= loader.getController();
-//            sp.setUserId(user_idd);
-//            
-//            
-//            contentPane.getChildren().add(root);
-//        } catch (IOException ex) {
-//            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        
+       
+        try {
+            // TODO
+            contentPane.getChildren().clear();
+
+            FXMLLoader  loader = new FXMLLoader(getClass().getResource("/scrumifyd/GestionProjets/views/Projects.fxml"));
+            Parent root = (Parent) loader.load();
+            SigninController s = new SigninController();
+            user_idd = s.user.getUserId();
+            this.username.setText("" + s.user.getUsername(user_idd));
+            ProjectsController sp= loader.getController();
+            sp.setUserId(user_idd);
+            
+            
+            contentPane.getChildren().add(root);
+        } catch (IOException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+            
     }    
 
     public void setContentPane(StackPane contentPane) {
@@ -90,7 +108,6 @@ public class DashboardController implements Initializable {
     
   public void setUserId(int user_id){
       this.user_idd=user_id;
-      this.user_id.setText(""+user_id);
   }
     
     @FXML
@@ -152,7 +169,7 @@ public class DashboardController implements Initializable {
    }
 
     private void addT(MouseEvent event) {
-                loadUI("GestionTeams","teams");
+                loadUI("GestionTeams","Team");
 
     }
 
@@ -190,7 +207,7 @@ public class DashboardController implements Initializable {
 
     @FXML
     private void openTeams(MouseEvent event) {
-        loadUI("GestionTeams","teams");
+        loadUI("GestionTeams","Team");
     }
 
     @FXML
@@ -198,7 +215,16 @@ public class DashboardController implements Initializable {
               if (event.getSource() == deconnexion) {
               
                 try {
-              
+               TrayNotification tray = new TrayNotification();
+                AnimationType type= AnimationType.POPUP;
+                tray.setAnimationType(type);
+                tray.setRectangleFill(Color.valueOf("#16cabd"));
+                tray.setTitle("Scrumify App");
+                tray.setMessage("Logged out  !");
+                Image img = new Image (ScrumifyD.class.getResourceAsStream("/scrumifyd/images/scrumify.png"));
+                tray.setImage(img);
+                //tray.setNotificationType(NotificationType.SUCCESS);
+                tray.showAndDismiss(Duration.millis(3000));
                     Node node = (Node) event.getSource();
                     Stage stage = (Stage) node.getScene().getWindow();
                     stage.close();
@@ -209,6 +235,16 @@ public class DashboardController implements Initializable {
                     Logger.getLogger(SigninController.class.getName()).log(Level.SEVERE, null, ex);
                 }
     }
+    }
+
+    @FXML
+    private void CalendarButton(MouseEvent event) {
+          loadUI("GestionProjets","calendarandstat");
+    }
+
+    @FXML
+    private void tasksOpen(MouseEvent event) {
+        loadUI("GestionTasks", "Taskss");
     }
     
 }

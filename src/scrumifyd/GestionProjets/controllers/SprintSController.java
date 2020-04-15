@@ -151,7 +151,7 @@ public class SprintSController implements Initializable {
                         int yearrd = s.getDuedate().getYear();
                         nodes[i] = loader.load();
                         ItemSController item = loader.getController();
-                        item.setId(s.getId());
+                        //item.setId(s.getId());
                         item.setName(s.getName());
                         item.setDescription(s.getDescription());
                         //item.setEtat(s.getEtat());

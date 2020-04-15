@@ -18,7 +18,7 @@
                   <HBox fx:id="sprint_scroll" prefHeight="303.0" prefWidth="853.0" />
                </content>
             </ScrollPane>
-            <FontAwesomeIconView fx:id="AddProject" fill="#16cabd" glyphName="PLUS" layoutX="457.0" layoutY="56.0" onMouseClicked="#AddProject" size="30" strokeType="INSIDE" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="230.09525871276855" />
+            <FontAwesomeIconView fx:id="AddSprint" fill="#16cabd" glyphName="PLUS" layoutX="457.0" layoutY="56.0" onMouseClicked="#AddSprint" size="30" strokeType="INSIDE" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="230.09525871276855" />
             <FontAwesomeIconView fx:id="back" fill="#16cabd" glyphName="BACKWARD" layoutX="39.0" layoutY="49.0" onMouseClicked="#back" size="24" />
             <Text fill="#16cabd" layoutX="360.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sprints">
                <font>

@@ -96,9 +96,7 @@ public class ItemSController implements Initializable {
         this.deadline_year.setText("" + deadline_year);
     }
 
-    public void setId(int id) {
-        this.id.setText("" + id);
-    }
+
 
   
 

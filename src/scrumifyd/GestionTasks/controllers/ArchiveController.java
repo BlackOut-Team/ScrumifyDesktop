@@ -12,13 +12,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import scrumifyd.GestionTasks.models.task;
-import scrumifyd.GestionTasks.services.task_services;
+import  scrumifyd.GestionTasks.services.task_services;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.StackPane;
 /**
  * FXML Controller class
  *
@@ -49,6 +50,8 @@ public class ArchiveController implements Initializable {
     Date created1,updated1;
     task task=new task();
     task_services ts=new task_services();
+    @FXML
+    private StackPane contentPane;
     /**
      * Initializes the controller class.
      */

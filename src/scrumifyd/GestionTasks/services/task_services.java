@@ -19,7 +19,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import scrumifyd.GestionTasks.models.task;
 import doryan.windowsnotificationapi.fr.Notification;
+import java.sql.Date;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 /**
  *
@@ -29,10 +33,11 @@ public class task_services {
         Connection conn = MyDbConnection.getInstance().getConnexion();
    
     
-    public void create(task ta) {
+    public void create(task ta , String status) {
                
         try {
-            String req = "INSERT INTO tasks (title,priority,description,finished,members) VALUES ('"+ta.getTitle()+"','"+ta.getPriority()+"','"+ta.getDescription()+"','"+ta.getFinished()+"','"+ta.getMembers()+"')";
+            int etat = 1 ;
+            String req = "INSERT INTO tasks (title,priority,description,created,updated,finished,status,etat,members) VALUES ('"+ta.getTitle()+"','"+ta.getPriority()+"','"+ta.getDescription()+"', '"+LocalDate.now()+"','"+LocalDate.now()+"' ,'"+ta.getFinished()+"','"+status+"','"+etat+"','"+ta.getMembers()+"')";
             
             PreparedStatement st = conn.prepareStatement(req);
             //st.setString(1, e.getNom());
@@ -141,23 +146,95 @@ public class task_services {
         }
             return task_todo;
     }
-     public List<task> afficher_todo()
+     public List<task> afficher_todo()throws SQLException 
     {        
                 List<task> task_todo=new ArrayList<>();
         try {
-                PreparedStatement pt = conn.prepareStatement("select * from tasks where status='todo' ");
+                PreparedStatement pt = conn.prepareStatement("select * from tasks where status='todo' and etat=1 ");
                 ResultSet rs = pt.executeQuery();
                 while (rs.next()) {
-                    task_todo.add(new task(
+                    Date createdd = rs.getDate("created");
+                Date updated = rs.getDate("updated");
+                 Date duedate = rs.getDate("finished");
+                LocalDate datec = Instant.ofEpochMilli(createdd.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate dated = Instant.ofEpochMilli(duedate.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                 LocalDate dateu = Instant.ofEpochMilli(updated.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+
+                    task_todo.add(new task(rs.getString("title"),
+                            rs.getInt("id"),
+                            rs.getString("description"),
+                            datec,
+                            dateu,
+                            dated,
                             rs.getInt("priority"),
                             rs.getInt("etat"),
-                            rs.getString("title"),
-                            rs.getString("description")));
+                            rs.getString("status")
+                            ));
                 }
         } catch (SQLException ex) {
                 Logger.getLogger(task_services.class.getName()).log(Level.SEVERE, null, ex);
         }
             return task_todo;
+    }
+      public List<task> afficher_doing()throws SQLException 
+    {        
+                List<task> task_doing=new ArrayList<>();
+        try {
+                PreparedStatement pt = conn.prepareStatement("select * from tasks where status='Doing' and etat=1");
+                ResultSet rs = pt.executeQuery();
+                while (rs.next()) {
+                    Date createdd = rs.getDate("created");
+                Date updated = rs.getDate("updated");
+                 Date duedate = rs.getDate("finished");
+                LocalDate datec = Instant.ofEpochMilli(createdd.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate dated = Instant.ofEpochMilli(duedate.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                 LocalDate dateu = Instant.ofEpochMilli(updated.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+
+                    task_doing.add(new task(rs.getString("title"),
+                            rs.getInt("id"),
+                            rs.getString("description"),
+                            datec,
+                            dateu,
+                            dated,
+                            rs.getInt("priority"),
+                            rs.getInt("etat"),
+                            rs.getString("status")
+                            ));
+                }
+        } catch (SQLException ex) {
+                Logger.getLogger(task_services.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return task_doing;
+    }
+       public List<task> afficher_done()throws SQLException 
+    {        
+                List<task> task_done=new ArrayList<>();
+        try {
+                PreparedStatement pt = conn.prepareStatement("select * from tasks where status='done' and etat=1");
+                ResultSet rs = pt.executeQuery();
+                while (rs.next()) {
+                    Date createdd = rs.getDate("created");
+                Date updated = rs.getDate("updated");
+                 Date duedate = rs.getDate("finished");
+                LocalDate datec = Instant.ofEpochMilli(createdd.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate dated = Instant.ofEpochMilli(duedate.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                 LocalDate dateu = Instant.ofEpochMilli(updated.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+
+                    task_done.add(new task(rs.getString("title"),
+                            rs.getInt("id"),
+                            rs.getString("description"),
+                            datec,
+                            dateu,
+                            dated,
+                            rs.getInt("priority"),
+                            rs.getInt("etat"),
+                            rs.getString("status")
+                            ));
+                }
+        } catch (SQLException ex) {
+                Logger.getLogger(task_services.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return task_done;
     }
     public void delete(int id) {
         
@@ -195,9 +272,25 @@ public class task_services {
                 Logger.getLogger(task_services.class.getName()).log(Level.SEVERE, null, ex);
             }
 }
+    public void move_to_do(int id) {
+        
+                String status="todo";    
+        try {
+                String req = "UPDATE tasks set status='"+status+"' where id ='"+id+"'";
+                PreparedStatement st = conn.prepareStatement(req);
+                st.executeUpdate();
+                    try {
+                        Notification.sendNotification("task", "task moved to doing",TrayIcon.MessageType.INFO);
+                    } catch (AWTException | MalformedURLException ex) {
+                        Logger.getLogger(task_services.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+            } catch (SQLException ex) {
+                Logger.getLogger(task_services.class.getName()).log(Level.SEVERE, null, ex);
+            }
+}
     public void move_to_done(int id) {
         
-                String status="done";    
+                String status="Done";    
         try {
                 String req = "UPDATE tasks set status='"+status+"' where id ='"+id+"'";
                 PreparedStatement st = conn.prepareStatement(req);
@@ -219,12 +312,18 @@ public class task_services {
                 PreparedStatement pt = conn.prepareStatement("select * from tasks where id='"+id+"'");
                 ResultSet rs = pt.executeQuery();
                 while (rs.next()) {
+                    Date createdd = rs.getDate("created");
+                Date updated = rs.getDate("updated");
+                Date duedate = rs.getDate("finished");
+                LocalDate datec = Instant.ofEpochMilli(createdd.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate dated = Instant.ofEpochMilli(duedate.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                 LocalDate dateu = Instant.ofEpochMilli(updated.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
                     task_details.add(new task(
                             rs.getString("title"),
                             rs.getString("description"),
-                            rs.getDate("created"),
-                            rs.getDate("updated"),
-                            rs.getString("finished"),
+                            datec,
+                            dateu,
+                            dated,
                             rs.getInt("priority"),
                             rs.getString("status")
                     ));
@@ -272,7 +371,7 @@ public class task_services {
             return task_todo;
     }
     public void archiver(int id) {
-           int i=1;
+           int i=0;
         try {
                 String req = "UPDATE tasks set etat='"+i+"' where id ='"+id+"'";
                 PreparedStatement st = conn.prepareStatement(req);
@@ -294,16 +393,23 @@ public class task_services {
                 PreparedStatement pt = conn.prepareStatement("select * from tasks where etat='"+1+"' order by priority DESC");
                 ResultSet rs = pt.executeQuery();
                 while (rs.next()) {
-                    task_details.add(new task(
-                            rs.getString("title"),
+                    Date createdd = rs.getDate("created");
+                Date updatedd = rs.getDate("updated");
+                Date duedate = rs.getDate("finished");
+                LocalDate datec = Instant.ofEpochMilli(createdd.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate dated = Instant.ofEpochMilli(duedate.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                 LocalDate dateu = Instant.ofEpochMilli(updatedd.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+
+                    task_details.add(new task(rs.getString("title"),
                             rs.getInt("id"),
                             rs.getString("description"),
-                            rs.getDate("created"),
-                            rs.getDate("updated"),
-                            rs.getString("finished"),
+                            datec,
+                            dateu,
+                            dated,
                             rs.getInt("priority"),
+                            rs.getInt("etat"),
                             rs.getString("status")
-                    ));
+                            ));
                 }
                 
         } catch (SQLException ex) {

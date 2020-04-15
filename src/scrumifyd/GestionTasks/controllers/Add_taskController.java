@@ -20,6 +20,7 @@ import scrumifyd.GestionTasks.models.media;
 import scrumifyd.GestionTasks.services.media_services;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTimePicker;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.File;
 import java.sql.Time;
 import java.util.Date;
@@ -28,6 +29,8 @@ import javafx.scene.control.ListView;
 import javafx.stage.FileChooser;
 import scrumifyd.GestionTasks.services.media_services;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,6 +44,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import scrumifyd.GestionProjets.controllers.DashboardController;
 /**
  * FXML Controller class
  *
@@ -63,7 +69,7 @@ public class Add_taskController implements Initializable {
     @FXML
     private JFXDatePicker date_picker;
     
-    
+    String status ;
     
     
     String date,time,due,path,name,title,description,p;
@@ -87,6 +93,13 @@ public class Add_taskController implements Initializable {
     private TableColumn<member, CheckBox> select;
     @FXML
     private Button check;
+    @FXML
+    private Pane contentPane;
+    @FXML
+    private FontAwesomeIconView back;
+    @FXML
+    private Label Errors;
+  
     /**
      * Initializes the controller class.
      */
@@ -96,9 +109,9 @@ public class Add_taskController implements Initializable {
     }   
 
     @FXML
-    private void add_files(ActionEvent event) {
+    private void add_files(MouseEvent event) {
         FileChooser file= new FileChooser();
-        file.setInitialDirectory(new File("C:\\Users\\mahdi\\Documents\\NetBeansProjects"));
+      //  file.setInitialDirectory(new File("C:\\Users\\Amira Doghri\\Documents"));
         file.getExtensionFilters().addAll(
         new FileChooser.ExtensionFilter("PDF Files","*.pdf"));
         List<File> selectedFiles=file.showOpenMultipleDialog(null);
@@ -113,28 +126,30 @@ public class Add_taskController implements Initializable {
         }
          System.out.println(path+"  "+name);
     }
-      @FXML
-    private void new_task(ActionEvent event) {
+        @FXML
+
+    private void new_task(MouseEvent event) {
         title=txt_title.getText();
         description=txt_description.getText();
         p=txt_priority.getText();
         priority=Integer.parseInt(p);
-        date=date_picker.getValue().toString();
-        time=time_picker.getValue().toString();
+        LocalDate date=date_picker.getValue();
+        LocalTime time=time_picker.getValue();
         due=date+" "+time;
         String all=btn_check(event);
-        task t =new task(priority,title,description,due,all);
-        task.create(t);
+        task t =new task(priority,title,description,date,all);
+        task.create(t,status);
         media.ajout_media(name, path);
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLDocument.fxml"));
+        contentPane.getChildren().clear();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/scrumifyd/GestionTasks/views/Taskss.fxml"));
         try {
             Parent root = loader.load();
+            TasksController nicc = loader.getController();
+            nicc.setref(1);
+            contentPane.getChildren().add(root);
         } catch (IOException ex) {
             Logger.getLogger(Add_taskController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        FXMLDocumentController nicc = loader.getController();
-        nicc.setref(1);
     }
 
     @FXML
@@ -152,7 +167,7 @@ public class Add_taskController implements Initializable {
     }
 
     @FXML
-    private String btn_check(ActionEvent event) {
+    private String btn_check(MouseEvent event) {
         String all="";
         for(member m : members_table.getItems()){
             if(m.getCheck().isSelected()){
@@ -164,5 +179,41 @@ public class Add_taskController implements Initializable {
         }
         return all;
     }
+    public void setStatus(String status){
+        this.status=status;
+    }
+public void loadUI(String ui) {
+        contentPane.getChildren().clear();
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/scrumifyd/GestionTasks/views/" + ui + ".fxml"));
+
+        } catch (IOException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        contentPane.getChildren().add(root);
+    }
+    @FXML
+    private void back(MouseEvent event) {
+        loadUI("Taskss");
+    }
+
     
+    
+    @FXML
+    private String btn_check(ActionEvent event) {
+        String all="";
+        for(member m : members_table.getItems()){
+            if(m.getCheck().isSelected()){
+                
+                int id15=m.getId();
+                String grp=Integer.toString(id15);
+                all+=grp+",";
+            }
+        }
+        return all;
+        
+    }
+
+   
 }

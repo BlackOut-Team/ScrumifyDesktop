@@ -5,7 +5,9 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXTimePicker;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import java.awt.AWTException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -20,16 +22,24 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import scrumifyd.util.MyDbConnection;
 import scrumifyd.GestionProjets.services.ProjectService;
 import scrumifyd.GestionProjets.models.Project;
@@ -38,6 +48,13 @@ import scrumifyd.GestionProjets.services.SprintInterface;
 import scrumifyd.GestionProjets.services.SprintService;
 import scrumifyd.GestionTeams.models.Team;
 import scrumifyd.GestionUsers.models.User;
+import scrumifyd.GestionUsers.services.SigninController;
+import scrumifyd.ScrumifyD;
+import tray.animations.AnimationType;
+import tray.notification.TrayNotification;
+ 
+
+
 
 /**
  * FXML Controller class
@@ -67,7 +84,8 @@ public class AddPController implements Initializable {
     @FXML
     private JFXComboBox PO;
     int user_id;
-    int etat = 1;
+   int etat=1;
+    
     LocalDate today = LocalDate.now();
 
     /**
@@ -152,6 +170,8 @@ public class AddPController implements Initializable {
         List<User> list = new ArrayList<>();
    
         try {
+//                        String query = "SELECT t.user_id , u.name FROM user u ,team_user t where t.role=3 and t.team_id="+team_id+" and u.id=t.user_id";
+
             String query = "SELECT `name` , `id` FROM `person` ";
 
             Statement stm = con.createStatement();
@@ -170,19 +190,25 @@ public class AddPController implements Initializable {
     }
 
     @FXML
-    public void SubmitButton(MouseEvent event) {
+    public void SubmitButton(MouseEvent event) throws AWTException {
 
         if (event.getSource() == Submit) {
             // here
 
             if (AddP()) {
-
-                Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Add project");
-                alert.setHeaderText("Results:");
-                alert.setContentText("Added successfully!");
-
-                alert.showAndWait();
+                SigninController s = new SigninController();
+                int user_id = SigninController.user.getUserId();
+                TrayNotification tray = new TrayNotification();
+                AnimationType type= AnimationType.POPUP;
+                tray.setAnimationType(type);
+                tray.setTitle("Scrumify App");
+                tray.setMessage("New project Added !");
+                
+                Image img = new Image (ScrumifyD.class.getResourceAsStream("/scrumifyd/images/scrumify.png"));
+                tray.setImage(img);
+                //tray.setNotificationType(NotificationType.SUCCESS);
+                tray.showAndDismiss(Duration.millis(3000));
+             
 
             } else {
                 Alert alert = new Alert(AlertType.ERROR);
@@ -222,6 +248,8 @@ public class AddPController implements Initializable {
                 Project  pp = Projects.getProject(res);
                 if (res!=0) {
                     s=true;
+                     
+
                     setLblError(Color.GREEN, "Project Added Successfully.Redirecting..");
                      SprintInterface sprint = new SprintService(); 
 
@@ -286,6 +314,7 @@ public class AddPController implements Initializable {
         Errors.setText(text);
         System.out.println(text);
     }
+
 
    
 

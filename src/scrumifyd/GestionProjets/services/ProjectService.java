@@ -18,10 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
 import scrumifyd.GestionProjets.models.Project;
+import scrumifyd.GestionUsers.models.User;
 import scrumifyd.util.MyDbConnection;
 
 /**
@@ -63,9 +65,7 @@ public class ProjectService implements InterfaceProjet {
                 return 0;
             }
 
-            //statement.setInt(6, p.getTeam_id());
-            //statement.setInt(6, p.getOwner_id());
-            // statement.setInt(7, p.getMaster_id());
+       
         } catch (SQLException ex) {
             Logger.getLogger(ProjectService.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -117,9 +117,8 @@ public class ProjectService implements InterfaceProjet {
                 LocalDate datec = Instant.ofEpochMilli(createdd.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
                 LocalDate dated = Instant.ofEpochMilli(duedate.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
                 Project p = new Project(result.getInt(1), result.getString("name"), result.getString("description"), datec, dated, result.getInt("etat"));
-              
+
                 //System.out.println(p.getCellButton());
-                
                 Projects.add(p);
             }
         } catch (SQLException ex) {
@@ -132,12 +131,15 @@ public class ProjectService implements InterfaceProjet {
 
     @Override
 
-    public List<Project> getAllActiveProjects() throws SQLException {
+    public List<Project> getAllActiveProjects(int id) throws SQLException {
 
         List<Project> Projects = new ArrayList<>();
+        List<Project> Projectss = new ArrayList<>();
+
         try {
 
-            String req = "SELECT * FROM `projet` WHERE `etat`=1 ";
+            String req = "SELECT * FROM projet   WHERE etat=1  ";
+
             Statement stm = connexion.createStatement();
             ResultSet result = stm.executeQuery(req);
 
@@ -146,12 +148,32 @@ public class ProjectService implements InterfaceProjet {
                 Date duedate = result.getDate("duedate");
                 LocalDate datec = Instant.ofEpochMilli(createdd.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
                 LocalDate dated = Instant.ofEpochMilli(duedate.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
-                Project p = new Project(result.getInt(1), result.getString("name"), result.getString("description"), datec, dated, result.getInt("etat"));
-                Projects.add(p);
+                Project p = new Project(result.getInt(1), result.getString("name"), result.getString("description"), datec, dated, result.getInt("etat"), result.getInt("team_id"), result.getInt("owner_id"), result.getInt("master_id"));
+                Projectss.add(p);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProjectService.class.getName()).log(Level.SEVERE, null, ex);
         }
+        Projectss.forEach((pp) -> {
+            if((pp.getMaster_id() == id) || (pp.getOwner_id() == id)){
+                Projects.add(pp);
+           
+            }
+                else {
+                        List<User> teamlist = getTeamMembers(pp.getTeam_id());
+                        
+                teamlist.forEach((User t) -> {
+               
+                if ((t.getId() == id) )  {
+                    Projects.add(pp);
+                } else {
+                    System.out.println(Projects.size());
+                    
+                }
+                });
+           
+                }
+        });
 
         return Projects;
 
@@ -220,19 +242,14 @@ public class ProjectService implements InterfaceProjet {
     //Statistics  
     @Override
 
-    public ObservableList<PieChart.Data> getProjectGraphStatistics() {
+    public ObservableList<PieChart.Data> getProjectGraphStatistics(int user_id) {
         ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
         try {
-            String qu1 = "SELECT COUNT(*) FROM PROJET";
+
             String qu2 = "SELECT COUNT(*) FROM PROJET where ETAT = 1";
             String qu3 = "SELECT COUNT(*) FROM PROJET where ETAT = 0";
 
-            ResultSet rs = execQuery(qu1);
-            if (rs.next()) {
-                int count = rs.getInt(1);
-                data.add(new PieChart.Data("Total Projects (" + count + ")", count));
-            }
-            rs = execQuery(qu2);
+            ResultSet rs = execQuery(qu2);
             if (rs.next()) {
                 int count = rs.getInt(1);
                 data.add(new PieChart.Data("Active Projects (" + count + ")", count));
@@ -242,10 +259,47 @@ public class ProjectService implements InterfaceProjet {
                 int count = rs.getInt(1);
                 data.add(new PieChart.Data("Archived Projects (" + count + ")", count));
             }
+
         } catch (SQLException e) {
         }
         return data;
     }
+     @Override
+
+    public ObservableList<PieChart.Data> getProjectTimeGraphStatistics(int user_id) {
+                    ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
+
+        try {
+            List<Project> curr  = getCurrentProjects(user_id);
+            List<Project> comp  = getCurrentProjects(user_id);
+                
+           
+//                
+//                String qu2 = "SELECT COUNT(*) FROM PROJET where ETAT = 1";
+//                String qu3 = "SELECT COUNT(*) FROM PROJET where ETAT = 0";
+                
+//                ResultSet rs = execQuery(qu2);
+//                if (rs.next()) {
+//                    int count = rs.getInt(1);
+                    data.add(new PieChart.Data("Current Projects (" + curr.size() + ")", curr.size()));
+                
+//                rs = execQuery(qu3);
+//                if (rs.next()) {
+//                    int count = rs.getInt(1);
+                    data.add(new PieChart.Data("Completed Projects (" + comp.size() + ")", comp.size()));
+                         return data;
+
+ 
+  
+          
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+   
+        return data;
+    }
+
 
     public ResultSet execQuery(String query) {
         ResultSet result;
@@ -259,18 +313,32 @@ public class ProjectService implements InterfaceProjet {
         }
         return result;
     }
- @Override
 
-    public List<Project> searchProjects(String key) throws SQLException {
+    @Override
+
+    public List<Project> searchProjects(String key,int user_id) throws SQLException {
 
         List<Project> Projects = new ArrayList<>();
+//        List<Project> Projects1 = new ArrayList<>();
+//
+//        List<Project> Pr = getAllActiveProjects(user_id);
+//        
+//        Projects = Pr.stream().filter(t -> t.getName().toUpperCase().//convert to uppercase for checking
+//         contains(key)).//filter values containing black
+//         collect(Collectors.toList())
+//                ;
+////        Projects1 = Pr.stream().filter(t -> t.getDescription().toUpperCase().//convert to uppercase for checking
+////         contains(key)).//filter values containing black
+////         collect(Collectors.toList())
+//                ;
+////        Projects.add((Project) Projects1);
+        
         try {
 
             String req = "SELECT * FROM `projet` WHERE `etat`=1 and (`name` like ? or `description` like ?) ";
             PreparedStatement stm = connexion.prepareStatement(req);
             stm.setString(1, "%" + key + "%");
             stm.setString(2, "%" + key + "%");
-
 
             ResultSet result = stm.executeQuery();
 
@@ -288,15 +356,19 @@ public class ProjectService implements InterfaceProjet {
 
         return Projects;
 
+        
     }
+
     @Override
 
-    public List<Project> getCurrentProjects() throws SQLException {
+    public List<Project> getCurrentProjects(int id) throws SQLException {
 
         List<Project> Projects = new ArrayList<>();
+                List<Project> Projectss = new ArrayList<>();
+
         try {
 
-            String req = "SELECT * FROM `projet` WHERE `etat`=1 and `duedate` > CURRENT_DATE() ";
+            String req = "SELECT * FROM `projet` WHERE (`etat`=1 and `duedate` > CURRENT_DATE())  ";
             Statement stm = connexion.createStatement();
             ResultSet result = stm.executeQuery(req);
 
@@ -305,12 +377,33 @@ public class ProjectService implements InterfaceProjet {
                 Date duedate = result.getDate("duedate");
                 LocalDate datec = Instant.ofEpochMilli(createdd.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
                 LocalDate dated = Instant.ofEpochMilli(duedate.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
-                Project p = new Project(result.getInt(1), result.getString("name"), result.getString("description"), datec, dated, result.getInt("etat"));
-                Projects.add(p);
+
+                Project p = new Project(result.getInt(1), result.getString("name"), result.getString("description"), datec, dated, result.getInt("etat"), result.getInt("team_id"), result.getInt("owner_id"), result.getInt("master_id"));
+                Projectss.add(p);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProjectService.class.getName()).log(Level.SEVERE, null, ex);
         }
+ Projectss.forEach((pp) -> {
+            if((pp.getMaster_id() == id) || (pp.getOwner_id() == id)){
+                Projects.add(pp);
+           
+            }
+                else {
+                        List<User> teamlist = getTeamMembers(pp.getTeam_id());
+                        
+                teamlist.forEach((User t) -> {
+               
+                if ((t.getId() == id) )  {
+                    Projects.add(pp);
+                } else {
+                    System.out.println(Projects.size());
+                    
+                }
+                });
+           
+                }
+        });
 
         return Projects;
 
@@ -318,36 +411,11 @@ public class ProjectService implements InterfaceProjet {
 
     @Override
 
-    public List<Project> getPendingProjects() throws SQLException {
+    public List<Project> getCompletedProjects(int id) throws SQLException {
 
         List<Project> Projects = new ArrayList<>();
-        try {
+                List<Project> Projectss = new ArrayList<>();
 
-            String req = "SELECT * FROM `projet` WHERE `etat`=1 ";
-            Statement stm = connexion.createStatement();
-            ResultSet result = stm.executeQuery(req);
-
-            while (result.next()) {
-                Date createdd = result.getDate("created");
-                Date duedate = result.getDate("duedate");
-                LocalDate datec = Instant.ofEpochMilli(createdd.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
-                LocalDate dated = Instant.ofEpochMilli(duedate.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
-                Project p = new Project(result.getInt(1), result.getString("name"), result.getString("description"), datec, dated, result.getInt("etat"));
-                Projects.add(p);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ProjectService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return Projects;
-
-    }
-
-    @Override
-
-    public List<Project> getCompletedProjects() throws SQLException {
-
-        List<Project> Projects = new ArrayList<>();
         try {
 
             String req = "SELECT * FROM `projet` WHERE `etat`=1 and `duedate` < CURRENT_DATE() ";
@@ -359,14 +427,169 @@ public class ProjectService implements InterfaceProjet {
                 Date duedate = result.getDate("duedate");
                 LocalDate datec = Instant.ofEpochMilli(createdd.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
                 LocalDate dated = Instant.ofEpochMilli(duedate.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
-                Project p = new Project(result.getInt(1), result.getString("name"), result.getString("description"), datec, dated, result.getInt("etat"));
-                Projects.add(p);
+                Project p = new Project(result.getInt(1), result.getString("name"), result.getString("description"), datec, dated, result.getInt("etat"), result.getInt("team_id"), result.getInt("owner_id"), result.getInt("master_id"));
+                Projectss.add(p);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProjectService.class.getName()).log(Level.SEVERE, null, ex);
         }
+       Projectss.forEach((pp) -> {
+            if((pp.getMaster_id() == id) || (pp.getOwner_id() == id)){
+                Projects.add(pp);
+           
+            }
+                else {
+                        List<User> teamlist = getTeamMembers(pp.getTeam_id());
+                        
+                teamlist.forEach((User t) -> {
+               
+                if ((t.getId() == id) )  {
+                    Projects.add(pp);
+                } else {
+                    System.out.println(Projects.size());
+                    
+                }
+                });
+           
+                }
+        });
 
         return Projects;
 
     }
+
+    @Override
+
+    public List<User> getTeamMembers(int id) {
+        List<User> members_list = new ArrayList<>();
+        try {
+
+            //String req = "select m.user_id from team_user m , project c where c.team_id = "+id+"" ; 
+//            String req = "select m.user_id , u.username from team_user m , user u ,projet c where c.team_id = "+id+" and u.id = m.user_id" ; 
+            String req = "select t.user_id , u.username , t.role from team_user t  ,user u where t.team_id = " + id + " and u.id = t.user_id ";
+
+            Statement stm = connexion.createStatement();
+            ResultSet result = stm.executeQuery(req);
+
+            while (result.next()) {
+
+                User u = new User(result.getInt(1), result.getString(2));
+                members_list.add(u);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return members_list;
+
+    }
+    @Override
+    public List<Project> getDeadlines(int user_id){
+        List<Project> Projects = new ArrayList<>();
+        List<Project> Projectss = new ArrayList<>();
+        
+
+        try {
+
+            String req = "SELECT * FROM projet   WHERE etat=1  ";
+
+            Statement stm = connexion.createStatement();
+            ResultSet result = stm.executeQuery(req);
+
+            while (result.next()) {
+              
+                Date duedate = result.getDate("duedate");
+                LocalDate dated = Instant.ofEpochMilli(duedate.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                Project p = new Project(result.getInt(1), result.getString("name"), dated, result.getInt("team_id"), result.getInt("owner_id"), result.getInt("master_id"));
+                Projectss.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Projectss.forEach((pp) -> {
+            if((pp.getMaster_id() == user_id) || (pp.getOwner_id() == user_id)){
+                Projects.add(pp);
+           
+            }
+                else {
+                        List<User> teamlist = getTeamMembers(pp.getTeam_id());
+                        
+                teamlist.forEach((User t) -> {
+               
+                if ((t.getId() == user_id) )  {
+                    Projects.add(pp);
+                } else {
+                    System.out.println(Projects.size());
+                    
+                }
+                });
+           
+                }
+        });
+
+        return Projects;
+    }
+ @Override
+
+    public ObservableList<PieChart.Data> getProjectGraphStatisticsB() {
+        ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
+        try {
+
+            String qu2 = "SELECT COUNT(*) FROM PROJET where ETAT = 1";
+            String qu3 = "SELECT COUNT(*) FROM PROJET where ETAT = 0";
+
+            ResultSet rs = execQuery(qu2);
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                data.add(new PieChart.Data("Active Projects (" + count + ")", count));
+            }
+            rs = execQuery(qu3);
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                data.add(new PieChart.Data("Archived Projects (" + count + ")", count));
+            }
+
+        } catch (SQLException e) {
+        }
+        return data;
+    }
+     @Override
+
+    public ObservableList<PieChart.Data> getProjectTimeGraphStatisticsB() {
+                    ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
+
+        try {
+////            List<Project> curr  = getCurrentProjects(user_id);
+////            List<Project> comp  = getCurrentProjects(user_id);
+                
+           
+//                
+                String qu2 = "SELECT COUNT(*) FROM PROJET where ETAT = 1";
+                String qu3 = "SELECT COUNT(*) FROM PROJET where ETAT = 0";
+                
+                ResultSet rs = execQuery(qu2);
+                if (rs.next()) {
+                    int count = rs.getInt(1);
+                    data.add(new PieChart.Data("Current Projects (" + count + ")", count ));
+                }
+                
+                rs = execQuery(qu3);
+                if (rs.next()) {
+                    int count = rs.getInt(1);
+                    data.add(new PieChart.Data("Completed Projects (" + count + ")", count ));
+                         return data;
+                }
+
+ 
+  
+          
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+   
+        return data;
+    }
+
+
 }

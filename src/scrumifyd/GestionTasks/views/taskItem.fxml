@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="item" prefHeight="144.0" prefWidth="289.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scrumifyd.GestionTasks.controllers.ItemTaskController">
+   <children>
+      <Pane layoutX="11.0" layoutY="23.0" prefHeight="99.0" prefWidth="268.0" style="-fx-background-color: #fff; -fx-background-radius: 30 30 30 30;">
+         <children>
+            <Separator layoutX="15.0" layoutY="40.0" prefHeight="2.0" prefWidth="105.0" />
+            <Label fx:id="Name" layoutX="18.0" layoutY="10.0" text="Task Title" textFill="#16cabd">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="18.0" layoutY="48.0" text="Priority" textFill="#aeacac">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="priority" layoutX="58.0" layoutY="49.0" text="Important" textFill="#4d4c4c">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="team_member" layoutX="17.0" layoutY="68.0" prefHeight="19.0" prefWidth="37.0" style="-fx-background-color: #aeacac;" text="Hidaya" textFill="#fffefe">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label layoutX="148.0" layoutY="11.0" prefHeight="17.0" prefWidth="65.0" text="Date Created" textFill="#16cabd">
+               <font>
+                  <Font size="8.0" />
+               </font>
+            </Label>
+            <Label fx:id="created_day" layoutX="153.0" layoutY="20.0" prefHeight="36.0" prefWidth="29.0" text="16" textFill="#aeacac">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="created_month" layoutX="175.0" layoutY="28.0" text="APR" textFill="#16cabd">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label fx:id="created_year" layoutX="175.0" layoutY="40.0" text="2018" textFill="#aeacac">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Separator layoutX="200.0" layoutY="20.0" orientation="VERTICAL" prefHeight="42.0" prefWidth="3.0" />
+            <Label layoutX="206.0" layoutY="14.0" text="Deadline date" textFill="#16cabd">
+               <font>
+                  <Font size="8.0" />
+               </font>
+            </Label>
+            <Label fx:id="deadline_day" layoutX="209.0" layoutY="29.0" text="25" textFill="#aeacac">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="deadline_month" layoutX="227.0" layoutY="28.0" text="AUG" textFill="#16cabd">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label fx:id="deadline_year" layoutX="227.0" layoutY="42.0" text="2018" textFill="#aeacac">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <MenuButton fx:id="menu" layoutX="187.0" layoutY="56.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="29.0" style="-fx-background-color: transparent;">
+              <items>
+                <MenuItem fx:id="action1" mnemonicParsing="false" text="Action 1" />
+                <MenuItem fx:id="action2" mnemonicParsing="false" text="Action 2" />
+              </items>
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </MenuButton>
+            <FontAwesomeIconView fx:id="EditButton" fill="#16cabd" glyphName="EDIT" layoutX="195.0" layoutY="91.0" size="14" />
+            <FontAwesomeIconView fx:id="ArchiveButton" fill="#16cabd" glyphName="ARCHIVE" layoutX="175.0" layoutY="91.0" size="14" />
+            <FontAwesomeIconView fx:id="showSprintsButton" fill="#16cabd" glyphName="LINK" layoutX="155.0" layoutY="91.0" size="14" />
+         </children>
+         <effect>
+            <DropShadow color="#d7d2d2" height="50.0" radius="24.5" width="50.0" />
+         </effect>
+      </Pane>
+   </children>
+</AnchorPane>

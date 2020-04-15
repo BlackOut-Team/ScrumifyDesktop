@@ -6,11 +6,14 @@
 package scrumifyd.GestionProjets.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import java.awt.AWTException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -28,12 +31,15 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Paint;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import scrumifyd.GestionProjets.models.Project;
 import scrumifyd.GestionProjets.services.InterfaceProjet;
 import scrumifyd.GestionProjets.services.ProjectService;
+import scrumifyd.util.ScrumifyUtil;
 
 /**
  * FXML Controller class
@@ -46,8 +52,7 @@ public class ProjectsAdminController implements Initializable {
     private StackPane contentPane;
     @FXML
     private TableView<Project> ProjectTable;
-    @FXML
-    private TableColumn<Project, Integer> clm_id;
+
     @FXML
     private TableColumn<Project, String> clm_name;
     @FXML
@@ -61,9 +66,17 @@ public class ProjectsAdminController implements Initializable {
     @FXML
     private TableColumn<Project, JFXButton> clm_action;
 
-    private ObservableList projectsList;
+    private ObservableList<Project> projectsList;
 
     List<Project> prList;
+    @FXML
+    private TableColumn<?, ?> clm_status1;
+    @FXML
+    private TableColumn<?, ?> clm_status11;
+    @FXML
+    private TableColumn<?, ?> clm_status12;
+    @FXML
+    private JFXButton pdfExport;
 
     /**
      * Initializes the controller class.
@@ -90,7 +103,6 @@ public class ProjectsAdminController implements Initializable {
 
             projectsList = FXCollections.observableArrayList(prList);
 
-            clm_id.setCellValueFactory(new PropertyValueFactory<>("id"));
             clm_name.setCellValueFactory(new PropertyValueFactory<>("name"));
             clm_description.setCellValueFactory(new PropertyValueFactory<>("description"));
             clm_created.setCellValueFactory(new PropertyValueFactory<>("created"));
@@ -116,14 +128,12 @@ public class ProjectsAdminController implements Initializable {
                         } else {
                             Project pr1 = (Project) getTableRow().getItem();
 
-
                             if (pr1.getEtat() == 1) {
                                 btn1.setTextFill(Paint.valueOf("#c91616"));
 
                                 setGraphic(btn1);
                                 setText(null);
-                            } 
-                            else if (pr1.getEtat() == 0) {
+                            } else if (pr1.getEtat() == 0) {
                                 btn2.setTextFill(Paint.valueOf("#16cabd"));
 
                                 setGraphic(btn2);
@@ -202,8 +212,6 @@ public class ProjectsAdminController implements Initializable {
 
     }
 
-    
-
     public void loadUI(String ui) {
         contentPane.getChildren().clear();
         Parent root = null;
@@ -214,6 +222,35 @@ public class ProjectsAdminController implements Initializable {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
         contentPane.getChildren().add(root);
+    }
+
+    @FXML
+    private void pdfExport(MouseEvent event) throws AWTException, MalformedURLException {
+        List<List> printData = new ArrayList<>();
+        String[] headers = {"ID", "   Name    ", "Description", "Etat", "    Created   ", "     Due date   "};
+        printData.add(Arrays.asList(headers));
+        for (Project pr : projectsList) {
+            List<String> row = new ArrayList<>();
+            String etat = ("" + pr.getEtat()).replaceAll("\t", " ");
+            String id = ("" + pr.getId()).replaceAll("\t", " ");
+            String created = ("" + pr.getCreated()).replaceAll("\t", " ");
+            String duedate = ("" + pr.getDuedate()).replaceAll("\t", " ");
+
+            row.add(id);
+            row.add(pr.getName().replaceAll("\t", " "));
+            row.add(pr.getDescription().replaceAll("\t", " "));
+            row.add(etat);
+
+            row.add(created);
+            row.add(duedate);
+
+            printData.add(row);
+        }
+        ScrumifyUtil.initPDFExprot(contentPane, contentPane, getStage(), printData);
+    }
+
+    private Stage getStage() {
+        return (Stage) ProjectTable.getScene().getWindow();
     }
 
 }
