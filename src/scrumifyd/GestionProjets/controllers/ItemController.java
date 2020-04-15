@@ -80,6 +80,8 @@ public class ItemController implements Initializable {
     public FontAwesomeIconView ArchiveButton;
     @FXML
     public FontAwesomeIconView EditButton;
+    @FXML
+    public FontAwesomeIconView MeetingButton;
 
     Project p;
     int pid;

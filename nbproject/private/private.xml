@@ -1,30 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
-        <file>
-            <url>src/scrumifyd/GestionProjets/controllers/AddPController.java</url>
-            <bookmark id="2">
-                <name/>
-                <line>229</line>
-                <key/>
-            </bookmark>
-        </file>
-        <file>
-            <url>src/scrumifyd/GestionProjets/services/ProjectService.java</url>
-            <bookmark id="1">
-                <name/>
-                <line>45</line>
-                <key/>
-            </bookmark>
-        </file>
-    </editor-bookmarks>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionProjets/controllers/ShowSprintController.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionProjets/controllers/ItemSController.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionProjets/controllers/ProjectsController.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionProjets/controllers/CurrentProjectsController.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionProjets/controllers/SprintSController.java</file>
+            <file>file:/E:/PIDEV/ScrumifyDesktop/src/scrumifyd/GestionTasks/controllers/FXMLDocumentController.java</file>
+            <file>file:/E:/PIDEV/ScrumifyDesktop/src/scrumifyd/util/MyDbConnection.java</file>
+            <file>file:/E:/PIDEV/ScrumifyDesktop/src/scrumifyd/GestionProjets/controllers/AddPController.java</file>
+            <file>file:/E:/PIDEV/ScrumifyDesktop/src/scrumifyd/GestionProjets/services/ProjectService.java</file>
+            <file>file:/E:/PIDEV/ScrumifyDesktop/src/scrumifyd/GestionTasks/controllers/EditTController.java</file>
+            <file>file:/E:/PIDEV/ScrumifyDesktop/src/scrumifyd/GestionTeams/controllers/TeamsController.java</file>
+            <file>file:/E:/PIDEV/ScrumifyDesktop/src/scrumifyd/GestionTasks/controllers/ItemTaskController.java</file>
         </group>
     </open-files>
 </project-private>

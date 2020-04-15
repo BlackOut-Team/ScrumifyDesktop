@@ -152,6 +152,7 @@ public class ProjectsController implements Initializable {
                         item.setDeadline_month(monthhd);
                         item.setDeadline_year(yearrd);
                         pnl_scroll.getChildren().addAll(nodes[i]);
+                        
                         EventHandler<MouseEvent> editHandler = (MouseEvent e) -> {
                             if (e.getSource() == item.EditButton) {
                                 try {
@@ -173,6 +174,7 @@ public class ProjectsController implements Initializable {
                                 }
                             }
                         };
+                  
                         EventHandler<MouseEvent> archiveHandler = (MouseEvent e) -> {
                             if (e.getSource() == item.ArchiveButton) {
                                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Archive project", ButtonType.YES, ButtonType.CANCEL);
@@ -200,6 +202,7 @@ public class ProjectsController implements Initializable {
                                 }
                             }
                         };
+                              
                         EventHandler<MouseEvent> showSprintHandler;
                         showSprintHandler = new EventHandler<MouseEvent>() {
 
@@ -270,7 +273,8 @@ public class ProjectsController implements Initializable {
                                                                 }
 
                                                             }
-                                                        };
+                                                        }; 
+                                                        
                                                         EventHandler<MouseEvent> archiveHandler = new EventHandler<MouseEvent>() {
 
                                                             @Override
@@ -311,6 +315,9 @@ public class ProjectsController implements Initializable {
                                                                 }
                                                             }
                                                         };
+                                                        
+                                                       
+                                                        
                                                         EventHandler<MouseEvent> showSprintDetailsHandler = new EventHandler<MouseEvent>() {
 
                                                             @Override
@@ -540,6 +547,25 @@ public class ProjectsController implements Initializable {
                                 }
                             }
                         };
+                         EventHandler<MouseEvent>  meetingHandler = new EventHandler<MouseEvent>() {
+                                                             
+                                                            @Override
+                                                            public void handle(MouseEvent e) {
+                                                                        if (e.getSource() == item.MeetingButton) {
+                                                                            try {
+                                                                                contentPane.getChildren().clear();
+                                                                                
+                                                                                Parent root=null;
+                                                                                
+                                                                                root = FXMLLoader.load(getClass().getResource("/scrumifyd/GestionMeetings/views/meetings.fxml"));
+                                                                                
+                                                                                
+                                                                                contentPane.getChildren().add(root);
+                                                                            } catch (IOException ex) {
+                                                                                Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);
+                                                                            }
+                                                                        }
+                                                            }  };
                         EventHandler<MouseEvent> showSprintHandler;
                         showSprintHandler = new EventHandler<MouseEvent>() {
 
@@ -684,6 +710,7 @@ public class ProjectsController implements Initializable {
                             }
                         };
                         item.EditButton.addEventHandler(MouseEvent.MOUSE_CLICKED, editHandler);
+                        item.MeetingButton.addEventHandler(MouseEvent.MOUSE_CLICKED, meetingHandler);
                         item.ArchiveButton.addEventHandler(MouseEvent.MOUSE_CLICKED, archiveHandler);
                         item.showSprintsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, showSprintHandler);
 

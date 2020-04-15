@@ -46,7 +46,7 @@ import javax.swing.JOptionPane;
  *
  * @author Iheb
  */
-public class teamsController implements Initializable {
+public class TeamsController implements Initializable {
 //Connection cnx = MyDbConnection.getConnexion();
    Connection  connexion = MyDbConnection.getInstance().getConnexion();
     @FXML
@@ -285,7 +285,7 @@ public class teamsController implements Initializable {
                 ObservableList obeListe = FXCollections.observableList(rs.rechercherNomEt(newValue));
                 TeamTable.setItems(obeListe);
             } catch (SQLException ex) {
-                Logger.getLogger(teamsController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TeamsController.class.getName()).log(Level.SEVERE, null, ex);
             }
             
        

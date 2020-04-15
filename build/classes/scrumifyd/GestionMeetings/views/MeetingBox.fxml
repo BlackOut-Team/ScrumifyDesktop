@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" fx:id="box"  prefHeight="200.0" prefWidth="880.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scrumifyd.GestionMeetings.controllers.MeetingBoxController">
+   <children>
+      <Pane layoutX="29.0" layoutY="22.0" prefHeight="200.0" prefWidth="841.0" style="-fx-background-color: #fff;">
+         <children>
+            <ImageView fx:id="avatar" fitHeight="70.0" fitWidth="76.0" layoutX="41.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Image2.png" />
+               </image>
+            </ImageView>
+            <Separator layoutX="41.0" layoutY="94.0" prefHeight="0.0" prefWidth="763.0" />
+            <Label fx:id="Name" layoutX="123.0" layoutY="18.0" text="" textFill="#16cabd">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="51.0" layoutY="113.0" text="Place" textFill="#aeacac">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="279.0" layoutY="113.0" text="Type " textFill="#aeacac">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="type" layoutX="58.0" layoutY="139.0" text="" textFill="#4d4c4c">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="place" layoutX="287.0" layoutY="139.0" text="" textFill="#4d4c4c">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="deadline_day" layoutX="725.0" layoutY="33.0" text="25" textFill="#aeacac">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="deadline_month" layoutX="774.0" layoutY="41.0" text="AUG" textFill="#16cabd" />
+            <Label fx:id="deadline_year" layoutX="774.0" layoutY="59.0" text="2018" textFill="#aeacac" />
+            <Label fx:id="id" layoutX="158.0" layoutY="51.0" text=" 20178" textFill="#b2b0b0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Text fill="#b2b0b0" layoutX="132.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="id : " />
+            <FontAwesomeIconView fx:id="EditButton" fill="#16cabd" glyphName="EDIT" layoutX="762.0" layoutY="180.0" size="28" />
+            <FontAwesomeIconView fx:id="SupprimerButton" fill="#16cabd" glyphName="ARCHIVE" layoutX="723.0" layoutY="180.0" size="24" />
+            
+         </children>
+         <effect>
+            <DropShadow color="#d7d2d2" height="50.0" radius="24.5" width="50.0" />
+         </effect>
+      </Pane>
+   </children>
+</AnchorPane>

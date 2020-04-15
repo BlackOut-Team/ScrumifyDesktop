@@ -214,9 +214,9 @@ public class FXMLDocumentController implements Initializable {
             title_details=liste_details.get(i).getTitle();
             desc_details=liste_details.get(i).getDescription();
             priority=liste_details.get(i).getPriority();
-            created=liste_details.get(i).getCreated();
-            updated=liste_details.get(i).getUpdated();
-            finished=liste_details.get(i).getFinished();
+            //created=liste_details.get(i).getCreated();
+            //updated=liste_details.get(i).getUpdated();
+            //finished=liste_details.get(i).getFinished();
         }
     }
 
@@ -253,7 +253,7 @@ public class FXMLDocumentController implements Initializable {
              Parent root = loader.load();
              DetailsController nicc = loader.getController();
              nicc.setid(id);
-             nicc.settask(liste_details);
+             //nicc.settask(liste_details);
             // hethahowa.getScene().setRoot(root);
              Stage s=new Stage();
              s.setScene(new Scene(root));
@@ -425,7 +425,7 @@ public class FXMLDocumentController implements Initializable {
        title1.setCellValueFactory(new PropertyValueFactory<>("title"));     
         col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
         List<task> tasket=new ArrayList<>();
-         tasket= task.afficher_todo();
+        // tasket= task.afficher_todo();
             ObservableList<task> dataList= FXCollections.observableArrayList(tasket);
             todo.setItems(dataList);
             FilteredList<task> filteredData = new FilteredList<>(dataList, b -> true);
