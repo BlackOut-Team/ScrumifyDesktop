@@ -34,10 +34,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import scrumifyd.GestionMeetings.controllers.MeetingsController;
+import static scrumifyd.GestionProjets.controllers.CurrentProjectsController.prSession;
 import scrumifyd.GestionProjets.models.Project;
 import scrumifyd.GestionProjets.models.Sprint;
 import scrumifyd.GestionProjets.services.InterfaceProjet;
 import scrumifyd.GestionProjets.services.ProjectService;
+import scrumifyd.GestionProjets.services.ProjectSession;
 import scrumifyd.GestionProjets.services.SprintInterface;
 import scrumifyd.GestionProjets.services.SprintService;
 import scrumifyd.GestionUsers.services.SigninController;
@@ -168,7 +171,8 @@ public class CompletedProjectsController implements Initializable {
                                         Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);
                                     }
                                 }
-                            };  EventHandler<MouseEvent> archiveHandler = (MouseEvent e) -> {
+                            };  
+                            EventHandler<MouseEvent> archiveHandler = (MouseEvent e) -> {
                                 if (e.getSource() == item.ArchiveButton) {
                                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Archive project", ButtonType.YES, ButtonType.CANCEL);
                                     alert.setTitle("Archive project");
@@ -194,7 +198,31 @@ public class CompletedProjectsController implements Initializable {
                                         refreshNodes();
                                     }
                                 }
-                            };  EventHandler<MouseEvent> showSprintHandler;
+                            };  
+                             EventHandler<MouseEvent>  meetingHandler = new EventHandler<MouseEvent>() {
+                                                             
+                                                            @Override
+                                                            public void handle(MouseEvent e) {
+                                                                        if (e.getSource() == item.MeetingButton) {
+                                                                             System.out.print("meetings");
+                                                                            
+                                                                            try {
+                                                                                FXMLLoader loaderR = new FXMLLoader(CompletedProjectsController.this.getClass().getResource("/scrumifyd/GestionMeetings/views/meetings.fxml"));
+
+                                                                                contentPane.getChildren().clear();
+                                                                                
+                                                                                
+
+                                                                               Parent root = (Parent) loaderR.load();                                                                                
+                                                                                             prSession = ProjectSession.getInstace(project.getId());
+
+                                                                                contentPane.getChildren().add(root);
+                                                                            } catch (IOException ex) {
+                                                                                Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);
+                                                                            }
+                                                                        }
+                                                            }  };
+                            EventHandler<MouseEvent> showSprintHandler;
                             showSprintHandler = new EventHandler<MouseEvent>() {
                                 
                                 @Override
@@ -340,6 +368,8 @@ public class CompletedProjectsController implements Initializable {
                             item.EditButton.addEventHandler(MouseEvent.MOUSE_CLICKED, editHandler);
                             item.ArchiveButton.addEventHandler(MouseEvent.MOUSE_CLICKED, archiveHandler);
                             item.showSprintsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, showSprintHandler);
+                                                        item.MeetingButton.addEventHandler(MouseEvent.MOUSE_CLICKED, meetingHandler);
+
                        
                     }catch (IOException ex) {
                         Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);

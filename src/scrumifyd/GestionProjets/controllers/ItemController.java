@@ -35,6 +35,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import scrumifyd.GestionProjets.models.Project;
 import scrumifyd.GestionProjets.services.ProjectService;
+import scrumifyd.GestionProjets.services.ProjectSession;
 
 /**
  * FXML Controller class
@@ -88,7 +89,10 @@ public class ItemController implements Initializable {
     @FXML
     public Label lbl_role;
     @FXML
-    private Label team_memebrs;
+    private Label team_member;
+    @FXML
+    public FontAwesomeIconView MeetingButton;
+    
 
     /**
      * Initializes the controller class.
@@ -104,7 +108,6 @@ public class ItemController implements Initializable {
     }
 
     public ItemController() {
-
     }
 
     public void setName(String Name) {

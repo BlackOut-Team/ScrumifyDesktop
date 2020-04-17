@@ -70,17 +70,17 @@ public class DashboardController implements Initializable {
     private Label username;
     @FXML
     private JFXButton tasksOpen;
+    @FXML
+    private JFXButton activities;
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        
        
         try {
             // TODO
             contentPane.getChildren().clear();
-
             FXMLLoader  loader = new FXMLLoader(getClass().getResource("/scrumifyd/GestionProjets/views/Projects.fxml"));
             Parent root = (Parent) loader.load();
             SigninController s = new SigninController();
@@ -89,7 +89,7 @@ public class DashboardController implements Initializable {
             ProjectsController sp= loader.getController();
             sp.setUserId(user_idd);
             
-            
+
             contentPane.getChildren().add(root);
         } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
@@ -245,6 +245,11 @@ public class DashboardController implements Initializable {
     @FXML
     private void tasksOpen(MouseEvent event) {
         loadUI("GestionTasks", "Taskss");
+    }
+
+    @FXML
+    private void activities(MouseEvent event) {
+        loadUI("GestionMeetings", "activity");
     }
     
 }

@@ -33,10 +33,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import scrumifyd.GestionMeetings.controllers.MeetingsController;
+import static scrumifyd.GestionProjets.controllers.CurrentProjectsController.prSession;
 import scrumifyd.GestionProjets.models.Project;
 import scrumifyd.GestionProjets.models.Sprint;
 import scrumifyd.GestionProjets.services.InterfaceProjet;
 import scrumifyd.GestionProjets.services.ProjectService;
+import scrumifyd.GestionProjets.services.ProjectSession;
 import scrumifyd.GestionProjets.services.SprintInterface;
 import scrumifyd.GestionProjets.services.SprintService;
 import scrumifyd.GestionUsers.services.SigninController;
@@ -97,11 +100,10 @@ public class ProjectsController implements Initializable {
     public void refreshNodes() {
 
         try {
-
             pnl_scroll.getChildren().clear();
             SigninController s = new SigninController();
 
-            user_id = s.user.getUserId();
+            user_id = SigninController.user.getUserId();
 
             ListPa = Projects.getAllActiveProjects(user_id);
 
@@ -170,6 +172,29 @@ public class ProjectsController implements Initializable {
                                     contentPane.getChildren().add(root);
                                 } catch (IOException ex) {
                                     Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            }
+                        };
+                         EventHandler<MouseEvent>  meetingHandler = new EventHandler<MouseEvent>() {
+                                                             
+                            @Override
+                            public void handle(MouseEvent e) {
+                                if (e.getSource() == item.MeetingButton) {
+
+                                    try {
+                                        prSession = ProjectSession.getInstace(project.getId());
+
+                                        FXMLLoader loaderR = new FXMLLoader(ProjectsController.this.getClass().getResource("/scrumifyd/GestionMeetings/views/meetings.fxml"));
+
+                                        contentPane.getChildren().clear();
+ 
+                                        Parent root = (Parent) loaderR.load();
+                                        
+
+                                       contentPane.getChildren().add(root);
+                                    } catch (IOException ex) {
+                                        Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
                                 }
                             }
                         };
@@ -360,6 +385,8 @@ public class ProjectsController implements Initializable {
                         item.EditButton.addEventHandler(MouseEvent.MOUSE_CLICKED, editHandler);
                         item.ArchiveButton.addEventHandler(MouseEvent.MOUSE_CLICKED, archiveHandler);
                         item.showSprintsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, showSprintHandler);
+                                                    item.MeetingButton.addEventHandler(MouseEvent.MOUSE_CLICKED, meetingHandler);
+
 
                     } catch (IOException ex) {
                         Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);
@@ -426,13 +453,12 @@ public class ProjectsController implements Initializable {
         loadUI("ProjectsCurrent");
     }
 
-    private void pendingProjects(MouseEvent event) {
-        loadUI("ProjectsPending");
-
-    }
+  
 
     @FXML
-    private void completedProjects(MouseEvent event) {
+    private void completedProjects(MouseEvent event) {              
+
+        
         loadUI("ProjectsCompleted");
 
     }
@@ -523,7 +549,8 @@ public class ProjectsController implements Initializable {
                                     InterfaceProjet pr = new ProjectService();
                                     //Project pp;
                                     //String idd = id.getText();
-                                    Project project1 = new Project(0);
+                                    
+                                    //Project project1 = new Project(0);
 
                                     if (pr.archiveProject(project.getId())) {
                                         System.out.println("done");
@@ -626,15 +653,11 @@ public class ProjectsController implements Initializable {
 
                                                                     if (result.get() == ButtonType.YES) {
                                                                         SprintInterface sr = new SprintService();
-                                                                        //Project pp;
-
-                                                                        //String idd = id.getText();
-                                                                        Sprint sprint = new Sprint(0);
+                                     
                                                                         if (sr.archiveSprint(s.getId())) {
 
                                                                             System.out.println("done");
                                                                             alert.hide();
-                                                                            refreshNodes();
 
                                                                         } else {
                                                                             System.out.println("error");
@@ -715,7 +738,6 @@ public class ProjectsController implements Initializable {
                     refreshSearch(searchBar.getText());
                     refreshNodes();
                 }
-                 
              } catch (InterruptedException ex) {
                  Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);
              }

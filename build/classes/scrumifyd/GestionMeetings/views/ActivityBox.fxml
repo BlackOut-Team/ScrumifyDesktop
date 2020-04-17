@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="box" prefHeight="121.0" prefWidth="880.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scrumifyd.GestionMeetings.controllers.ActivityBoxController">
+   <children>
+      <Pane fx:id="box2" layoutX="15.0" layoutY="11.0" prefHeight="88.0" prefWidth="826.0" style="-fx-padding: 20 px;">
+         <children>
+            <ImageView fx:id="avatar" fitHeight="47.0" fitWidth="45.0" layoutX="33.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/Image12.png" />
+               </image>
+            </ImageView>
+            <Separator layoutX="41.0" layoutY="94.0" prefHeight="0.0" prefWidth="763.0" />
+            <Label fx:id="Action" layoutX="190.0" layoutY="14.0" text="Action" textFill="#16cabd">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="Username" layoutX="138.0" layoutY="14.0" text="user" textFill="#aeacac">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+          
+            <FontAwesomeIconView fx:id="SupprimerButton" fill="#16cabd" glyphName="TRASH" layoutX="780.0" layoutY="68.0" size="24" />
+             <FontAwesomeIconView fx:id="ViewButton" fill="#16cabd" glyphName="EYE" layoutX="738.0" layoutY="68.0" size="24" />
+
+         </children>
+         <effect>
+            <DropShadow color="#d7d2d2" height="50.0" radius="24.5" width="50.0" />
+         </effect>
+      </Pane>
+   </children>
+</AnchorPane>

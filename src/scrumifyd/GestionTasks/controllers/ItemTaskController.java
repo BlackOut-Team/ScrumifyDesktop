@@ -130,12 +130,12 @@ public class ItemTaskController implements Initializable {
     }
 
     public void action2(ActionEvent event) {
-        if (action1.getText().equals("Move to to do")) {
+        if (action2.getText().equals("Move to to do")) {
             task.move_to_do(id);
 
-        } else if (action1.getText().equals("Move to doing")) {
+        } else if (action2.getText().equals("Move to doing")) {
             task.move(id);
-        } else if (action1.getText().equals("Move to done")) {
+        } else if (action2.getText().equals("Move to done")) {
             System.out.println(id);
             task.move_to_done(id);
         }

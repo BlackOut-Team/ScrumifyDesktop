@@ -82,6 +82,21 @@
                   <Insets left="50.0" />
                </padding>
             </JFXButton>
+            <JFXButton fx:id="activities" alignment="BASELINE_LEFT" graphicTextGap="10.0" onMouseClicked="#activities" prefHeight="43.0" prefWidth="252.0" ripplerFill="#adf7f7" styleClass="column-header" stylesheets="@../util/fullpackstyling.css" text="Activities" textFill="#5b5858">
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <graphic>
+                  <ImageView accessibleText="Project List" fitHeight="16.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/icons8_Workflow_64px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </JFXButton>
             <JFXButton fx:id="CalendarButton" alignment="BASELINE_LEFT" graphicTextGap="10.0" onMouseClicked="#CalendarButton" prefHeight="43.0" prefWidth="252.0" ripplerFill="#adf7f7" text="Deadlines &amp; charts" textFill="#5b5858">
                <VBox.margin>
                   <Insets />
@@ -115,24 +130,6 @@
                   <Insets left="50.0" />
                </padding>
             </JFXButton>
-            <JFXButton alignment="BASELINE_LEFT" graphicTextGap="10.0" prefHeight="43.0" prefWidth="252.0" ripplerFill="#adf7f7" text="Files" textFill="#5b5858">
-               <font>
-                  <Font size="13.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="16.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/logo.png" />
-                     </image>
-                     <viewport>
-                        <Rectangle2D />
-                     </viewport>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="50.0" />
-               </padding>
-            </JFXButton>
             <JFXButton fx:id="tasksOpen" alignment="BASELINE_LEFT" graphicTextGap="10.0" onMouseClicked="#tasksOpen" prefHeight="43.0" prefWidth="252.0" ripplerFill="#adf7f7" text="Tasks Board" textFill="#5b5858">
                <font>
                   <Font size="13.0" />
@@ -159,6 +156,24 @@
                   <Insets left="40.0" />
                </padding>
             </Label>
+            <JFXButton alignment="BASELINE_LEFT" graphicTextGap="10.0" prefHeight="43.0" prefWidth="252.0" ripplerFill="#adf7f7" text="Files" textFill="#5b5858">
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="16.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/logo.png" />
+                     </image>
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </JFXButton>
             <JFXButton fx:id="settings" alignment="BASELINE_LEFT" graphicTextGap="10.0" prefHeight="43.0" prefWidth="252.0" ripplerFill="#adf7f7" text="Settings" textFill="#5b5858">
                <font>
                   <Font size="13.0" />

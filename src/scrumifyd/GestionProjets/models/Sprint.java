@@ -23,6 +23,11 @@ public class Sprint {
     public Sprint() {
     }
 
+    public Sprint(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Sprint(int id, String name, String Description, LocalDate start, LocalDate duedate, int etat) {
         this.id = id;
         this.name = name;

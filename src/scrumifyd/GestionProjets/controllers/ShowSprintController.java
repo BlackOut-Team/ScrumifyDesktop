@@ -25,6 +25,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -90,121 +91,119 @@ public class ShowSprintController implements Initializable {
               
                                     i++;
 
-                if (s.getEtat() == 1 ) {
-                    try {
-                        FXMLLoader loader = new FXMLLoader(ShowSprintController.this.getClass().getResource("/scrumifyd/GestionProjets/views/ItemS.fxml"));
-                        //separate date into separate day month year for both dates
-                        int dayy = s.getCreated().getDayOfMonth();
-                        Month monthh = s.getCreated().getMonth();
-                        int yearr = s.getCreated().getYear();
-                        int dayyd = s.getDuedate().getDayOfMonth();
-                        Month monthhd = s.getDuedate().getMonth();
-                        int yearrd = s.getDuedate().getYear();
-                        nodes[i] = loader.load();
-                        ItemSController item = loader.getController();
-                        //item.setId(s.getId());
-                        item.setName(s.getName());
-                        item.setDescription(s.getDescription());
-                        //item.setEtat(s.getEtat());
-                        item.setCreated_day(dayy);
-                        item.setDeadline_month(monthh);
-                        item.setCreated_year(yearr);
-                        item.setDeadline_day(dayyd);
-                        item.setDeadline_month(monthhd);
-                        item.setDeadline_year(yearrd);
-                        sprint_scroll.getChildren().addAll(nodes[i]);
-                        EventHandler<MouseEvent> editHandler = new EventHandler<MouseEvent>() {
-                            @Override
-                            public void handle(MouseEvent e) {
-                                if (e.getSource() == item.EditButton) {
-                                    try {
-                                        FXMLLoader loader2 = new FXMLLoader(ShowSprintController.this.getClass().getResource("/scrumifyd/GestionProjets/views/EditS.fxml"));
-                                        
-                                        contentPane.getChildren().clear();
-                                        Parent root = (Parent) loader2.load();
-                                        EditSprintController sp = loader2.getController();
-                                        
-                                        sp.setProject(p);
-                                        System.out.println(s.getId());
-                                        sp.setProjectId(s.getId());
-                                        sp.setName(s.getName());
-                                        sp.setDescription(s.getDescription());
-                                        sp.setStartdate(s.getCreated());
-                                        sp.setDeadline(s.getDuedate());
-                                        contentPane.getChildren().add(root);
-                                    } catch (IOException ex) {
-                                        Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);
-                                    }
-                                }
-                                
-                            }
-                        };
-                        
-                        EventHandler<MouseEvent> archiveHandler = new EventHandler<MouseEvent>() {
-                            @Override
-                            public void handle(MouseEvent e) {
-                                if (e.getSource() == item.ArchiveButton) {
-                                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Archive sprint", ButtonType.YES, ButtonType.CANCEL);
-                                    alert.setTitle("Archive sprint");
-                                    alert.setHeaderText("Are you sure to archive this project ?");
-                                    
-                                    Optional<ButtonType> result = alert.showAndWait();
-                                    
-                                    if (result.get() == ButtonType.YES) {
-                                        SprintInterface sr = new SprintService();
-                                       
-                                        
-                                        Sprint sprint = new Sprint(0);
-                                        if (sr.archiveSprint(s.getId())) {
-                                            
-                                            System.out.println("done");
-                                            alert.hide();
-                                            refreshNodes();
-                                            
-                                            
-                                        } else {
-                                            System.out.println("error");
-                                            alert.hide();
-                                            
-                                        }
+               if (s.getEtat() == 1) {
+                                                    try {
+                                                        FXMLLoader loader = new FXMLLoader(ShowSprintController.this.getClass().getResource("/scrumifyd/GestionProjets/views/ItemS.fxml"));
+                                                        //separate date into separate day month year for both dates
+                                                        int dayy = s.getCreated().getDayOfMonth();
+                                                        Month monthh = s.getCreated().getMonth();
+                                                        int yearr = s.getCreated().getYear();
+                                                        int dayyd = s.getDuedate().getDayOfMonth();
+                                                        Month monthhd = s.getDuedate().getMonth();
+                                                        int yearrd = s.getDuedate().getYear();
+                                                        nodes[i] = loader.load();
+                                                        ItemSController item = loader.getController();
+                                                        //item.setId(s.getId());
+                                                        item.setName(s.getName());
+                                                        item.setDescription(s.getDescription());
+                                                        //item.setEtat(s.getEtat());
+                                                        item.setCreated_day(dayy);
+                                                        item.setDeadline_month(monthh);
+                                                        item.setCreated_year(yearr);
+                                                        item.setDeadline_day(dayyd);
+                                                        item.setDeadline_month(monthhd);
+                                                        item.setDeadline_year(yearrd);
+                                                        sprint_scroll.getChildren().addAll(nodes[i]);
+                                                        EventHandler<MouseEvent> editHandler = new EventHandler<MouseEvent>() {
 
-                                        System.out.println("Ok pressed");
-                                        
-                                    } else {
-                                        System.out.println("canceled");
-                                        refreshNodes();
-                                        
-                                    }
-                                    
-                                }
-                            }
-                        };                      
-                        EventHandler<MouseEvent> showSprintHandler = new EventHandler<MouseEvent>() {
-                            @Override
-                            public void handle(MouseEvent e) {
-                                
-                                
-                            }
-                        };
-                        
-                        item.EditButton.addEventHandler(MouseEvent.MOUSE_CLICKED, editHandler);
-                        item.ArchiveButton.addEventHandler(MouseEvent.MOUSE_CLICKED, archiveHandler);
-                    } catch (IOException ex) {
-                        Logger.getLogger(ShowSprintController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    
-                } else {
-                    i++;
-                }
-                
-                
-            });
+                                                            @Override
+                                                            public void handle(MouseEvent e) {
+                                                                if (e.getSource() == item.EditButton) {
+                                                                    try {
+                                                                        FXMLLoader loader2 = new FXMLLoader(ShowSprintController.this.getClass().getResource("/scrumifyd/GestionProjets/views/EditS.fxml"));
+
+                                                                        contentPane.getChildren().clear();
+                                                                        Parent root = (Parent) loader2.load();
+                                                                        EditSprintController sp = loader2.getController();
+
+                                                                        System.out.println(s.getId());
+                                                                        sp.setProjectId(s.getId());
+                                                                        sp.setName(s.getName());
+                                                                        sp.setDescription(s.getDescription());
+                                                                        sp.setStartdate(s.getCreated());
+                                                                        sp.setDeadline(s.getDuedate());
+                                                                        contentPane.getChildren().add(root);
+                                                                    } catch (IOException ex) {
+                                                                        Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);
+                                                                    }
+                                                                }
+
+                                                            }
+                                                        };
+                                                        EventHandler<MouseEvent> archiveHandler = new EventHandler<MouseEvent>() {
+
+                                                            @Override
+                                                            public void handle(MouseEvent e) {
+                                                                if (e.getSource() == item.ArchiveButton) {
+                                                                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Archive sprint", ButtonType.YES, ButtonType.CANCEL);
+                                                                    alert.setTitle("Archive sprint");
+                                                                    alert.setHeaderText("Are you sure to archive this project ?");
+
+                                                                    Optional<ButtonType> result = alert.showAndWait();
+
+                                                                    if (result.get() == ButtonType.YES) {
+                                                                        SprintInterface sr = new SprintService();
+                                     
+                                                                        if (sr.archiveSprint(s.getId())) {
+
+                                                                            System.out.println("done");
+                                                                            alert.hide();
+                                                                            ShowSprintController s = loader.getController();
+                                                                            refreshNodes();
+                                                                            s.refreshNodes();
+
+                                                                        } else {
+                                                                            System.out.println("error");
+                                                                            alert.hide();
+
+                                                                        }
+
+                                                                        System.out.println("Ok pressed");
+
+                                                                    } else {
+                                                                        System.out.println("canceled");
+                                                                        refreshNodes();
+
+                                                                    }
+
+                                                                }
+                                                            }
+                                                        };
+                                                        EventHandler<MouseEvent> showSprintDetailsHandler = new EventHandler<MouseEvent>() {
+
+                                                            @Override
+                                                            public void handle(MouseEvent e) {
+
+                                                            }
+                                                        };
+                                                        item.EditButton.addEventHandler(MouseEvent.MOUSE_CLICKED, editHandler);
+                                                        item.ArchiveButton.addEventHandler(MouseEvent.MOUSE_CLICKED, archiveHandler);
+                                                        item.ArchiveButton.addEventHandler(MouseEvent.MOUSE_CLICKED, showSprintDetailsHandler);
+                                                    } catch (IOException ex) {
+                                                        Logger.getLogger(ShowSprintController.class.getName()).log(Level.SEVERE, null, ex);
+                                                    }
+                                                } else {
+                                                    i++;
+                                                }
+                                            });
+         
+            }
       
             
     
        
 
-    }
+    
 //
 //    public List<Sprint> getSprints() throws SQLException {
 //        List<Sprint> Sprints = new ArrayList<>();

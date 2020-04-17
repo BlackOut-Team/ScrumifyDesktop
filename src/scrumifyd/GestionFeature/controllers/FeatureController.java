@@ -30,7 +30,16 @@ import scrumifyd.GestionFeature.services.CrudFeatures;
 import scrumifyd.GestionUserstory.controllers.UserStoryController;
 import scrumifyd.GestionUserstory.services.CrudUserstory;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import java.awt.AWTException;
+import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import scrumifyd.GestionProjets.models.Project;
+import scrumifyd.util.ScrumifyUtil;
 
 /**
  * FXML Controller class
@@ -60,6 +69,9 @@ public class FeatureController implements Initializable {
     private AnchorPane contentPane;
     @FXML
     private FontAwesomeIconView Back;
+    private ObservableList<Features> featureslist;
+    @FXML
+    private StackPane contentPane1;
 
     /**
      * Initializes the controller class.
@@ -141,11 +153,34 @@ public class FeatureController implements Initializable {
     }
 
     @FXML
-    private void PDF(ActionEvent event) {
+    private void PDF(ActionEvent event) throws AWTException, MalformedURLException {
 
         CrudFeatures a = new CrudFeatures();
-        a.afficherPdf();
+        
+        List<List> printData = new ArrayList<>();
+            String[] headers = {"ID", "   Name    ", "Sprint", "Etat", "    Is deleted   ", "     Due date   "};
+        printData.add(Arrays.asList(headers));
+        for (Features fr : featureslist) {
+            List<String> row = new ArrayList<>();
+            String etat = ("" + fr.getEtat()).replaceAll("\t", " ");
+            String id = ("" + fr.getId()).replaceAll("\t", " ");
+            String created = ("" + fr.getIsDeleted()).replaceAll("\t", " ");
+            String duedate = ("" + fr.getSprint_id()).replaceAll("\t", " ");
 
+            row.add(id);
+            row.add(fr.getName().replaceAll("\t", " "));
+            row.add(duedate);
+            row.add(etat);
+
+            row.add(created);
+
+            printData.add(row);
+        }
+        ScrumifyUtil.initPDFExprot(contentPane1, contentPane, getStage(), printData);
+
+    }
+ private Stage getStage() {
+        return (Stage) table.getScene().getWindow();
     }
 
     @FXML

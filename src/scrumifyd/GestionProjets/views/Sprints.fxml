@@ -15,7 +15,7 @@
          <children>
             <ScrollPane layoutX="39.0" layoutY="126.0" prefHeight="320.0" prefWidth="773.0">
                <content>
-                  <HBox fx:id="sprint_scroll" prefHeight="303.0" prefWidth="853.0" />
+                  <HBox fx:id="sprint_scroll" prefHeight="303.0" prefWidth="853.0" style="-fx-background-color: transparent; -fx-border-color: #16cabd;" />
                </content>
             </ScrollPane>
             <FontAwesomeIconView fx:id="AddSprint" fill="#16cabd" glyphName="PLUS" layoutX="457.0" layoutY="56.0" onMouseClicked="#AddSprint" size="30" strokeType="INSIDE" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="230.09525871276855" />
