@@ -69,7 +69,7 @@ public class ActivityController implements Initializable {
       this.user_id=user_id;
   }
      public void supprimerActivity(MouseEvent e, Activity a) throws SQLException {
-         FXMLLoader loader = new FXMLLoader(ActivityController.this.getClass().getResource("/scrumifyd/GestionProjets/views/ActivityBox.fxml"));
+         FXMLLoader loader = new FXMLLoader(ActivityController.this.getClass().getResource("/scrumifyd/GestionMeetings/views/ActivityBox.fxml"));
 
          ActivityBoxController activity = loader.getController();
          if (e.getSource() == activity.SupprimerButton) {
@@ -85,36 +85,85 @@ public class ActivityController implements Initializable {
    
       public void refreshNodes() {
 
-          pnl_scroll.getChildren().clear();
         try {
+            pnl_scroll.getChildren().clear();
+            
             ListA = Activity.getAllActivity();
+                                System.out.println(ListA);
+
+            if (!ListA.isEmpty()) {
+                
+                Node nodes[] = new Node[ListA.size() + 1];
+                ListA.forEach((Activity activity) -> {
+                    System.out.println(activity);
+                    
+                    try {
+                        
+                        int i = ListA.indexOf(activity);
+                        i++;
+                        FXMLLoader ActivityLoader = new FXMLLoader(ActivityController.this.getClass().getResource("/scrumifyd/GestionMeetings/views/ActivityBox.fxml"));
+                                                    ActivityBoxController box2 = ActivityLoader.getController();
+
+                            nodes[i] = ActivityLoader.load();
+
+                        if (activity.getViewed() == 0) {
+                                                        ActivityBoxController box = ActivityLoader.getController();
+
+                            //separate date into separate day month year for both dates
+                            box.setColor();
+                        
+                            box.setAction(activity.getAction());
+                            box.setViewed(activity.getViewed());
+                            box.setUsername(activity.getUsername());
+                            EventHandler<MouseEvent> supprimerHandler = new EventHandler<MouseEvent>() {
+
+                                                            @Override
+                                                            public void handle(MouseEvent e) {
+                              if (e.getSource() == box2.SupprimerButton) {
+                                    InterfaceActivity aa = new ActivityService();
+                                    //Project pp;
+                                    //String idd = id.getText();
+                                try {
+                                    aa.supprimerActivity(activity.getId());
+            refreshNodes();
+                                } catch (SQLException ex) {
+                                    Logger.getLogger(ActivityController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            
+                        }}
+                            
+                            };
+                                                        box2.SupprimerButton.addEventHandler(MouseEvent.MOUSE_CLICKED, supprimerHandler);
+                        }else{
+                            ActivityBoxController box = ActivityLoader.getController();
+
+
+                            //separate date into separate day month year for both dates
+                            box.setColor2();
+                            box.hideButton();
+                        
+                            box.setAction(activity.getAction());
+                            box.setViewed(activity.getViewed());
+                            box.setUser(activity.getUser_id());
+                            
+                        }
+                                                    
+                                                    
+                          
+                                                    pnl_scroll.getChildren().addAll(nodes[i]);
+
+                    }catch (IOException ex) {
+                        Logger.getLogger(ActivityController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                });
+            }
+            
+            
+             
+                            
         } catch (SQLException ex) {
             Logger.getLogger(ActivityController.class.getName()).log(Level.SEVERE, null, ex);
         }
-          if (!ListA.isEmpty()) {
-              
-              Node nodes[] = new Node[ListA.size() + 1];
-              ListA.forEach((Activity activity) -> {
-                  try {
-                      int i = ListA.indexOf(activity);
-                      i++;
-                      if (true) {
-                          FXMLLoader loader;
-                          loader = new FXMLLoader(ActivityController.this.getClass().getResource("/scrumifyd/GestionProjets/views/ActivityBox.fxml"));
-                          //separate date into separate day month year for both dates
-                          nodes[i] = loader.load();
-                          ActivityBoxController box = loader.getController();
-                          box.setAction(activity.getAction());
-                          box.setViewed(activity.getViewed());
-                          pnl_scroll.getChildren().addAll(nodes[i]);
-                          
-                      };
-                      
-                  }catch (IOException ex) {
-                      Logger.getLogger(ActivityController.class.getName()).log(Level.SEVERE, null, ex);
-                  }
-              });
-          }
 
     }
 

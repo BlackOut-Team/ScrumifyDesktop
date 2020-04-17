@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" fx:id="box"  prefHeight="200.0" prefWidth="880.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scrumifyd.GestionMeetings.controllers.ActivityBoxController">
+   <children>
+      <Pane id="Pane" fx:id="box2" layoutX="29.0" layoutY="22.0" prefHeight="200.0" prefWidth="841.0" >
+         <children>
+            <ImageView fx:id="avatar" fitHeight="70.0" fitWidth="76.0" layoutX="41.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Image2.png" />
+               </image>
+            </ImageView>
+            <Separator layoutX="41.0" layoutY="94.0" prefHeight="0.0" prefWidth="763.0" />
+            <Label fx:id="Action" layoutX="123.0" layoutY="18.0" text="Action" textFill="#16cabd">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="Viewed"  layoutX="51.0" layoutY="113.0" text="Viewed" textFill="#aeacac">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+             <Label fx:id="User"  layoutX="71.0" layoutY="113.0" text="user" textFill="#aeacac">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="Username"  layoutX="80.0" layoutY="113.0" text="user" textFill="#aeacac">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Text fill="#b2b0b0" layoutX="132.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="id : " />
+          
+            <FontAwesomeIconView fx:id="SupprimerButton" fill="#16cabd" glyphName="delete" layoutX="723.0" layoutY="180.0" size="24" />
+             <FontAwesomeIconView fx:id="ViewButton" fill="#16cabd" glyphName="eye" layoutX="650.0" layoutY="180.0" size="24" />
+
+         </children>
+         <effect>
+            <DropShadow color="#d7d2d2" height="50.0" radius="24.5" width="50.0" />
+         </effect>
+      </Pane>
+   </children>
+</AnchorPane>

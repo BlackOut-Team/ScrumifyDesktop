@@ -46,7 +46,10 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import scrumifyd.GestionMeetings.services.ActivityService;
+import scrumifyd.GestionMeetings.services.InterfaceActivity;
 import scrumifyd.GestionProjets.controllers.DashboardController;
+import scrumifyd.GestionProjets.services.UserSession;
 /**
  * FXML Controller class
  *
@@ -99,6 +102,8 @@ public class Add_taskController implements Initializable {
     private FontAwesomeIconView back;
     @FXML
     private Label Errors;
+    
+    
   
     /**
      * Initializes the controller class.
@@ -139,6 +144,7 @@ public class Add_taskController implements Initializable {
         String all=btn_check(event);
         task t =new task(priority,title,description,date,all);
         task.create(t,status);
+     
         media.ajout_media(name, path);
         contentPane.getChildren().clear();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/scrumifyd/GestionTasks/views/Taskss.fxml"));

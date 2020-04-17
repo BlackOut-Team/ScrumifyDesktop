@@ -17,4 +17,5 @@ import scrumifyd.GestionMeetings.models.Activity;
 public interface InterfaceActivity {
      public  List<Activity> getAllActivity() throws SQLException;
      void supprimerActivity(int id)throws SQLException;
+     public int ajouterActivity(Activity activity)throws SQLException;
 }

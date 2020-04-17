@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 /**
  *
@@ -33,7 +34,15 @@ public class ActivityBoxController implements Initializable{
     @FXML
     private Label Viewed;
     @FXML
+    private Label Username;
+    @FXML
+    private Label User;
+    @FXML
     public FontAwesomeIconView SupprimerButton;
+    @FXML
+    public FontAwesomeIconView ViewButton;
+    @FXML
+    private Pane box2;
 
    
     /**
@@ -79,5 +88,25 @@ public class ActivityBoxController implements Initializable{
 
 
    
-    
+    public void setUser(int user) {
+        this.User.setText("" + user);
+    }
+public void setUsername(String username) {
+        this.Username.setText("" + username);
+    }
+    public Label getUser() {
+        return User;
+    }
+public void setColor(){
+    box2.setStyle("-fx-background-color:#55efc4;");
+}   
+public void setColor2(){
+    box2.setStyle("-fx-background-color:#fff;");
 }
+public void hideButton(){
+    ViewButton.setVisible(false);
+}public void showButton(){
+    ViewButton.setVisible(true);
+}
+}
+

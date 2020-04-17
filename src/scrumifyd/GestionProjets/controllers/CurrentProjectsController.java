@@ -219,7 +219,32 @@ public class CurrentProjectsController implements Initializable {
                                                                                 Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);
                                                                             }
                                                                         }
-                                                            }  };EventHandler<MouseEvent> showSprintHandler;
+                                                            }  };
+                         
+                          EventHandler<MouseEvent>  activityHandler = new EventHandler<MouseEvent>() {
+                                                             
+                                                            @Override
+                                                            public void handle(MouseEvent e) {
+                                                                        if (e.getSource() == item.ActivityButton) {
+                                                                             System.out.print("activities");
+                                                                            
+                                                                            try {
+                                                                                FXMLLoader loaderR = new FXMLLoader(CurrentProjectsController.this.getClass().getResource("/scrumifyd/GestionMeetings/views/activity.fxml"));
+
+                                                                                contentPane.getChildren().clear();
+                                                                                
+                                                                                
+
+                                                                               Parent root = (Parent) loaderR.load();                                                                                
+                                                                                
+                                                                                contentPane.getChildren().add(root);
+                                                                            } catch (IOException ex) {
+                                                                                Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);
+                                                                            }
+                                                                        }
+                                                            }  };
+                         
+                         EventHandler<MouseEvent> showSprintHandler;
                             showSprintHandler = new EventHandler<MouseEvent>() {
                                 
                                 @Override
@@ -366,6 +391,7 @@ public class CurrentProjectsController implements Initializable {
                             item.ArchiveButton.addEventHandler(MouseEvent.MOUSE_CLICKED, archiveHandler);
                               item.MeetingButton.addEventHandler(MouseEvent.MOUSE_CLICKED, meetingHandler);
 
+                        item.ActivityButton.addEventHandler(MouseEvent.MOUSE_CLICKED, activityHandler);
                             item.showSprintsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, showSprintHandler);
                        
                     }catch (IOException ex) {

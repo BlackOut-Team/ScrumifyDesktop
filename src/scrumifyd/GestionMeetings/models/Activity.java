@@ -11,19 +11,42 @@ package scrumifyd.GestionMeetings.models;
  */
 public class Activity {
      int id;
+     int  user_id;
     String action;
+    String username;
     int viewed;
    
 
-    public Activity(int id, String action, int viewed) {
+    public Activity(int id,int user_id, String action, int viewed) {
         this.id = id;
+        this.user_id =user_id;
         this.action = action;
         this.viewed = viewed;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public Activity(String action, int viewed) {
         this.action = action;
         this.viewed = viewed;
+    }
+ public Activity(String action, int viewed, int user_id) {
+        this.action = action;
+        this.viewed = viewed;
+        this.user_id = user_id;
+    }
+ public Activity(int id, String action, int viewed, int user_id, String username) {
+        this.id = id;
+        this.action = action;
+        this.viewed = viewed;
+        this.user_id = user_id;
+        this.username = username;
     }
 
     public int getId() {
@@ -40,6 +63,14 @@ public class Activity {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setAction(String action) {

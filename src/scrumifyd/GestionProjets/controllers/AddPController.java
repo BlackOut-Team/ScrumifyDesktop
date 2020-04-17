@@ -40,12 +40,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import scrumifyd.GestionMeetings.models.Activity;
+import scrumifyd.GestionMeetings.services.ActivityService;
+import scrumifyd.GestionMeetings.services.InterfaceActivity;
 import scrumifyd.util.MyDbConnection;
 import scrumifyd.GestionProjets.services.ProjectService;
 import scrumifyd.GestionProjets.models.Project;
 import scrumifyd.GestionProjets.services.InterfaceProjet;
 import scrumifyd.GestionProjets.services.SprintInterface;
 import scrumifyd.GestionProjets.services.SprintService;
+import scrumifyd.GestionProjets.services.UserSession;
 import scrumifyd.GestionTeams.models.Team;
 import scrumifyd.GestionUsers.models.User;
 import scrumifyd.GestionUsers.services.SigninController;
@@ -242,7 +246,10 @@ public class AddPController implements Initializable {
             try {
                 System.out.println("Add : "  + user_id);
                 Project project = new Project(name, description, today,deadline, etat ,t.getId(),o.getId() , user_id );
-
+   InterfaceActivity a = new ActivityService();
+        Activity ac = new Activity("a jasdasd",0,user_id);
+             
+        a.ajouterActivity(ac);
                 InterfaceProjet Projects = new ProjectService();
                 res = Projects.addProject(project);
                 Project  pp = Projects.getProject(res);
