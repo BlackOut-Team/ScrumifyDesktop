@@ -27,8 +27,7 @@ import javafx.beans.value.ObservableValue;
  */
 public class AutoCompleteAddressField extends AutoCompleteTextField {
 
-    private static final String API_KEY = "AIzaSyB22oQWKugTFxxqbcSkMc4MqALFi094auU";
-
+  
     public AutoCompleteAddressField() {
         super(new TreeSet<>((AddressPrediction o1, AddressPrediction o2) -> o1.toString().compareTo(o2.toString())));
 
