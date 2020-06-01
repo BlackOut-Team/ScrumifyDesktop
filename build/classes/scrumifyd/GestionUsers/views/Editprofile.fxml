@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<StackPane fx:id="contentPane" prefHeight="522.0" prefWidth="812.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scrumifyd.GestionUsers.controllers.editProfileController">
+   <children>
+      <AnchorPane prefHeight="522.0" prefWidth="830.0">
+         <children>
+            <Text fill="#16cabd" layoutX="395.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Profile">
+               <font>
+                  <Font name="Calibri Light" size="24.0" />
+               </font>
+            </Text>
+            <ImageView fx:id="avatar" fitHeight="218.0" fitWidth="176.0" layoutX="553.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../GestionProjets/images/person_1.png" />
+               </image>
+            </ImageView>
+            <JFXTextField fx:id="name" alignment="TOP_LEFT" editable="false" focusColor="#36989a" labelFloat="true" layoutX="101.0" layoutY="162.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="21.0" prefWidth="235.0" promptText="Name" style="-fx-font-size: 9 px; -fx-text-fill: #626970;">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </JFXTextField>
+            <JFXTextField fx:id="lastname" alignment="TOP_LEFT" editable="false" focusColor="#36989a" labelFloat="true" layoutX="101.0" layoutY="222.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="21.0" prefWidth="235.0" promptText="Lastname" style="-fx-font-size: 9 px; -fx-text-fill: #626970;">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </JFXTextField>
+            <JFXTextField fx:id="username" alignment="TOP_LEFT" editable="false" focusColor="#36989a" labelFloat="true" layoutX="101.0" layoutY="281.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="21.0" prefWidth="235.0" promptText="Username " style="-fx-font-size: 9 px; -fx-text-fill: #626970;">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </JFXTextField>
+            <JFXTextField fx:id="email" alignment="TOP_LEFT" focusColor="#36989a" labelFloat="true" layoutX="101.0" layoutY="334.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="21.0" prefWidth="235.0" promptText="Email" style="-fx-font-size: 9 px; -fx-text-fill: #626970;">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </JFXTextField>
+            <JFXButton fx:id="edit" layoutX="101.0" layoutY="387.0" onAction="#edit" prefHeight="25.0" prefWidth="99.0" styleClass="button3" stylesheets="@../../GestionProjets/util/fullpackstyling.css" text="Edit profile" />
+            <JFXButton fx:id="reset" layoutX="237.0" layoutY="387.0" onAction="#reset" styleClass="button3" stylesheets="@../../GestionProjets/util/fullpackstyling.css" text="Reset Password" />
+            <FontAwesomeIconView fx:id="picture" fill="#16cabd" glyphName="IMAGE" layoutX="580.0" layoutY="377.0" onMouseClicked="#openchooser" size="26" text="" wrappingWidth="28.52383041381836" />
+            <FontAwesomeIconView fx:id="camera" fill="#16cabd" glyphName="CAMERA" layoutX="638.0" layoutY="377.0" onMouseClicked="#openwebcam" size="26" />
+            <FontAwesomeIconView fx:id="draw_av" fill="#16cabd" glyphName="PENCIL" layoutX="696.0" layoutY="377.0" onMouseClicked="#openill" size="26" />
+            <JFXTextField fx:id="current" alignment="TOP_LEFT" focusColor="#36989a" labelFloat="true" layoutX="365.0" layoutY="188.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="21.0" prefWidth="235.0" promptText="Current Password" style="-fx-font-size: 9 px; -fx-text-fill: #626970;">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </JFXTextField>
+            <JFXTextField fx:id="new1" alignment="TOP_LEFT" focusColor="#36989a" labelFloat="true" layoutX="365.0" layoutY="234.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="21.0" prefWidth="235.0" promptText="New Password" style="-fx-font-size: 9 px; -fx-text-fill: #626970;">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </JFXTextField>
+            <JFXTextField fx:id="new2" alignment="TOP_LEFT" focusColor="#36989a" labelFloat="true" layoutX="365.0" layoutY="284.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="21.0" prefWidth="235.0" promptText="Repeat new password" style="-fx-font-size: 9 px; -fx-text-fill: #626970;">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </JFXTextField>
+            <JFXButton fx:id="reset1" layoutX="460.0" layoutY="322.0" onAction="#resetdone" styleClass="button3" stylesheets="@../../GestionProjets/util/fullpackstyling.css" text="Reset" />
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
+
+<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="581.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scrumifyd.GestionUsers.controllers.chooseController">
+   <children>
+      <AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="475.0" prefWidth="591.0">
+         <children>
+            <Pane layoutX="-1.0" layoutY="-2.0" prefHeight="477.0" prefWidth="590.0" styleClass="button5" stylesheets="@../util/fullpackstyling.css">
+               <children>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="18.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/scrumify.png" />
+                     </image>
+                  </ImageView>
+                  <Pane fx:id="vbox" layoutX="63.0" layoutY="74.0" prefHeight="362.0" prefWidth="469.0" style="-fx-background-color: white;">
+                     <children>
+                        <JFXTextField fx:id="Avatar" alignment="TOP_LEFT" focusColor="#36989a" layoutX="37.0" layoutY="312.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="21.0" prefWidth="235.0" promptText="Avatar" style="-fx-font-size: 9 px; -fx-text-fill: #626970;">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </JFXTextField>
+                        <JFXButton fx:id="choose" layoutX="307.0" layoutY="310.0" onAction="#choose" prefHeight="25.0" prefWidth="108.0" styleClass="button1" stylesheets="@../../util/fullpackstyling.css" text="Choose avatar" textFill="WHITE" />
+                        <ImageView fx:id="av1" fitHeight="97.0" fitWidth="119.0" layoutX="21.0" layoutY="22.0" onMouseClicked="#select" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../GestionProjets/images/Image2.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="av2" fitHeight="97.0" fitWidth="119.0" layoutX="163.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../GestionProjets/images/Image3.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="av3" fitHeight="97.0" fitWidth="119.0" layoutX="307.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../GestionProjets/images/Image4.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="av4" fitHeight="97.0" fitWidth="119.0" layoutX="25.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../GestionProjets/images/Image6.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="av5" fitHeight="97.0" fitWidth="119.0" layoutX="163.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../GestionProjets/images/Image7.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="av6" fitHeight="97.0" fitWidth="119.0" layoutX="302.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../GestionProjets/images/person_1.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" left="300.0" top="13.0" />
+                     </padding>
+                  </Pane>
+                  <Label fx:id="Errors" layoutX="14.0" layoutY="447.0" prefHeight="17.0" prefWidth="235.0" textFill="#32aea6" />
+                  <Circle fx:id="ExitButton" fill="#ff391f" layoutX="555.0" layoutY="24.0" onMouseClicked="#ExitButton" opacity="0.68" radius="8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fx:id="resizeButton" fill="#71d02e" layoutX="531.0" layoutY="23.0" onMouseClicked="#resizeButton" opacity="0.68" radius="8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fx:id="MinimizeButton" fill="#d7ff1f" layoutX="509.0" layoutY="23.0" onMouseClicked="#MinimizeButton" opacity="0.68" radius="8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
