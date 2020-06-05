@@ -5,7 +5,7 @@
             <url>src/scrumifyd/GestionProjets/controllers/AddPController.java</url>
             <bookmark id="2">
                 <name/>
-                <line>213</line>
+                <line>206</line>
                 <key/>
             </bookmark>
         </file>
@@ -20,33 +20,18 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionProjets/controllers/AdminDashController.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionFeature/services/CrudFeatures.java</file>
+            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/util/BCrypt.java</file>
+            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionUsers/controllers/HomeController.java</file>
+            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionUsers/controllers/SigninController.java</file>
+            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionUsers/controllers/resetController.java</file>
+            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionUsers/controllers/editProfileController.java</file>
             <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionProjets/services/ProjectService.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionMeetings/controllers/ActivityBoxController2.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionMeetings/controllers/ActivityController.java</file>
             <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionProjets/controllers/ProjectsController.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionFeature/controllers/FeatureController.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionMeetings/models/AutoCompleteAddressField.java</file>
+            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionTeams/services/TeamService.java</file>
+            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionUsers/services/UserCrud.java</file>
             <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionProjets/controllers/DashboardController.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionMeetings/services/InterfaceMeeting.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionProjets/models/Sprint.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionProjets/controllers/ShowSprintController.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionMeetings/controllers/EditMeetingController.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionMeetings/services/MeetingService.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionMeetings/controllers/AddMeetingController.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionProjets/controllers/CompletedProjectsController.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionMeetings/models/Meeting.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionMeetings/models/Activity.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionProjets/controllers/CurrentProjectsController.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionMeetings/services/InterfaceActivity.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/util/ScrumifyUtil.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionMeetings/controllers/MeetingsController.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionMeetings/controllers/ActivityBoxController.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionProjets/controllers/EditSprintController.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionMeetings/services/ActivityService.java</file>
-            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionProjets/controllers/ProjectsAdminController.java</file>
             <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionProjets/controllers/AddPController.java</file>
+            <file>file:/C:/Users/Amira%20Doghri/Documents/3A-2S/JavaFX/ScrumifyD/src/scrumifyd/GestionUsers/models/User.java</file>
         </group>
     </open-files>
 </project-private>

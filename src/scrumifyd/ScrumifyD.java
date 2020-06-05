@@ -22,7 +22,6 @@ public class ScrumifyD extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/scrumifyd/GestionUsers/views/Home.fxml"));
-      //  Parent root = FXMLLoader.load(getClass().getResource("/scrumifyd/GestionProjets/views/Dashboard.fxml"));
 
         //borderless .  
         stage.initStyle(StageStyle.UNDECORATED);

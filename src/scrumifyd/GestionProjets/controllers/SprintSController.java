@@ -89,19 +89,19 @@ public class SprintSController implements Initializable {
             int num = Integer.valueOf(value);
             weeks = 0;
             for (int i = 0; i < num; i++) {
-                
+
                 SprintInterface spr = new SprintService();
-                Sprint s = new Sprint(1,p.getId());
+                Sprint s = new Sprint(1, p.getId());
                 spr.addDefaultSprint(s, p.getCreated(), weeks);
                 weeks += 4;
-                
+
             }
-            
+
             contentPane.getChildren().clear();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/scrumifyd/GestionProjets/views/Sprints.fxml"));
             Parent root = (Parent) loader.load();
             ShowSprintController sp = loader.getController();
-            
+
             loadS(sp);
             contentPane.getChildren().add(root);
         } catch (IOException ex) {
@@ -110,13 +110,13 @@ public class SprintSController implements Initializable {
 
     }
 
-    public void loadS(ShowSprintController sp){
+    public void loadS(ShowSprintController sp) {
         try {
             sp.setProject(p);
             sp.setProjectId(pid);
             sp.pid.setText("" + p.getId());
             FXMLLoader loader1 = new FXMLLoader(SprintSController.this.getClass().getResource("/scrumifyd/GestionProjets/views/Sprints.fxml"));
-            
+
             contentPane.getChildren().clear();
             Parent root = (Parent) loader1.load();
 
@@ -177,29 +177,29 @@ public class SprintSController implements Initializable {
                                     sp1.setStartdate(s.getCreated());
                                     sp1.setDeadline(s.getDuedate());
                                     contentPane.getChildren().add(root1);
-                                }catch (IOException ex) {
+                                } catch (IOException ex) {
                                     Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             }
                         };
 
                         EventHandler<MouseEvent> archiveHandler = (MouseEvent e) -> {
-                            
+
                             if (e.getSource() == item.ArchiveButton) {
                                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Archive sprint", ButtonType.YES, ButtonType.CANCEL);
                                 alert.setTitle("Archive sprint");
                                 alert.setHeaderText("Are you sure to archive this project ?");
-                                
+
                                 Optional<ButtonType> result = alert.showAndWait();
-                                
+
                                 if (result.get() == ButtonType.YES) {
                                     SprintInterface sr = new SprintService();
                                     //Project pp;
-                                    
+
                                     //String idd = id.getText();
                                     Sprint sprint = new Sprint(0);
                                     if (sr.archiveSprint(s.getId())) {
-                                        
+
                                         System.out.println("done");
                                         alert.hide();
                                         //refreshNodes();
@@ -207,35 +207,34 @@ public class SprintSController implements Initializable {
                                     } else {
                                         System.out.println("error");
                                         alert.hide();
-                                        
+
                                     }
 
                                     System.out.println("Ok pressed");
-                                    
+
                                 } else {
                                     System.out.println("canceled");
                                     // refreshNodes();
-                                    
+
                                 }
-                                
+
                             }
                         };
                         EventHandler<MouseEvent> showSprintDetailsHandler = (MouseEvent e) -> {
-                                                         if (e.getSource() == item.LinkButton) {
+                            if (e.getSource() == item.LinkButton) {
 
-                                                             try {
-                                                                 contentPane.getChildren().clear();
-                                                                 FXMLLoader loaderr = new FXMLLoader(SprintSController.this.getClass().getResource("/scrumifyd/GestionTasks/views/FXMLDocument.fxml"));
-                                                                 
-                                                                 
-                                                                 Parent root1 = (Parent) loaderr.load();
-                                                                 
-                                                                 contentPane.getChildren().add(root);
-                                                             } catch (IOException ex) {
-                                                                 Logger.getLogger(SprintSController.class.getName()).log(Level.SEVERE, null, ex);
-                                                             }
+                                try {
+                                    contentPane.getChildren().clear();
+                                    FXMLLoader loaderr = new FXMLLoader(SprintSController.this.getClass().getResource("/scrumifyd/GestionTasks/views/FXMLDocument.fxml"));
 
-                             }
+                                    Parent root1 = (Parent) loaderr.load();
+
+                                    contentPane.getChildren().add(root);
+                                } catch (IOException ex) {
+                                    Logger.getLogger(SprintSController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+
+                            }
                         };
 
                         item.EditButton.addEventHandler(MouseEvent.MOUSE_CLICKED, editHandler);
@@ -251,8 +250,7 @@ public class SprintSController implements Initializable {
                 }
 
             });
-            
-            
+
 //        System.out.println(sp.ListS);
 //        sp.pp += p.getId();
 //        //sp.setProjectId(p.getId());
@@ -270,63 +268,52 @@ public class SprintSController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(SprintSController.class.getName()).log(Level.SEVERE, null, ex);
         }
-                        
 
-
-                   
     }
+
     @FXML
-        private void selectSecond(MouseEvent event) throws SQLException{
+    private void selectSecond(MouseEvent event) throws SQLException {
         try {
             String value = this.lbl_suggestion1.getText();
             int num = Integer.valueOf(value);
             weeks = 0;
             for (int i = 0; i < num; i++) {
-                
-             
-                    SprintInterface spr = new SprintService();
-                    Sprint s = new Sprint(p.getId());
-                    spr.addDefaultSprint(s, p.getCreated(), weeks);
-                    weeks += 2;
-               
+
+                SprintInterface spr = new SprintService();
+                Sprint s = new Sprint(p.getId());
+                spr.addDefaultSprint(s, p.getCreated(), weeks);
+                weeks += 2;
+
             }
             contentPane.getChildren().clear();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/scrumifyd/GestionProjets/views/Sprints.fxml"));
             Parent root = (Parent) loader.load();
             ShowSprintController sp = loader.getController();
-            
+
             loadS(sp);
             contentPane.getChildren().add(root);
-        
 
-} catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(SprintSController.class
-.getName()).log(Level.SEVERE, null, ex);
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-
-
-
     @FXML
-        private void selectCustom(MouseEvent event) {
+    private void selectCustom(MouseEvent event) {
         try {
             contentPane.getChildren().clear();
-            FXMLLoader  loader = new FXMLLoader(getClass().getResource("/scrumifyd/GestionProjets/views/AddSprint.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scrumifyd/GestionProjets/views/AddSprint.fxml"));
             Parent root = (Parent) loader.load();
-            AddSprintController sp=  loader.getController();         
+            AddSprintController sp = loader.getController();
             sp.setProjectId(p.getId());
             contentPane.getChildren().add(root);
-        
 
-
-
-} catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(SprintSController.class
-
-.getName()).log(Level.SEVERE, null, ex);
+                    .getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     private void back(MouseEvent event) {
@@ -340,14 +327,9 @@ public class SprintSController implements Initializable {
         try {
             root = FXMLLoader.load(getClass().getResource("/scrumifyd/GestionProjets/views/" + ui + ".fxml"));
 
-        
-
-
-
-} catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(DashboardController.class
-
-.getName()).log(Level.SEVERE, null, ex);
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         contentPane.getChildren().add(root);
     }

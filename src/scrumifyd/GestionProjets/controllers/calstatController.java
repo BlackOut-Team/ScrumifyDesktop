@@ -22,7 +22,7 @@ import javafx.scene.layout.Pane;
 import scrumifyd.GestionProjets.models.Project;
 import scrumifyd.GestionProjets.services.InterfaceProjet;
 import scrumifyd.GestionProjets.services.ProjectService;
-import scrumifyd.GestionUsers.services.SigninController;
+import scrumifyd.GestionUsers.controllers.SigninController;
 
 /**
  * FXML Controller class
