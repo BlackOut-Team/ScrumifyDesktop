@@ -45,9 +45,10 @@ public interface InterfaceProjet {
 
     public boolean unarchiveProject(int id);
    
-    public List<User> getTeamMembers(int id)  ;
+    public List<User> getTeamMembers(int id);
      public List<Project> getDeadlines(int user_id);
-    
+        public int getRoleU(int pr_id, int user_id, int team_id) ;
+
 
 
 }

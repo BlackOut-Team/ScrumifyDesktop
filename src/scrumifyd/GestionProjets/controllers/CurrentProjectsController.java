@@ -43,8 +43,8 @@ import scrumifyd.GestionProjets.services.ProjectSession;
 import scrumifyd.GestionProjets.services.SprintInterface;
 import scrumifyd.GestionProjets.services.SprintService;
 import scrumifyd.GestionProjets.services.UserSession;
-import scrumifyd.GestionUsers.services.SigninController;
-import static scrumifyd.GestionUsers.services.SigninController.user;
+import scrumifyd.GestionUsers.controllers.SigninController;
+import static scrumifyd.GestionUsers.controllers.SigninController.user;
 
 /**
  * FXML Controller class
@@ -134,18 +134,19 @@ public class CurrentProjectsController implements Initializable {
                         ItemController item = loader.getController();
 //                            item.setId(project.getId());
                         item.setName(project.getName());
-                        if (project.getMaster_id() == user_id) {
+                 if (Projects.getRoleU(project.getId(), user_id, project.getTeam_id())== 1) {
                             item.setRole("Scrum Master");
-                        } else if (project.getOwner_id() == user_id) {
+                        } else if (Projects.getRoleU(project.getId(), user_id, project.getTeam_id())== 3) {
                             item.lbl_role.setStyle("-fx-background-color:green");
                             item.setRole("Project Owner");
                             item.EditButton.setVisible(false);
                             item.ArchiveButton.setVisible(false);
 
-                        } else {
+                        }
+                        else if (Projects.getRoleU(project.getId(), user_id, project.getTeam_id())== 2){
                             item.lbl_role.setStyle("-fx-background-color:#16cabd");
                             item.setRole("Developer");
-                        }
+                       }  
                         item.setDescription(project.getDescription());
                         item.setEtat(project.getEtat());
                         item.setCreated_day(dayy);

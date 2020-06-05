@@ -29,7 +29,7 @@
                   <Font size="13.0" />
                </font>
             </Label>
-            <JFXButton layoutX="1005.0" layoutY="73.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="30.0" prefWidth="163.0" ripplerFill="WHITE" style="-fx-background-color: #16bacd;" text="EDIT PROFILE" textFill="WHITE">
+            <JFXButton fx:id="editprofile" layoutX="1005.0" layoutY="73.0" nodeOrientation="RIGHT_TO_LEFT" onAction="#editprofile" prefHeight="30.0" prefWidth="163.0" ripplerFill="WHITE" style="-fx-background-color: #16bacd;" text="EDIT PROFILE" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -211,7 +211,7 @@
       </VBox>
       <Pane layoutX="71.0" layoutY="44.0" prefHeight="131.0" prefWidth="142.0" style="-fx-background-color: #fff;">
          <children>
-            <ImageView fitHeight="120.0" fitWidth="139.0" layoutX="4.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="avatar" fitHeight="96.0" fitWidth="126.0" layoutX="8.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/Image14.png" />
                </image>

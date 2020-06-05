@@ -42,6 +42,7 @@
                   <FontAwesomeIconView fill="#16cabd" glyphName="GROUP" layoutX="839.0" layoutY="278.0" size="18" />
                   <FontAwesomeIconView fill="#16cabd" glyphName="GAVEL" layoutX="838.0" layoutY="337.0" size="18" />
                   <Label fx:id="Errors" layoutX="81.0" layoutY="377.0" prefHeight="17.0" prefWidth="235.0" textFill="#32aea6" />
+                  <FontAwesomeIconView fx:id="back1" fill="#16cabd" glyphName="BACKWARD" layoutX="18.0" layoutY="39.0" onMouseClicked="#back" size="24" />
                </children>
             </Pane>
          </children>

@@ -23,7 +23,7 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import scrumifyd.GestionProjets.services.InterfaceProjet;
 import scrumifyd.GestionProjets.services.ProjectService;
-import scrumifyd.GestionUsers.services.SigninController;
+import scrumifyd.GestionUsers.controllers.SigninController;
 
 /**
  *

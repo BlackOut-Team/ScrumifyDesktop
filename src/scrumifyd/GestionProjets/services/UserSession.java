@@ -25,6 +25,8 @@ public final class UserSession {
 
     private int userId;
     private String username;
+    private String avatar;
+
 
     private UserSession(int userId) {
         this.userId = userId;
@@ -44,7 +46,7 @@ public final class UserSession {
     public String getUsername(int userId) {
         try {
 
-            String req = "SELECT * FROM PERSON WHERE ID=" + userId + " ";
+            String req = "SELECT * FROM USER WHERE ID=" + userId + " ";
             Statement stm = connexion.createStatement();
             ResultSet result = stm.executeQuery(req);
 
@@ -58,17 +60,34 @@ public final class UserSession {
         }
         return username;
     }
+     public String getAvatar(int userId) {
+        try {
+
+            String req = "SELECT * FROM USER WHERE ID=" + userId + " ";
+            Statement stm = connexion.createStatement();
+            ResultSet result = stm.executeQuery(req);
+
+            while (result.next()) {
+                String avatar = result.getString("image");
+                 return avatar;
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return avatar;
+    }
 
    
 
     public void cleanUserSession() {
-        userId = -1;// or null
+        userId = 0;// or null
     }
 
     @Override
     public String toString() {
         return "UserSession{" +
-                "userName='" + userId + "' ";
+                "id='" + userId + "' ";
                
     }
 }

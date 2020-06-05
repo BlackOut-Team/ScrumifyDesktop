@@ -51,7 +51,7 @@ public class ScrumifyUtil {
         fileChooser.getExtensionFilters().add(extFilter);
         File saveLoc = fileChooser.showSaveDialog(stage);
         ListToPDF ltp = new ListToPDF();
-        boolean flag = ltp.doPrintToPdf(data, saveLoc, ListToPDF.Orientation.LANDSCAPE);
+      //  boolean flag = ltp.doPrintToPdf(data, saveLoc, ListToPDF.Orientation.LANDSCAPE);
         JFXButton okayBtn = new JFXButton("Okay");
         JFXButton openBtn = new JFXButton("View File");
         openBtn.setOnAction((ActionEvent event1) -> {
@@ -65,9 +65,9 @@ public class ScrumifyUtil {
                 alert.showAndWait();
             }
         });
-        if (flag) {
+       /* if (flag) {
                Notification.sendNotification("Scrumify App", "PDF file generated !",TrayIcon.MessageType.INFO );
-        }
+        }*/
     }
 
    

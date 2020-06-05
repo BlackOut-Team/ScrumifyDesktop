@@ -38,7 +38,6 @@ import java.util.List;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import scrumifyd.GestionProjets.models.Project;
 import scrumifyd.util.ScrumifyUtil;
 
 /**
