@@ -42,8 +42,7 @@ public class ActivityController implements Initializable {
 
     @FXML
     private VBox pnl_scroll;
-    @FXML
-    private Label Errors;
+    //private Label Errors;
     int user_id;
 
     Activity aa;
@@ -105,7 +104,7 @@ public class ActivityController implements Initializable {
 
                             box.setAction(activity.getAction());
                       
-                            box.setUsername(activity.getUsername());
+                            //box.setUsername(activity.getUsername());
 
                             EventHandler<MouseEvent> supprimerHandler = new EventHandler<MouseEvent>() {
 
@@ -150,7 +149,7 @@ public class ActivityController implements Initializable {
                             box.hideButton();
 
                             box.setAction(activity.getAction());
-                            box.setUsername(activity.getUsername());
+                            //box.setUsername(activity.getUsername());
                             
                              EventHandler<MouseEvent> supprimerHandler = new EventHandler<MouseEvent>() {
 
@@ -184,7 +183,8 @@ public class ActivityController implements Initializable {
             }
             else 
             {
-                Errors.setText("no activity");
+                System.out.println("no activity");
+                //Errors.setText("no activity");
             }
 
         } catch (SQLException ex) {

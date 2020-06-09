@@ -1,7 +1,6 @@
 package scrumifyd.GestionProjets.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import java.awt.Toolkit;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -86,8 +85,8 @@ public class DashboardController implements Initializable {
             SigninController s = new SigninController();
             user_idd = s.user.getUserId();
             ava = s.user.getAvatar(user_idd);
-            this.username.setText("" + s.user.getUsername(user_idd));
-            //this.avatar.setImage(new Image("/scrumifyd/uploads/images/" + ava));
+            this.username.setText("Hello ," + s.user.getUsername(user_idd));
+            this.avatar.setImage(new Image("/scrumifyd/uploads/images/" + ava));
             ProjectsController sp = loader.getController();
 
             sp.setUserId(user_idd);
@@ -258,7 +257,7 @@ public class DashboardController implements Initializable {
             sp.email.setText(u.getEmail());
             String ava = u.getImage();
             System.out.println(ava);
-            //sp.avatar.setImage(new Image("/scrumifyd/uploads/images/" + ava));
+             sp.avatar.setImage(new Image("/scrumifyd/uploads/images/" + ava));
 
             contentPane.getChildren().add(root);
             //loadUI("GestionProjets","Projects");

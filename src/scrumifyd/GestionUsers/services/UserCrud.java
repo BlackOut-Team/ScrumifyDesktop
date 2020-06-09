@@ -15,7 +15,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -347,5 +349,21 @@ public class UserCrud {
         return false;
 
     }
+  public ArrayList<Integer> getTeams(int user_id){
+      ArrayList<Integer> team_list = new ArrayList<>();
+      String req="SELECT t.team_id FROM team_user t WHERE t.user_id="+user_id;
+      PreparedStatement prpStm;
+        try {
+            prpStm = Cn.prepareStatement(req);
+            ResultSet result = prpStm.executeQuery();
+            if (result.next()) {
+                int t = result.getInt("team_id");
+                team_list.add(t);
 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      return team_list;
+  }
 }
