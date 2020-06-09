@@ -122,7 +122,7 @@ public class editProfileController implements Initializable {
         camera.setVisible(false);
         draw_av.setVisible(false);
         reset.setVisible(false);
-        edit.setVisible(false);
+        //edit.setVisible(false);
 
         //show reset form 
         current.setVisible(true);
