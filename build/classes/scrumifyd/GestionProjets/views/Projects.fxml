@@ -23,7 +23,7 @@
             </ScrollPane>
             <HBox layoutX="8.0" layoutY="13.0" prefHeight="34.0" prefWidth="885.0" style="-fx-background-color: white;">
                <children>
-                  <JFXTextField fx:id="searchBar" focusColor="#16cabd" onKeyReleased="#searchBar" promptText="search" unFocusColor="#4d4d4dab" />
+                  <JFXTextField fx:id="searchBar" focusColor="#16cabd" onKeyTyped="#searchBar" promptText="search" unFocusColor="#4d4d4dab" />
                   <Label fx:id="lbl_allProjects" onMouseClicked="#allProjects" prefHeight="30.0" prefWidth="207.0" styleClass="button6" stylesheets="@../util/fullpackstyling.css" text="All Projects" textFill="#16cabd">
                      <font>
                         <Font size="13.0" />
