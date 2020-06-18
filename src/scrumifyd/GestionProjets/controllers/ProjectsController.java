@@ -731,11 +731,11 @@ public class ProjectsController implements Initializable {
     @FXML
     private void searchBar(KeyEvent event) {
       
-         searchBar.setOnKeyReleased((event3) -> {
+         searchBar.setOnKeyTyped((event3) -> {
              try {
                  refreshSearch(searchBar.getText());
-                if (searchBar.getText()=="" ){
-                    refreshSearch(searchBar.getText());
+                if (searchBar.getText().isEmpty() ){
+                    //refreshSearch(searchBar.getText());
                     refreshNodes();
                 }
              } catch (InterruptedException ex) {

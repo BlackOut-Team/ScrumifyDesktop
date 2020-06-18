@@ -217,4 +217,10 @@ public class AdminDashController implements Initializable {
 
     }
 
+
+    @FXML
+    private void teams(ActionEvent event) {
+    }
+
+
 }

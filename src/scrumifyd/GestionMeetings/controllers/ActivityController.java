@@ -5,6 +5,7 @@
  */
 package scrumifyd.GestionMeetings.controllers;
 
+import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
 
@@ -21,14 +22,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import scrumifyd.GestionMeetings.models.Activity;
 import scrumifyd.GestionMeetings.services.ActivityService;
 import scrumifyd.GestionMeetings.services.InterfaceActivity;
+import scrumifyd.GestionProjets.controllers.ProjectsController;
+import scrumifyd.GestionProjets.controllers.emptyController;
+import scrumifyd.GestionProjets.models.Project;
 
 /**
  * FXML Controller class
@@ -42,17 +49,19 @@ public class ActivityController implements Initializable {
 
     @FXML
     private VBox pnl_scroll;
-    @FXML
-    private Label Errors;
+    //private Label Errors;
     int user_id;
 
     Activity aa;
-    /**
-     * Initializes the controller class.
-     */
 
     List<Activity> ListA = new ArrayList();
     InterfaceActivity Activity = new ActivityService();
+    @FXML
+    private JFXTextField searchBar;
+
+    /**
+     * Initializes the controller class.
+     */
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -104,8 +113,8 @@ public class ActivityController implements Initializable {
                             box.setColor();
 
                             box.setAction(activity.getAction());
-                      
-                            box.setUsername(activity.getUsername());
+
+                            box.setUsername(Activity.getUserAc(activity.getId()).getUsername());
 
                             EventHandler<MouseEvent> supprimerHandler = new EventHandler<MouseEvent>() {
 
@@ -126,13 +135,13 @@ public class ActivityController implements Initializable {
                                 }
 
                             };
-                            
-                             EventHandler<MouseEvent> viewHandler = new EventHandler<MouseEvent>() {
+
+                            EventHandler<MouseEvent> viewHandler = new EventHandler<MouseEvent>() {
 
                                 @Override
                                 public void handle(MouseEvent e) {
                                     if (e.getSource() == box.ViewButton) {
-                                       box.setColor2();
+                                        box.setColor2();
                                         refreshNodes();
 
                                     }
@@ -150,9 +159,9 @@ public class ActivityController implements Initializable {
                             box.hideButton();
 
                             box.setAction(activity.getAction());
-                            box.setUsername(activity.getUsername());
-                            
-                             EventHandler<MouseEvent> supprimerHandler = new EventHandler<MouseEvent>() {
+                            box.setUsername(Activity.getUserAc(activity.getId()).getUsername());
+
+                            EventHandler<MouseEvent> supprimerHandler = new EventHandler<MouseEvent>() {
 
                                 @Override
                                 public void handle(MouseEvent e) {
@@ -181,10 +190,24 @@ public class ActivityController implements Initializable {
                         Logger.getLogger(ActivityController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 });
-            }
-            else 
-            {
-                Errors.setText("no activity");
+            } else {
+             contentPane.getChildren().clear();
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/scrumifyd/GestionProjets/views/empty.fxml"));
+                Parent root = null;
+                try {
+                    root = (Parent) loader.load();
+                    emptyController sp = loader.getController();
+                    sp.setUserId(user_id);
+                    sp.setLabelColor(sp.lbl_allProjects);
+                    sp.setLabelColor1(sp.lbl_completed);
+                    sp.setLabelColor1(sp.lbl_currentprojects);
+
+                } catch (IOException ex) {
+                    Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                contentPane.getChildren().add(root);
             }
 
         } catch (SQLException ex) {
@@ -201,4 +224,138 @@ public class ActivityController implements Initializable {
         this.aa = aa;
     }
 
+    public void refreshSearch(String key) throws InterruptedException {
+        try {
+            pnl_scroll.getChildren().clear();
+
+            List<Activity> ListA = Activity.searchActivities(key);
+
+            if (!ListA.isEmpty()) {
+
+                Node nodes[] = new Node[ListA.size() + 1];
+                ListA.forEach((Activity activity) -> {
+
+                    try {
+
+                        int i = ListA.indexOf(activity);
+                        i++;
+                        FXMLLoader ActivityLoader = new FXMLLoader(ActivityController.this.getClass().getResource("/scrumifyd/GestionMeetings/views/ActivityBox.fxml"));
+                        // ActivityBoxController box2 = ActivityLoader.getController();
+
+                        nodes[i] = ActivityLoader.load();
+
+                        if (activity.getViewed() == 0) {
+                            ActivityBoxController box = ActivityLoader.getController();
+
+                            box.setColor();
+
+                            box.setAction(activity.getAction());
+
+                            box.setUsername(Activity.getUserAc(activity.getId()).getUsername());
+
+                            EventHandler<MouseEvent> supprimerHandler = new EventHandler<MouseEvent>() {
+
+                                @Override
+                                public void handle(MouseEvent e) {
+                                    if (e.getSource() == box.SupprimerButton) {
+                                        InterfaceActivity aa = new ActivityService();
+                                        //Project pp;
+                                        //String idd = id.getText();
+                                        try {
+                                            aa.supprimerActivity(activity.getId());
+                                            refreshNodes();
+                                        } catch (SQLException ex) {
+                                            Logger.getLogger(ActivityController.class.getName()).log(Level.SEVERE, null, ex);
+                                        }
+
+                                    }
+                                }
+
+                            };
+
+                            EventHandler<MouseEvent> viewHandler = new EventHandler<MouseEvent>() {
+
+                                @Override
+                                public void handle(MouseEvent e) {
+                                    if (e.getSource() == box.ViewButton) {
+                                        box.setColor2();
+                                        refreshNodes();
+
+                                    }
+                                }
+
+                            };
+                            box.SupprimerButton.addEventHandler(MouseEvent.MOUSE_CLICKED, supprimerHandler);
+                            box.ViewButton.addEventHandler(MouseEvent.MOUSE_CLICKED, viewHandler);
+
+                        } else {
+                            ActivityBoxController box = ActivityLoader.getController();
+
+                            //separate date into separate day month year for both dates
+                            box.setColor2();
+                            box.hideButton();
+
+                            box.setAction(activity.getAction());
+                            box.setUsername(Activity.getUserAc(activity.getId()).getUsername());
+
+                            EventHandler<MouseEvent> supprimerHandler = new EventHandler<MouseEvent>() {
+
+                                @Override
+                                public void handle(MouseEvent e) {
+                                    if (e.getSource() == box.SupprimerButton) {
+                                        InterfaceActivity aa = new ActivityService();
+                                        //Project pp;
+                                        //String idd = id.getText();
+                                        try {
+                                            aa.supprimerActivity(activity.getId());
+                                            refreshNodes();
+                                        } catch (SQLException ex) {
+                                            Logger.getLogger(ActivityController.class.getName()).log(Level.SEVERE, null, ex);
+                                        }
+
+                                    }
+                                }
+
+                            };
+                            box.SupprimerButton.addEventHandler(MouseEvent.MOUSE_CLICKED, supprimerHandler);
+
+                        }
+
+                        pnl_scroll.getChildren().addAll(nodes[i]);
+
+                    } catch (IOException ex) {
+                        Logger.getLogger(ActivityController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                });
+            } else {
+                ImageView empty = new ImageView("/scrumifyd/GestionProjets/images/empty-state.png");
+                pnl_scroll.getChildren().add(empty);
+                System.out.println("empty");
+           
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ActivityController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    @FXML
+    private void searchBar(KeyEvent event) {
+
+        searchBar.setOnKeyTyped((event3) -> {
+            try {
+                refreshSearch(searchBar.getText());
+                if (searchBar.getText().isEmpty()) {
+                    //refreshSearch(searchBar.getText());
+                    refreshNodes();
+                }
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        });
+
+    }
 }

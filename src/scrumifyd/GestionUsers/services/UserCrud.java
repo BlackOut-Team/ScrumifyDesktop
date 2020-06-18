@@ -15,7 +15,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -57,18 +59,32 @@ public class UserCrud {
 
     }
 
-    public void SupprimerUser(int id) {
+    public Boolean SupprimerUser(int id) {
         try {
             Statement st = Cn.createStatement();
-            String req = "delete from user where id=" + id;
+            String req = "Update user set enabled=0  where id=" + id;
             st.executeUpdate(req);
-            System.out.println("suppression ok");
+            return true;
+           
         } catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
 
     }
+   public Boolean enableUser(int id) {
+        try {
+            Statement st = Cn.createStatement();
+            String req = "Update user set enabled=1  where id=" + id;
+            st.executeUpdate(req);
+            return true;
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
 
+    }
     public ObservableList<User> getAllUser() {
         ObservableList<User> l = FXCollections.observableArrayList();
 
@@ -80,7 +96,7 @@ public class UserCrud {
             ResultSet rs = st.executeQuery(req); //retourne un résulat
 
             while (rs.next()) {
-                User U = new User(rs.getInt(1), rs.getString(2), rs.getString(4), true, rs.getString(8), rs.getString(12));
+                User U = new User(rs.getInt(1), rs.getString(2),rs.getString(3), rs.getString(4),rs.getString(6),  rs.getBoolean(8), rs.getDate(11), rs.getString(15));
 
                 l.add(U);
             }
@@ -317,7 +333,7 @@ public class UserCrud {
 
     public Boolean updateAv(String img, int id) {
         try {
-            String update = "UPDATE user set image=?  WHERE ID=" + id + "";
+            String update = "UPDATE user set image=?  WHERE ID='" + id + "'";
             PreparedStatement stm = Cn.prepareStatement(update);
             stm.setString(1, img);
             int res = stm.executeUpdate();
@@ -347,5 +363,21 @@ public class UserCrud {
         return false;
 
     }
+  public ArrayList<Integer> getTeams(int user_id){
+      ArrayList<Integer> team_list = new ArrayList<>();
+      String req="SELECT t.team_id FROM team_user t WHERE t.user_id="+user_id;
+      PreparedStatement prpStm;
+        try {
+            prpStm = Cn.prepareStatement(req);
+            ResultSet result = prpStm.executeQuery();
+            if (result.next()) {
+                int t = result.getInt("team_id");
+                team_list.add(t);
 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      return team_list;
+  }
 }

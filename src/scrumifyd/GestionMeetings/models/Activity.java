@@ -13,7 +13,6 @@ public class Activity {
      int id;
      int  user_id;
     String action;
-    String username;
     int viewed;
    
 
@@ -41,12 +40,11 @@ public class Activity {
         this.viewed = viewed;
         this.user_id = user_id;
     }
- public Activity(int id, String action, int viewed, int user_id, String username) {
+ public Activity(int id, String action, int viewed, int user_id) {
         this.id = id;
         this.action = action;
         this.viewed = viewed;
         this.user_id = user_id;
-        this.username = username;
     }
 
     public int getId() {
@@ -65,14 +63,7 @@ public class Activity {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
+ 
     public void setAction(String action) {
         this.action = action;
     }

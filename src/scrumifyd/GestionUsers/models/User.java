@@ -106,7 +106,7 @@ public User(int id, String username) {
         this.id = id;
         this.username = username;
     }
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -249,6 +249,17 @@ public User(int id, String username) {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public User(Integer id, String username, String name, String lastname, String email, boolean enabled, Date lastLogin, String image) {
+        this.id = id;
+        this.username = username;
+        this.name = name;
+        this.lastname = lastname;
+        this.email = email;
+        this.enabled = enabled;
+        this.lastLogin = lastLogin;
+        this.image = image;
     }
 
 

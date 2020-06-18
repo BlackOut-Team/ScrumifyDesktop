@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <!--<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
@@ -43,6 +44,130 @@
    <children>
       <AnchorPane>
          <children>
+            <Pane fx:id="contentPane" layoutX="11.0" layoutY="51.0" prefHeight="413.0" prefWidth="934.0">
+               <children>
+                  <PieChart fx:id="charts" layoutY="1.0" style="-fx-pie-color: #16cabd;" styleClass="chart-pie" stylesheets="@../../util/fullpackstyling.css" />
+                  <PieChart fx:id="charts1" layoutX="490.0" layoutY="7.0" prefHeight="400.0" prefWidth="437.0" />
+                  <GridPane fx:id="gridd" layoutX="37.0" layoutY="54.0" prefHeight="343.0" prefWidth="852.0" style="-fx-border-color: #16cabd; -fx-background-color: transparent;" styleClass="column-header" stylesheets="@../../util/fullpackstyling.css">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <ScrollPane prefHeight="32.0" prefWidth="213.0">
+                           <content>
+                              <VBox fx:id="p_1" prefHeight="78.0" prefWidth="208.0" style="-fx-background-color: transparent;" />
+                           </content>
+                           <GridPane.margin>
+                              <Insets top="30.0" />
+                           </GridPane.margin>
+                        </ScrollPane>
+                        <ScrollPane GridPane.columnIndex="1">
+                           <content>
+                              <VBox fx:id="p_2" prefHeight="79.0" prefWidth="209.0" style="-fx-background-color: transparent;" styleClass="table-view" stylesheets="@../util/fullpackstyling.css" />
+                           </content>
+                           <GridPane.margin>
+                              <Insets top="30.0" />
+                           </GridPane.margin>
+                        </ScrollPane>
+                        <ScrollPane GridPane.columnIndex="2">
+                           <content>
+                              <VBox fx:id="p_3" prefHeight="81.0" prefWidth="207.0" style="-fx-background-color: transparent;" styleClass="table-view" stylesheets="@../util/fullpackstyling.css" />
+                           </content>
+                           <GridPane.margin>
+                              <Insets top="30.0" />
+                           </GridPane.margin>
+                        </ScrollPane>
+                        <ScrollPane GridPane.columnIndex="3">
+                           <content>
+                              <VBox fx:id="p_4" prefHeight="79.0" prefWidth="208.0" style="-fx-background-color: transparent;" styleClass="table-view" stylesheets="@../util/fullpackstyling.css" />
+                           </content>
+                           <GridPane.margin>
+                              <Insets top="30.0" />
+                           </GridPane.margin>
+                        </ScrollPane>
+                        <ScrollPane GridPane.rowIndex="1">
+                           <content>
+                              <VBox fx:id="p_5" prefHeight="75.0" prefWidth="208.0" style="-fx-background-color: transparent;" styleClass="table-view" stylesheets="@../util/fullpackstyling.css" />
+                           </content>
+                           <GridPane.margin>
+                              <Insets top="30.0" />
+                           </GridPane.margin>
+                        </ScrollPane>
+                        <ScrollPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <content>
+                              <VBox fx:id="p_6" prefHeight="80.0" prefWidth="210.0" style="-fx-background-color: transparent;" styleClass="table-view" stylesheets="@../util/fullpackstyling.css" />
+                           </content>
+                           <GridPane.margin>
+                              <Insets top="30.0" />
+                           </GridPane.margin>
+                        </ScrollPane>
+                        <ScrollPane GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <content>
+                              <VBox fx:id="p_7" prefHeight="80.0" prefWidth="206.0" style="-fx-background-color: transparent;" styleClass="table-view" stylesheets="@../util/fullpackstyling.css" />
+                           </content>
+                           <GridPane.margin>
+                              <Insets top="30.0" />
+                           </GridPane.margin>
+                        </ScrollPane>
+                        <ScrollPane GridPane.columnIndex="3" GridPane.rowIndex="1">
+                           <content>
+                              <VBox fx:id="p_8" prefHeight="58.0" prefWidth="207.0" style="-fx-background-color: transparent;" styleClass="table-view" stylesheets="@../util/fullpackstyling.css" />
+                           </content>
+                           <GridPane.margin>
+                              <Insets top="30.0" />
+                           </GridPane.margin>
+                        </ScrollPane>
+                        <ScrollPane GridPane.rowIndex="2">
+                           <content>
+                              <VBox fx:id="p_9" prefHeight="78.0" prefWidth="211.0" style="-fx-background-color: transparent;" styleClass="table-view" stylesheets="@../util/fullpackstyling.css" />
+                           </content>
+                           <GridPane.margin>
+                              <Insets top="30.0" />
+                           </GridPane.margin>
+                        </ScrollPane>
+                        <ScrollPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <content>
+                              <VBox fx:id="p_10" prefHeight="79.0" prefWidth="210.0" style="-fx-background-color: transparent;" styleClass="table-view" stylesheets="@../util/fullpackstyling.css" />
+                           </content>
+                           <GridPane.margin>
+                              <Insets top="30.0" />
+                           </GridPane.margin>
+                        </ScrollPane>
+                        <ScrollPane GridPane.columnIndex="2" GridPane.rowIndex="2">
+                           <content>
+                              <VBox fx:id="p_11" prefHeight="73.0" prefWidth="201.0" style="-fx-background-color: transparent;" styleClass="table-view" stylesheets="@../util/fullpackstyling.css" />
+                           </content>
+                           <GridPane.margin>
+                              <Insets top="30.0" />
+                           </GridPane.margin>
+                        </ScrollPane>
+                        <ScrollPane GridPane.columnIndex="3" GridPane.rowIndex="2">
+                           <content>
+                              <VBox fx:id="p_12" prefHeight="76.0" prefWidth="206.0" style="-fx-background-color: transparent;" styleClass="table-view" stylesheets="@../util/fullpackstyling.css" />
+                           </content>
+                           <GridPane.margin>
+                              <Insets top="30.0" />
+                           </GridPane.margin>
+                        </ScrollPane>
+                     </children>
+                  </GridPane>
+                  <Label fx:id="year" layoutX="435.0" text="2020" textFill="#16cabd">
+                     <font>
+                        <Font name="Calibri Bold" size="36.0" />
+                     </font>
+                  </Label>
+                  <FontAwesomeIconView fx:id="back" fill="#7dd4ccc1" glyphName="BACKWARD" layoutX="369.0" layoutY="31.0" size="24" />
+                  <FontAwesomeIconView fx:id="next" fill="#7dd4ccf2" glyphName="FORWARD" layoutX="544.0" layoutY="31.0" size="24" wrappingWidth="22.476170539855957" />
+               </children>
+            </Pane>
             <HBox layoutY="12.0" prefHeight="34.0" prefWidth="928.0">
                <children>
                   <Label fx:id="lbl_calendar" prefHeight="30.0" prefWidth="439.0" styleClass="button6" stylesheets="@../util/fullpackstyling.css" text="                                                              Calendar" textFill="#16cabd">
@@ -66,142 +191,66 @@
                   </Label>
                </children>
             </HBox>
-            <Pane fx:id="contentPane" layoutX="11.0" layoutY="51.0" prefHeight="413.0" prefWidth="934.0">
-               <children>
-                  <PieChart fx:id="charts" layoutY="1.0" style="-fx-pie-color: #16cabd;" styleClass="chart-pie" stylesheets="@../../util/fullpackstyling.css" />
-                  <PieChart fx:id="charts1" layoutX="490.0" layoutY="7.0" prefHeight="400.0" prefWidth="437.0" />
-                  <GridPane fx:id="gridd" layoutX="37.0" layoutY="52.0" prefHeight="343.0" prefWidth="852.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <ScrollPane prefHeight="79.0" prefWidth="167.0">
-                           <content>
-                              <Label text="JAN" textFill="#16cabd">
-                                 <font>
-                                    <Font name="Calibri" size="24.0" />
-                                 </font>
-                              </Label>
-                           </content>
-                        </ScrollPane>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
-                           <content>
-                              <Label text="FEB" textFill="#16cabd">
-                                 <font>
-                                    <Font name="Calibri" size="24.0" />
-                                 </font>
-                              </Label>
-                           </content>
-                        </ScrollPane>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
-                           <content>
-                              <Label text="MAR" textFill="#16cabd">
-                                 <font>
-                                    <Font name="Calibri" size="24.0" />
-                                 </font>
-                              </Label>
-                           </content>
-                        </ScrollPane>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
-                           <content>
-                              <Label text="APR" textFill="#16cabd">
-                                 <font>
-                                    <Font name="Calibri" size="24.0" />
-                                 </font>
-                              </Label>
-                           </content>
-                        </ScrollPane>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-                           <content>
-                              <Label text="MAY" textFill="#16cabd">
-                                 <font>
-                                    <Font name="Calibri" size="24.0" />
-                                 </font>
-                              </Label>
-                           </content>
-                        </ScrollPane>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <content>
-                              <Label text="JUN" textFill="#16cabd">
-                                 <font>
-                                    <Font name="Calibri" size="24.0" />
-                                 </font>
-                              </Label>
-                           </content>
-                        </ScrollPane>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                           <content>
-                              <Label text="JUL" textFill="#16cabd">
-                                 <font>
-                                    <Font name="Calibri" size="24.0" />
-                                 </font>
-                              </Label>
-                           </content>
-                        </ScrollPane>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                           <content>
-                              <Label text="AUG" textFill="#16cabd">
-                                 <font>
-                                    <Font name="Calibri" size="24.0" />
-                                 </font>
-                              </Label>
-                           </content>
-                        </ScrollPane>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
-                           <content>
-                              <Label text="SEP" textFill="#16cabd">
-                                 <font>
-                                    <Font name="Calibri" size="24.0" />
-                                 </font>
-                              </Label>
-                           </content>
-                        </ScrollPane>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                           <content>
-                              <Label text="OCT" textFill="#16cabd">
-                                 <font>
-                                    <Font name="Calibri" size="24.0" />
-                                 </font>
-                              </Label>
-                           </content>
-                        </ScrollPane>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                           <content>
-                              <Label text="NOV" textFill="#16cabd">
-                                 <font>
-                                    <Font name="Calibri" size="24.0" />
-                                 </font>
-                              </Label>
-                           </content>
-                        </ScrollPane>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
-                           <content>
-                              <Label text="DEC" textFill="#16cabd">
-                                 <font>
-                                    <Font name="Calibri" size="24.0" />
-                                 </font>
-                              </Label>
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </GridPane>
-                  <Label fx:id="year" layoutX="435.0" text="2020" textFill="#16cabd">
-                     <font>
-                        <Font name="Calibri Bold" size="36.0" />
-                     </font>
-                  </Label>
-                  <FontAwesomeIconView fx:id="back" fill="#7dd4ccc1" glyphName="BACKWARD" layoutX="369.0" layoutY="31.0" size="24" />
-                  <FontAwesomeIconView fx:id="next" fill="#7dd4ccf2" glyphName="FORWARD" layoutX="544.0" layoutY="31.0" size="24" wrappingWidth="22.476170539855957" />
-               </children>
-            </Pane>
+            <Label fx:id="m" layoutX="51.0" layoutY="220.0" text="MAY" textFill="#16cabd">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="m" layoutX="691.0" layoutY="331.0" text="DEC" textFill="#16cabd">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="m" layoutX="478.0" layoutY="332.0" text="NOV" textFill="#16cabd">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="m" layoutX="268.0" layoutY="332.0" text="OCT" textFill="#16cabd">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="m" layoutX="51.0" layoutY="331.0" text="SEP" textFill="#16cabd">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="m" layoutX="690.0" layoutY="218.0" text="AUG" textFill="#16cabd">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="477.0" layoutY="219.0" text="JUL" textFill="#16cabd">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="267.0" layoutY="218.0" text="JUN" textFill="#16cabd">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="689.0" layoutY="103.0" text="APR" textFill="#16cabd">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="477.0" layoutY="102.0" text="MAR" textFill="#16cabd">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="267.0" layoutY="103.0" text="FEB" textFill="#16cabd">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="53.0" layoutY="100.0" text="JAN" textFill="#16cabd">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

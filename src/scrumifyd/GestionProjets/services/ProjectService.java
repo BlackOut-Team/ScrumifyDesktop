@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -309,42 +310,43 @@ public class ProjectService implements InterfaceProjet {
     public List<Project> searchProjects(String key, int user_id) throws SQLException {
 
         List<Project> Projects = new ArrayList<>();
-//        List<Project> Projects1 = new ArrayList<>();
-//
-//        List<Project> Pr = getAllActiveProjects(user_id);
-//        
-//        Projects = Pr.stream().filter(t -> t.getName().toUpperCase().//convert to uppercase for checking
-//         contains(key)).//filter values containing black
-//         collect(Collectors.toList())
-//                ;
-////        Projects1 = Pr.stream().filter(t -> t.getDescription().toUpperCase().//convert to uppercase for checking
-////         contains(key)).//filter values containing black
-////         collect(Collectors.toList())
-//                ;
-////        Projects.add((Project) Projects1);
+        List<Project> Projects1 = new ArrayList<>();
 
-        try {
+        List<Project> Pr = getAllActiveProjects(user_id);
+        System.out.println(Pr);
 
-            String req = "SELECT * FROM `projet` WHERE `etat`=1 and (`name` like ? or `description` like ?) ";
-            PreparedStatement stm = connexion.prepareStatement(req);
-            stm.setString(1, "%" + key + "%");
-            stm.setString(2, "%" + key + "%");
-
-            ResultSet result = stm.executeQuery();
-
-            while (result.next()) {
-                Date createdd = result.getDate("created");
-                Date duedate = result.getDate("duedate");
-                LocalDate datec = Instant.ofEpochMilli(createdd.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
-                LocalDate dated = Instant.ofEpochMilli(duedate.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
-                Project p = new Project(result.getInt(1), result.getString("name"), result.getString("description"), datec, dated, result.getInt("etat"));
-                Projects.add(p);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ProjectService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        Projects = Pr.stream().filter(t -> t.getName().//convert to uppercase for checking
+                contains(key)).//filter values containing black
+                collect(Collectors.toList());
+        System.out.println(Projects);
+        Projects1 = Pr.stream().filter(t -> t.getDescription().//convert to uppercase for checking
+                contains(key)).//filter values containing black
+                collect(Collectors.toList());
+        System.out.println(Projects1);
+        //  Projects.add(Projects1););
+        Projects.addAll(Projects1);
         return Projects;
+//        try {
+//
+//            String req = "SELECT * FROM `projet` WHERE `etat`=1 and (`name` like ? or `description` like ?) ";
+//            PreparedStatement stm = connexion.prepareStatement(req);
+//            stm.setString(1, "%" + key + "%");
+//            stm.setString(2, "%" + key + "%");
+//
+//            ResultSet result = stm.executeQuery();
+//
+//            while (result.next()) {
+//                Date createdd = result.getDate("created");
+//                Date duedate = result.getDate("duedate");
+//                LocalDate datec = Instant.ofEpochMilli(createdd.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+//                LocalDate dated = Instant.ofEpochMilli(duedate.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+//                Project p = new Project(result.getInt(1), result.getString("name"), result.getString("description"), datec, dated, result.getInt("etat"));
+//                Projects.add(p);
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(ProjectService.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
 
     }
 

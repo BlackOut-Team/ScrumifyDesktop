@@ -1,7 +1,6 @@
 package scrumifyd.GestionProjets.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import java.awt.Toolkit;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -86,7 +85,7 @@ public class DashboardController implements Initializable {
             SigninController s = new SigninController();
             user_idd = s.user.getUserId();
             ava = s.user.getAvatar(user_idd);
-            this.username.setText("" + s.user.getUsername(user_idd));
+            this.username.setText("Hello ," + s.user.getUsername(user_idd));
             this.avatar.setImage(new Image("/scrumifyd/uploads/images/" + ava));
             ProjectsController sp = loader.getController();
 
@@ -248,18 +247,20 @@ public class DashboardController implements Initializable {
             Parent root = (Parent) loader.load();
             editProfileController sp = loader.getController();
             sp.user_id = user_idd;
-            User u = new User();
+            System.out.println(user_idd);
+            //User u = new User();
             UserCrud U = new UserCrud();
-            u = U.getUser(user_idd);
+            User u = U.getUser(user_idd);
             sp.name.setText(u.getName());
             sp.lastname.setText(u.getLastname());
             sp.username.setText(u.getUsername());
             sp.email.setText(u.getEmail());
             String ava = u.getImage();
+            System.out.println(ava);
             sp.avatar.setImage(new Image("/scrumifyd/uploads/images/" + ava));
 
             contentPane.getChildren().add(root);
-//loadUI("GestionProjets","Projects");
+            //loadUI("GestionProjets","Projects");
         } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }

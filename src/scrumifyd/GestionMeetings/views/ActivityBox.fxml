@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="box" prefHeight="121.0" prefWidth="880.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scrumifyd.GestionMeetings.controllers.ActivityBoxController">
+<AnchorPane id="AnchorPane" fx:id="box" prefHeight="121.0" prefWidth="945.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scrumifyd.GestionMeetings.controllers.ActivityBoxController">
    <children>
-      <Pane fx:id="box2" layoutX="15.0" layoutY="11.0" prefHeight="88.0" prefWidth="826.0" style="-fx-padding: 20 px;">
+      <Pane fx:id="box2" layoutX="15.0" layoutY="11.0" prefHeight="88.0" prefWidth="915.0" style="-fx-padding: 20 px;">
          <children>
             <ImageView fx:id="avatar" fitHeight="47.0" fitWidth="45.0" layoutX="33.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -31,8 +31,8 @@
                </font>
             </Label>
           
-            <FontAwesomeIconView fx:id="SupprimerButton" fill="#16cabd" glyphName="TRASH" layoutX="780.0" layoutY="68.0" size="24" />
-             <FontAwesomeIconView fx:id="ViewButton" fill="#16cabd" glyphName="EYE" layoutX="738.0" layoutY="68.0" size="24" />
+            <FontAwesomeIconView fx:id="SupprimerButton" fill="#16cabd" glyphName="TRASH" layoutX="861.0" layoutY="68.0" size="24" />
+             <FontAwesomeIconView fx:id="ViewButton" fill="#16cabd" glyphName="EYE" layoutX="813.0" layoutY="68.0" size="24" />
 
          </children>
          <effect>
