@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<!--<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutX="-1.0" layoutY="-2.0" prefHeight="477.0" prefWidth="749.0" styleClass="linear-grad" stylesheets="@../util/fullpackstyling.css">
+         <children>
+            <ImageView fitHeight="398.0" fitWidth="628.0" layoutX="82.0" layoutY="59.0" opacity="0.19" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/undraw_investing_7u74.png" />
+               </image>
+            </ImageView>
+            <FontAwesomeIconView fx:id="exit" fill="WHITE" glyphName="CLOSE" layoutX="720.0" layoutY="27.0" size="20" wrappingWidth="26.761884689331055" />
+            <Label fx:id="Errors" layoutX="14.0" layoutY="447.0" prefHeight="17.0" prefWidth="235.0" textFill="#32aea6" />
+            <BorderPane prefHeight="477.0" prefWidth="200.0" style="-fx-background-color: white;">
+               <center>
+                  <ImageView fitHeight="37.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                     <image>
+                        <Image url="@../images/scrumify.png" />
+                     </image>
+                  </ImageView>
+               </center>
+            </BorderPane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>-->
+
+<StackPane fx:id="contentPane" prefHeight="506.0" prefWidth="1008.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scrumifyd.GestionMeetings.controllers.ActivityController">
+   <children>
+      <AnchorPane>
+         <children>
+            <JFXTextField fx:id="searchBar" focusColor="#16cabd" layoutX="14.0" layoutY="14.0" onKeyTyped="#searchBar" promptText="Search" />    
+            <ScrollPane layoutY="51.0" prefHeight="455.0" prefWidth="1008.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="51.0">
+                 <content>
+                    <VBox fx:id="pnl_scroll" prefHeight="459.0" prefWidth="1005.0" spacing="15.0" style="-fx-background-color: #fff;" />
+                 </content>
+              </ScrollPane>
+            <Label layoutX="467.0" layoutY="16.0" text="All actvities" textFill="#16cabd">
+               <font>
+                  <Font name="Calibri Light" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

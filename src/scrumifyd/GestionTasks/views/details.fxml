@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scrumifyd.GestionTasks.controllers.DetailsController">
+   <children>
+      <AnchorPane>
+         <children>
+            <Pane fx:id="contentPane" layoutX="11.0" layoutY="8.0" prefHeight="512.0" prefWidth="934.0">
+               <children>
+                  <FontAwesomeIconView fx:id="back" fill="#16cabd" glyphName="BACKWARD" layoutX="18.0" layoutY="40.0" onMouseClicked="#back" size="24" />
+                  <Label fx:id="Errors" layoutX="81.0" layoutY="377.0" prefHeight="17.0" prefWidth="235.0" textFill="#32aea6" />
+                  <ListView fx:id="l_members" layoutX="161.0" layoutY="256.0" prefHeight="187.0" prefWidth="200.0" />
+                  <Label layoutX="161.0" layoutY="227.0" text="List of members" />
+                  <Label layoutX="156.0" layoutY="67.0" text="Title" />
+                  <JFXTextArea fx:id="Description" editable="false" layoutX="156.0" layoutY="97.0" prefHeight="101.0" prefWidth="292.0" />
+                  <Label fx:id="Title" layoutX="228.0" layoutY="67.0" text="Name" textFill="#16cabd">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="priority" layoutX="591.0" layoutY="67.0" text="Label" />
+                  <Label layoutX="509.0" layoutY="67.0" text="Priority" />
+                  <Label layoutX="511.0" layoutY="97.0" text="Status" />
+                  <Label fx:id="etat" layoutX="590.0" layoutY="97.0" text="Label" />
+                  <Label layoutX="511.0" layoutY="128.0" text="Created" />
+                  <Label layoutX="512.0" layoutY="189.0" text="Duedate" />
+                  <Label layoutX="512.0" layoutY="158.0" text="Updated" />
+                  <Label fx:id="updated" layoutX="582.0" layoutY="160.0" text="Updated" />
+                  <Label fx:id="created" layoutX="583.0" layoutY="128.0" text="Created" />
+                  <Label fx:id="finished" layoutX="580.0" layoutY="194.0" text="Finished" />
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "scrumify-269400",
+  "private_key_id": "15ff2505164dc12709318845c24296189f2e040e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCobtxCYSSjs3B0\nMSKN2qV9BAqM7OcBcWTFaR/6q2bPBDVcVT1b4MbTMIqFynO46lGIKuAt1nHAbXZz\naToHIxiqviAee5vkDutZ1Am1V66wknlbadFyl62G6tyFaHJSjMrnKdjKclAB+oV6\nDiXg3TEV2dz4sM+dJSkbm6eUDmLyb5arCZ8q8I9ACptF2u4aZLVDMXEE7c16ThvQ\n+8tvoE1SUCxqDExi+aeSPSaE+6vebhiYMSha5NLn+6e7gW5D6EYR+4ch511IChgq\n/1Lj2LtXXx6l+gKws/2DnK/NWxUY+tOMPhKddpW2xT1kbwKPArbYOEtQ44dIWFgx\npUeySaz9AgMBAAECggEAFS2TSPlj8lK5R113kHSMgv1DbQLLQlWFVoO9qfbBP4hc\n7pYn1+nvC1Y6z1BsX99+juuCh+Dt0+8vifASLsbimXK8dni+WjI8tMJs0hNgpgJU\n0Kyr0YfGzC8IY/HaZgzJOmr66kGYqRcHOhiV+gHLOTR34gEr/wCm0Y+EcPZPdKy6\nK3wEQfm4f+mv86mnqFSsM94AtqZya5qGkgwqjbmpxESdO5JcfoAj8jGn4I4fKfl0\niz78XW9HtJQ8FqEHSb+THvVLJSaT538det1HN8QWH46qGHbtqS4WW2VUL7uj1EAL\nRCPtwUlV5HBbiJYpPWogl5vVPswCwz/brQZpGC5q1QKBgQDhLBMXyTB/uWvwlNHx\nehwBpX15wK5RMvOv5aHewKZAsajIam5qHhdCB5B1BD+Ab5Ksj53A8qBNqVPDnCOc\nLkmgG7qCO4m75QCc2kkdRiOXiopOQ4Lq5alFG363ovIIS3jRk2TI1k/ncCkXtOBt\nG9ZNTSaq8LUR6M8lN3ybr1r2MwKBgQC/fiuRVXLQZjtsVxQBa9KhryKowu7a1Xbf\njXHeYB9q6sm0KmCLuLZfIa52QzEiWSSZW9a80Tt8b8DhCnHR37km+csGS19JHRrz\nyEDrcrZQPzcUEzFNiQB7ks1X8+duv8fB0u5VfmaBxkv0XSrNjICNEi95ysDGkCgg\n28stmnXADwKBgQCVL5tyzfSZGyPd4Ov8PrghiyDIMxYLbGOyLcWCjUdZY5v9NS70\nlf043UQjk23zTXjzZa/Sb64v5jk+R8v8JVrYfqaitIm7+KzgP2vjvl3EgKDD28z4\njrMIu3/IcWhEgKSKzkofGocUQuam80siXygsTSqKZTLCq+nasZmYmKT+qwKBgBDa\ngesgoiJFXSWD5HbbjoY8a8h+n5cTAotaX5M60okOcQIyWJzzfNmSlVBDSafEQLxe\noN+tapbhHxCvYqUeE6WihoPfTluY/C5Iia4vQmx9o9NYfRZd4HT/zqLXDJ9qsaIV\ndnR/03XIhhbTvFiq7QV9fEAz4BOZzG5X6eHxnjtxAoGATmnGilz8wkwHrqnKfSIg\nmCeKnUzlybjWJwExf7nII7vzBg5otSiJvqVOmY3f339wAsclV1Z5IPOAv669mCiJ\njos3MOItI1akBCrlTodwTlaCbHiBX+m6n+PLBkN8kX59Q4cqwuCSphXAzBEOduFd\nkn3lO4v7EYt15x80KQyW57s=\n-----END PRIVATE KEY-----\n",
+  "client_email": "scrumify@scrumify-269400.iam.gserviceaccount.com",
+  "client_id": "107091593061757891748",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/scrumify%40scrumify-269400.iam.gserviceaccount.com"
+}

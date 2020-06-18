@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+
+<StackPane fx:id="contentPane1" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scrumifyd.GestionFeature.controllers.FeatureController">
+   <children>
+      <AnchorPane id="AnchorPane" fx:id="contentPane" prefHeight="439.0" prefWidth="752.0">
+         <children>
+            <TableView fx:id="table" layoutX="107.0" layoutY="220.0" onMouseClicked="#fill_fields" prefHeight="200.0" prefWidth="324.0" stylesheets="@../../util/fullpackstyling.css">
+              <columns>
+                <TableColumn fx:id="id" minWidth="0.0" prefWidth="58.33331298828125" text="id" />
+                <TableColumn fx:id="name" prefWidth="170.66668701171875" text="name" />
+                  <TableColumn fx:id="etat" prefWidth="91.33331298828125" text="etat" />
+              </columns>
+            </TableView>
+            <Button fx:id="delete" layoutX="473.0" layoutY="286.0" mnemonicParsing="false" onAction="#delete" prefHeight="25.0" prefWidth="168.0" styleClass="button3" stylesheets="@../../util/fullpackstyling.css" text="Delete" textFill="WHITE" />
+            <Label layoutX="147.0" layoutY="123.0" text="Status" />
+            <ChoiceBox fx:id="etat_field" layoutX="236.0" layoutY="118.0" prefHeight="27.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-border-color: #16cabd;" stylesheets="@../../util/fullpackstyling.css" />
+            <Label layoutX="147.0" layoutY="77.0" text="Name" />
+            <Button fx:id="update" layoutX="275.0" layoutY="159.0" mnemonicParsing="false" onAction="#update" prefHeight="25.0" prefWidth="64.0" styleClass="button3" stylesheets="@../../util/fullpackstyling.css" text="update" textFill="WHITE" />
+            <TextField fx:id="name_field" layoutX="236.0" layoutY="72.0" prefHeight="27.0" prefWidth="225.0" style="-fx-background-color: transparent; -fx-border-color: #16cabd; -fx-text-fill: black;" stylesheets="@../../util/fullpackstyling.css" />
+            <Separator layoutX="66.0" layoutY="207.0" prefHeight="0.0" prefWidth="669.0" />
+            <Button layoutX="355.0" layoutY="158.0" mnemonicParsing="false" onAction="#add" prefHeight="25.0" prefWidth="64.0" styleClass="button3" stylesheets="@../../util/fullpackstyling.css" text="add" textFill="WHITE" />
+            <Button layoutX="620.0" layoutY="23.0" mnemonicParsing="false" onAction="#PDF" styleClass="button2" stylesheets="@../../util/fullpackstyling.css" text="Export PDF" textFill="WHITE" />
+            <Button layoutX="473.0" layoutY="320.0" mnemonicParsing="false" onAction="#UserStory" prefHeight="39.0" prefWidth="168.0" styleClass="button3" stylesheets="@../../util/fullpackstyling.css" text="UserStory" textFill="WHITE" />
+            <Label layoutX="462.0" layoutY="250.0" text="Select item from table then proceed :" />
+            <Label layoutX="354.0" layoutY="24.0" text="Features" textFill="#16cabd">
+               <font>
+                  <Font name="Calibri Bold" size="18.0" />
+               </font>
+            </Label>
+            <FontAwesomeIconView fx:id="Back" fill="#16cabd" glyphName="BACKWARD" layoutX="24.0" layoutY="45.0" onMouseClicked="#Back" size="24" />
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
