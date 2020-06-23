@@ -2,7 +2,8 @@
 Desktop Application using javaFX 
 
 CRUD + métier :
-Gestion des projets : 
+
+---------Gestion des projets : 
 Ajouter projet + contrôle de saisie (date deadline ) + clé étrangère Team id
 Suggestion des sprints : 2 semaines / 4 semaines  / Personnalisé
 Modifier projet +contrôle de saisie 
@@ -11,16 +12,17 @@ Afficher les projets : filtre selon date ( current / Completed / all ) + Recherc
 Statistiques sur les projets
 Fonctionnalité avancée : calendrier from scratch qui affiche les deadline des projets
 
-Gestion des sprints :
+----------Gestion des sprints :
 Ajouter sprint +contrôle de saisie ( sur date) + relié avec table projet 
 Modifier sprint +contrôle de saisie ( sur date)
 Archiver sprint 
 Affichage des sprints 
 
-Calendrier :
+---------Calendrier :
 Affichage des projets et sprints sur le calendrier 
 
-API :
+--------API :
 Notification (Tray Notification )
 Statistiques
 
+lien vide intégration (Mobile /Desktop / Web): https://drive.google.com/file/d/1YmBR9BAaNboVIaCJfclK9ik8b3J2BTj-/view?usp=sharing
