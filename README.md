@@ -1,5 +1,5 @@
 # ScrumifyDesktop
-Desktop Application using javaFX 
+Desktop Application using javaFX , implements the scrum method has the same features as the website
 
 CRUD + métier :
 
